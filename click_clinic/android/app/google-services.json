@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "733819637403",
+    "firebase_url": "https://click-clinic-8b0c3.firebaseio.com",
+    "project_id": "click-clinic-8b0c3",
+    "storage_bucket": "click-clinic-8b0c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733819637403:android:42577bce5a562cb175003e",
+        "android_client_info": {
+          "package_name": "com.team09.click_clinic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733819637403-nq65uguo9tah0qqhtq3f4pff9ik3r6tg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfDlpXwV6UtjGNn6tNTOBC8VySpljgK1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733819637403-nq65uguo9tah0qqhtq3f4pff9ik3r6tg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
