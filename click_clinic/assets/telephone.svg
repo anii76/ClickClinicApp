@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="346.627" height="616.225" viewBox="0 0 346.627 616.225">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path-2);
+      }
+
+      .cls-4 {
+        opacity: 0.3;
+      }
+
+      .cls-5 {
+        clip-path: url(#clip-path-3);
+      }
+
+      .cls-6 {
+        fill: rgba(0,0,0,0);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <path id="Tracé_25" data-name="Tracé 25" class="cls-1" d="M-505-119.775h346.627V-736H-505Z" transform="translate(505 736)"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rectangle_22" data-name="Rectangle 22" class="cls-1" width="13.159" height="22.787"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <path id="Tracé_24" data-name="Tracé 24" class="cls-1" d="M0-48.213H13.159V-71H0Z" transform="translate(0 71)"/>
+    </clipPath>
+    <image id="image" width="13.159" height="22.787" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAABHCAYAAACanm7cAAAAAXNSR0IArs4c6QAAArhJREFUaAXtmk+ITlEYxmf8CYWFBiWanRSyMBsp2dgoK2WhLCTJykrJCqWwkM1MyspkJwslZSuSP6XGgpUJhbHBYCF/f8+d79R7b3O/e833+u5dvG89c895z3ve89znvOfO4juDA3lbQfcw2AlGwCLQT3vJYvfBNfBgtoV34/wE/rQEo0WSu1pCrCjQDREdBEvBZzAPJJuicQt8BYr53yZyC8BmsKOw2H71TwD7BlfpL9NAQ7aPdS2fSfF4aJyZQ84atrwkZiX+VUDPBPUFqVXHLhBkiQ68NY7zNTIsIeYOmAanTfx62hPgexdorW2gyoYJ+A1E9IuCP3Q6cpyUo8IOMG7fcl0nXjVs/WXtxxX5NbwQSATlmNZh+QWSabDKnpsAJRJkd2celX/vVUbMfJ9FMLNijdQ5yU+YuQdsBeNAXwaZ6ki7skGdEtNX41LJmHWLR47LOxxpa07ZyAbb+rrktrtBLvWWth/wejMaiAqSXqKHkqGklwJeeaImQ0kvBbzyRE2Gkl4KeOWJmgwlvRTwyhM1GUp6KeCVJ2oylPRSwCtP1GQo6aWAV56oyVDSSwGvPFGToaSXAl55oiZDSS8FvPJETbZZycVe5FIez+3Wj/E3wRvwAhwBLla8OTDXpGuY+AykfEO0LwP9+q9nT+al5HFYJIKW0BgdXbvpybxIbilhISU3lozVdnuRfN1lxckuY2VD6U5INi6SluiPslkV/rIbKheZ96pi7mzDugCVs/f0EvMzuZF/6+wlXCdbufSyV8BcbTUTfwLlyu4dPe105JgAvZgOj27ure0lCXN1EJNw2eWqc8ahgbOgSdNdtm8gkZzS6ZO02nJrugl4G/T7/qT+IRy0RGgfS/1DNBLzNj0fJYLpebRlRHWLcL7IabutbaIjstvBMMiCePbLPrKQDu84uJ4W/Qsbkhd33C8TiwAAAABJRU5ErkJggg=="/>
+  </defs>
+  <g id="Groupe_59" data-name="Groupe 59" class="cls-2">
+    <g id="Groupe_de_masques_58" data-name="Groupe de masques 58" class="cls-3" transform="translate(162.08 213.432)">
+      <g id="Groupe_57" data-name="Groupe 57" class="cls-4">
+        <g id="Groupe_56" data-name="Groupe 56" class="cls-5">
+          <g id="Groupe_55" data-name="Groupe 55" class="cls-3">
+            <g id="Groupe_49" data-name="Groupe 49" class="cls-5">
+              <g id="Groupe_48" data-name="Groupe 48">
+                <g id="Groupe_47" data-name="Groupe 47" class="cls-3">
+                  <use id="Rectangle_16" data-name="Rectangle 16" xlink:href="#image"/>
+                </g>
+              </g>
+            </g>
+            <g id="Groupe_54" data-name="Groupe 54" class="cls-5">
+              <g id="Groupe_53" data-name="Groupe 53" class="cls-3">
+                <g id="Groupe_52" data-name="Groupe 52" class="cls-5">
+                  <g id="Groupe_51" data-name="Groupe 51">
+                    <g id="Groupe_50" data-name="Groupe 50" class="cls-3">
+                      <use id="Rectangle_18" data-name="Rectangle 18" xlink:href="#image"/>
+                    </g>
+                  </g>
+                  <path id="Tracé_21" data-name="Tracé 21" class="cls-6" d="M-5-50H11.368V-76H-5Z" transform="translate(3.395 74.395)"/>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
