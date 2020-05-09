@@ -1,4 +1,3 @@
-import 'package:click_clinic/benevole/screens/authenticate/sign_in.dart';
 import 'package:click_clinic/benevole/services/auth.dart';
 import 'package:click_clinic/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +21,8 @@ class _RegisterState extends State<Register> {
   //text field state
   String email = '';
   String password = '';
+  String tel = '';
+  String nom = 'Benevole';
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,19 @@ class _RegisterState extends State<Register> {
         Form(
           key: _formKey,
           child: Column(children: <Widget>[
+            SizedBox(
+              height: 20.0,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Nom Complet',
+              ),
+
+              validator: (val) => (val.isEmpty) ? 'Entrer un nom valide' : null,
+              onChanged: (val) {
+                 setState(() => nom = val);
+              },
+            ),
             SizedBox(
               height: 20.0,
             ),
@@ -67,11 +81,28 @@ class _RegisterState extends State<Register> {
             SizedBox(
               height: 20.0,
             ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Telephone',
+              ),
+
+              validator: (val) => (val.isEmpty || val.length != 10) ? 'Entrer un tel valide' : null,
+              onChanged: (val) {
+                 setState(() => tel = val);
+              },
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+
+            SizedBox(
+              height: 20.0,
+            ),
             RaisedButton(
               onPressed: () async {
                 if (_formKey.currentState.validate()){
                   setState(() => loading = true); 
-                  dynamic result = await _auth.inscription(email, password);
+                  dynamic result = await _auth.inscription(email, password, nom, tel);
 
                 if (result == null){
                    setState(() {

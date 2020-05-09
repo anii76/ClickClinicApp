@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:click_clinic/benevole/models/user.dart';
 
 class DatabaseService {
 
@@ -8,12 +9,11 @@ class DatabaseService {
   // collection reference 
   final CollectionReference benevoleCollection = Firestore.instance.collection('Benevole');
 
-  Future updateUserData({String nom, String tel, String wilaya, bool service1, bool service2, bool service3, String description, bool disponibilite}) async {
+  Future updateUserData(String nom, String tel, bool service1, bool service2, bool service3, String description, bool disponibilite) async {
     return await benevoleCollection.document(uid).setData({
       'Nom': nom,
-      'Tel': tel,
-      'Wilaya': wilaya, 
-      'Service1': service1,
+      'Tel': tel, 
+      'Service1': service1, 
       'Service2': service2,
       'Service3': service3,
       'Description': description, //autres services
@@ -22,10 +22,23 @@ class DatabaseService {
 
     });
   }
-
+  //getting user data
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid,
+      nom: snapshot.data['Nom'],
+      tel: snapshot.data['Tel'],
+      service1: snapshot.data['Service1'],
+      service2: snapshot.data['Service2'],
+      service3: snapshot.data['Service3'],
+      description: snapshot.data['Description'],
+      disponibilite: snapshot.data['Desponibilite'],
+    );
+  }
   //get benevole stream
-  Stream<QuerySnapshot> get benevole {
-    return benevoleCollection.snapshots();
+  Stream<UserData> get benevole {
+    return benevoleCollection.document(uid).snapshots()
+    .map(_userDataFromSnapshot);
   } 
 
 }
