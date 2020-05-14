@@ -27,9 +27,8 @@ dependencies:
   path:
   firebase_core:
   firebase_storage:
-  image_crooper:
   image_picker:
-
+  flutter_phone_state: ^0.5.9
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
