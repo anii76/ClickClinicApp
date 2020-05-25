@@ -1,37 +1,48 @@
+/*import 'package:click_clinic/acceuil.dart';
+import 'package:shared_preferences/shared_preferences.dart';*/
+import 'package:click_clinic/benevole/screens/wrapper.dart';
+import 'package:click_clinic/benevole/services/auth.dart';
+import 'package:click_clinic/benevole/models/user.dart';
+
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:click_clinic/patient/principal.dart';
+
+String initValue;
+
+/*Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initValue = await prefs.getString("initValue");
+  await prefs.setString("initValue", widget.path);
+  print('initValue ${initValue}');
+}*/
+    
 
 class Switcher extends StatelessWidget {
-  final String connexion = 'assets/connexion.svg';
+
+  final String path;
+  Switcher({this.path });
+  
   @override
   Widget build(BuildContext context) {
-    
-    //returns patient or benevole based on pressed button
-    //also the choosing screen is shown only at first launch
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            /*Container( 
-              child:*/ SvgPicture.asset(
-               connexion,
-               //alignment: Alignment.topCenter,
-               height: 200,
-             ),
-              //margin: EdgeInsets.only(top: 30, left: 76,),
-           //),
-            Text('Heureux de vous revoir !',
-             ),
-            
-            RaisedButton(onPressed: null, child: Text('Connexion')),
-            Column(
-              children: [FlatButton(onPressed: null, child: Text('Vous n\'avez de compte? INSCRIVEZ VOUS !')),
-            FlatButton(onPressed: null, child: Text('Mot de passe oublié?'))]),
-            
-          ]
-        ) 
-      ),
-    );
-  }
+    return path == 'benevole' ?///initValue == '' || initValue == null ? MaterialApp(
+       StreamProvider<User>.value(  
+                           value: AuthService().user,
+                           child: MaterialApp( //maybe it won't be a material app widget
+                                  home: Wrapper(),
+                                 ),
+                           ) : Patient(); 
+      /*initialRoute: initValue == "benevole"  ? "patient" : "benevole",
+      routes: {
+        'benevole' :(context) => StreamProvider<User>.value(  
+                           value: AuthService().user,
+                           child: MaterialApp( //maybe it won't be a material app widget
+                                  home: Wrapper(),
+                                 ),
+                           ), 
+        'patient' :(context) => Patient()
+      }
+    ): Acceuil(); */
+  } 
 }

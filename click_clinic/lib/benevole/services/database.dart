@@ -9,7 +9,16 @@ class DatabaseService {
   // collection reference 
   final CollectionReference benevoleCollection = Firestore.instance.collection('Benevole');
 
-  Future updateUserData(String nom, String tel, bool service1, bool service2, bool service3, String description, bool disponibilite) async {
+  Future updateUserData(
+    String nom, 
+    String tel, 
+    bool service1, 
+    bool service2, 
+    bool service3, 
+    String description, 
+    bool disponibilite,
+    String profilepicpath,
+    ) async {
     return await benevoleCollection.document(uid).setData({
       'Nom': nom,
       'Tel': tel, 
@@ -19,6 +28,7 @@ class DatabaseService {
       'Description': description, //autres services
       //'Location': needs maps Api 
       'Disponibilite': disponibilite,
+      'ProfilePicPath': profilepicpath
 
     });
   }
@@ -33,6 +43,7 @@ class DatabaseService {
       service3: snapshot.data['Service3'],
       description: snapshot.data['Description'],
       disponibilite: snapshot.data['Desponibilite'],
+      profilepicpath: snapshot.data['ProfilePicPath'],
     );
   }
   //get benevole stream

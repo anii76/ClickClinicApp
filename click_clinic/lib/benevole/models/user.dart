@@ -15,7 +15,8 @@ class UserData {
   final bool service1,service2,service3;
   final String description;
   final bool disponibilite;
+  final String profilepicpath;
 
   UserData({this.uid, this.nom, this.tel, this.service1, 
-  this.service2, this.service3, this.description, this.disponibilite});
+  this.service2, this.service3, this.description, this.disponibilite, this.profilepicpath});
 }

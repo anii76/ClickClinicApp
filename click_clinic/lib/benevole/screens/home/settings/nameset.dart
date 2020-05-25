@@ -70,7 +70,8 @@ class _NameSetState extends State<NameSet> {
                     userData.service2 ?? snapshot.data.service2,
                     userData.service3 ?? snapshot.data.service3,
                     userData.description ?? snapshot.data.description,
-                    userData.disponibilite ?? snapshot.data.disponibilite
+                    userData.disponibilite ?? snapshot.data.disponibilite,
+                    userData.profilepicpath ?? snapshot.data.profilepicpath
                   );
                   //Navigator.pop(context);
                   setState(() => error = 'updated :)'); 
