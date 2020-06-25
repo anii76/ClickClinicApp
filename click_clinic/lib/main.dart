@@ -1,8 +1,8 @@
-import 'package:click_clinic/acceuil.dart';
-import 'package:click_clinic/switcher.dart';
+import 'package:click_clinic/shared/acceuil.dart';
+import 'package:click_clinic/shared/switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:click_clinic/onboarding.dart';
+import 'package:click_clinic/shared/onboarding.dart';
 
 int initScreen;
 Future<void> main() async {
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: initScreen == 0 || initScreen == null ? "first" : "/", //initialRoute is ruining it
       routes: {
         '/': (context) => Acceuil(), //qst is can I put this widget in materialApp :/ 
