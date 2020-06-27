@@ -1,9 +1,8 @@
+import 'package:flutterapp/paraDesServices.dart';
+import 'package:flutterapp/paraDuCompte.dart';
 
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:camera/camera.dart';
 import 'pages.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final cameras = await availableCameras();
@@ -11,13 +10,17 @@ Future<void> main() async {
 
   runApp(
     MaterialApp(
-      theme: ThemeData.dark(),
-      home: TakePictureScreen(
-  
-        camera: firstCamera,
-      ),
-    ),
+      theme: ThemeData(
+          // scaffoldBackgroundColor: Colors.white24,
+         // primaryColor: Colors.white
+         ),
+      home:ParaDapp(),
+    ),//GroupeSang(),//Patient(),// 
   );
 }
+
+
+
+
 
 
