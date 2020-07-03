@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'pages.dart';
+
 class Patient extends StatefulWidget {
   @override
   _PatientState createState() => _PatientState();
@@ -6,8 +7,9 @@ class Patient extends StatefulWidget {
 
 class _PatientState extends State<Patient> {
   GlobalKey globalKey = GlobalKey();
-  Offset _offset = Offset(0, 0);
+  Offset _offset = Offset(0,0);
   List<double> limits = [];
+  bool isMenuOpen = false;
 
   @override
   void initState() {
@@ -21,7 +23,7 @@ class _PatientState extends State<Patient> {
     final position = renderBox.localToGlobal(Offset.zero);
     double start = position.dy - 20;
     double constLimit = position.dy + renderBox.size.height - 20;
-    double step = (constLimit - start) / 3;
+    double step = (constLimit - start) / 4;
     limits = [];
     for (double x = start; x <= constLimit; x = x + step) {
       limits.add(x);
@@ -45,68 +47,71 @@ class _PatientState extends State<Patient> {
 
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
-          width: sidebarSize,
-          child: GestureDetector(
-            onPanUpdate: (details) {
-              if (details.localPosition.dx <= sidebarSize) {
-                setState(() {
-                  _offset = details.localPosition;
-                });
-              }
-            },
-            onPanEnd: (details) {
-              setState(() {
-                _offset = Offset(0, 0);
-              });
-            },
-            child: Stack(
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    'Que cherchez-vous ?',
-                    style: TextStyle(
-                        fontSize: 28,
-                        color: Colors.white,
-                        fontFamily: 'Poppins-Medium'),
-                  ),
-                ),
-                SizedBox(
+        body: Container(
+          width: mediaQuery.width,
+          child: Stack(
+            children: <Widget>[
+              PatientLayout(),
+              AnimatedPositioned(
+                duration: Duration(milliseconds: 1500),
+                left: isMenuOpen ? 0 : -sidebarSize + 20,
+                top: 0,
+                curve: Curves.elasticOut,
+                child: SizedBox(
                   width: sidebarSize,
-                  child: Stack(
-                    children: <Widget>[
-                      CustomPaint(
-                        size: Size(sidebarSize, mediaQuery.height),
-                        painter: DrawerPainterp(offset: _offset),
-                      ),
-                      Container(
-                        width: sidebarSize,
-                        height: mediaQuery.height,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Container(
-                              height: mediaQuery.height * 0.25,
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    Image.asset(
-                                      "assets/images/patient.png",
-                                      width: sidebarSize / 2,
-                                    ),
-                                    Text(
-                                      "Patient",
-                                      style: TextStyle(
-                                        color: Colors.black45,
+                  child: GestureDetector(
+                    onPanUpdate: (details) {
+                      if (details.localPosition.dx <= sidebarSize) {
+                        setState(() {
+                          _offset = details.localPosition;
+                        });
+                      }
+                      if (details.localPosition.dx > sidebarSize - 20 &&
+                          details.delta.distanceSquared > 2) {
+                        setState(() {
+                          isMenuOpen = true;
+                        });
+                      }
+                    },
+                    onPanEnd: (details) {
+                      setState(() {
+                        _offset = Offset(0, 0);
+                      });
+                    },
+                    child: Stack(
+                      children: <Widget>[
+                        CustomPaint(
+                          size: Size(sidebarSize, mediaQuery.height),
+                          painter: DrawerPainterp(offset: _offset),
+                        ),
+                        Container(
+                          width: sidebarSize,
+                          height: mediaQuery.height,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Container(
+                                height: mediaQuery.height * 0.25,
+                                child: Center(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Image.asset(
+                                        "assets/images/patient.png",
+                                        width: sidebarSize / 2,
                                       ),
-                                    )
-                                  ],
+                                      Text(
+                                        "Patient",
+                                        style: TextStyle(
+                                          color: Colors.black45,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Divider(thickness: 1.0),
-                            Container(
+                              Divider(thickness: 1.0),
+                              Container(
                                 key: globalKey,
                                 width: double.infinity,
                                 height: menuContainerHeight,
@@ -115,31 +120,65 @@ class _PatientState extends State<Patient> {
                                     MyButton(
                                       text: "Paramètres",
                                       textSize: getSize(0),
-                                      iconData: Icons.settings,
+                                      iconData: "assets/images/gear.png",
                                       height: (menuContainerHeight / 3),
                                     ),
                                     MyButton(
                                       text: "Contact",
-                                      textSize: getSize(0),
-                                      iconData: Icons.contact_mail,
+                                      textSize: getSize(1),
+                                      iconData: "assets/images/env.png",
                                       height: (menuContainerHeight / 3),
                                     ),
                                     MyButton(
                                       text: "À propos",
-                                      textSize: getSize(0),
-                                      iconData: Icons.notification_important,
+                                      textSize: getSize(2),
+                                      iconData: "assets/images/h.png",
                                       height: (menuContainerHeight / 3),
                                     ),
                                   ],
-                                )),
-                          ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        AnimatedPositioned(
+                          duration: Duration(milliseconds:400),
+                          right: (isMenuOpen) ? 10 : sidebarSize,
+                          bottom: 30,
+                          child: Row(
+                            children: <Widget>[
+                              Text("ClickClinic 1.0.0",
+                              textAlign: TextAlign.center  ,   
+                                  style: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    color: Color(0x35000000),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                  ),
+                              IconButton(
+                                enableFeedback: true,
+                                icon: Icon(
+                                  Icons.keyboard_backspace,
+                                  color: Colors.black45,
+                                  size: 30,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    isMenuOpen = false;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -182,7 +221,7 @@ class DrawerPainterp extends CustomPainter {
 class MyButton extends StatelessWidget {
   final String text;
   final double textSize;
-  final IconData iconData;
+  final String iconData;
   final double height;
   MyButton({this.text, this.textSize, this.iconData, this.height});
   @override
@@ -193,20 +232,35 @@ class MyButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Icon(
-            iconData,
-            color: Colors.black45,
-          ),
+          Img(iconData),
           SizedBox(
             width: 10.0,
           ),
           Text(
             text,
-            style: TextStyle(color: Colors.black45, fontSize: textSize),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black45,
+              fontSize: textSize,
+              
+            ),
           ),
         ],
       ),
       onPressed: () {},
+    );
+  }
+}
+
+class Img extends StatelessWidget {
+  final String _assetPath;
+  Img(this._assetPath);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //constraints: BoxConstraints.expand(height:0.9),
+      decoration: BoxDecoration(color: Colors.white),
+      child: Image.asset(_assetPath, fit: BoxFit.cover, width: 30.0),
     );
   }
 }

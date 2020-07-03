@@ -1,7 +1,6 @@
-import 'package:flutterapp/paraDesServices.dart';
-import 'package:flutterapp/paraDuCompte.dart';
 
 import 'pages.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,10 +13,14 @@ Future<void> main() async {
           // scaffoldBackgroundColor: Colors.white24,
          // primaryColor: Colors.white
          ),
-      home:ParaDapp(),
-    ),//GroupeSang(),//Patient(),// 
+      home: Patient(),//BenevoleLayout(),
+      )
   );
 }
+
+
+
+
 
 
 

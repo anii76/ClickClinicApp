@@ -6,30 +6,41 @@ class GroupeSang extends StatefulWidget {
 }
 
 class _GroupeSangState extends State<GroupeSang> {
+  final GlobalKey<FireMapState> _key = new GlobalKey<FireMapState>();
+  //final GlobalKey<FireMapState> _cle = new GlobalKey<FireMapState>();
   String dropdownValue = '  Groupe sanguin';
   var sp = <String>[
     '  Groupe sanguin',
-    '  A',
-    '  B',
-    '  AB',
-    '  O',
+    '  A+','  A-',
+    '  B+','  B-',
+    '  AB+','  AB-',
+    '  O+','  O-',
   ];
-  String drop = '  Rhésus';
+ /* String drop = '  Rhésus';
   var rh = <String>[
     '  Rhésus',
     '  Positif (+)',
     '  Négatif (-)',
-  ];
+  ];*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body:Column(children: <Widget>[
+        Stack(
         children: [
+          Align(
+          child: Carte(
+            key: _key,
+            Width: MediaQuery.of(context).size.width,
+            Height: MediaQuery.of(context).size.height / 1.5,
+          ),
+          alignment: Alignment.bottomCenter,
+        ),
           Container(
             width: MediaQuery.of(context).size.width,
             height:
-                MediaQuery.of(context).size.height / 2.36, //apply everywhere
+                MediaQuery.of(context).size.height / 2.36, 
             decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topRight,
@@ -147,13 +158,13 @@ class _GroupeSangState extends State<GroupeSang> {
                         print(newValue);
                       });
 
-                      //  _key.currentState.method(dropdownValue.replaceAll('  ', ''));
+                        _key.currentState.method(dropdownValue.replaceAll('  ', ''));
 
                       print(dropdownValue.replaceFirst(new RegExp(r' '), ''));
                     }),
               )),
              
-              SizedBox(
+            /*  SizedBox(
                 height: 10,
               ),
               SizedBox(
@@ -205,18 +216,18 @@ class _GroupeSangState extends State<GroupeSang> {
                             print(newValue);
                           });
 
-                          //   _key.currentState.method(drop.replaceAll('  ', ''));
+                           _cle.currentState.method(drop.replaceAll('  ', ''));
 
                           print(
                               drop.replaceFirst(new RegExp(r' '), ''));
                         }),
-                  )),
+                  )),*/
             ]),
           ),
        
         ],
       ),
-      bottomSheet: SizedBox(
+     SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.width * 0.12,
               child: RaisedButton(
@@ -234,6 +245,7 @@ class _GroupeSangState extends State<GroupeSang> {
                 ),
               ),
             ),
-    );
+      ],
+    ),);
   }
 }

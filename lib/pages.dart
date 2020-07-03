@@ -7,13 +7,19 @@ export 'package:camera/camera.dart';
 export 'drawerp.dart';
 export 'drawerb.dart';
 export 'paraDapp.dart';
+export 'patient.dart';
+export 'package:flutterapp/paraDesServices.dart';
+export 'package:flutterapp/paraDuCompte.dart';
+export 'donneur.dart';
+export 'package:google_maps_flutter/google_maps_flutter.dart';
+export 'package:geoflutterfire/geoflutterfire.dart';
+export 'package:location/location.dart';
+export 'carte.dart';
+export 'package:foldable_sidebar/foldable_sidebar.dart';
+//export 'package:location_permissions/location_permissions.dart';
+
+
 /*
-import 'package:click_clinic/screens/benevole/benevole.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:click_clinic/screens/patient/principal.dart';
-/*import 'package:click_clinic/switcher.dart';
-import 'package:flutter/services.dart';*/
 
 class Acceuil extends StatefulWidget {
   @override
@@ -167,16 +173,7 @@ class MyImage extends StatelessWidget {
     );
   }
 }
-//not responsive
-//redo the UI to make it responsive
-import 'package:click_clinic/screens/patient/database.dart';
-import 'package:click_clinic/screens/patient/hopitaux.dart';
-import 'package:click_clinic/screens/patient/pharmacies.dart';
-import 'package:click_clinic/screens/patient/medecins.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:click_clinic/shared/acceuil.dart';
-import 'package:click_clinic/screens/patient/autre.dart';
+
 
 class Patient extends StatefulWidget {
   @override
@@ -191,7 +188,7 @@ class _PatientState extends State<Patient> {
         children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 280.0,
+            height: MediaQuery.of(context).size.height*0.33,
             decoration: BoxDecoration(
               color: Color(0xFF00B9FF),
               borderRadius: BorderRadius.only(
