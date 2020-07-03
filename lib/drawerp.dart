@@ -53,7 +53,7 @@ class _PatientState extends State<Patient> {
             children: <Widget>[
               PatientLayout(),
               AnimatedPositioned(
-                duration: Duration(milliseconds: 1500),
+                duration: Duration(milliseconds: 3000),
                 left: isMenuOpen ? 0 : -sidebarSize + 20,
                 top: 0,
                 curve: Curves.elasticOut,

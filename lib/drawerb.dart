@@ -11,19 +11,34 @@ class _BenevoleLayoutState extends State<BenevoleLayout> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: FoldableSidebarBuilder(
-          drawerBackgroundColor: const Color(0xff00b9ff),
-          drawer: CustomDrawer(
-            closeDrawer: () {
-              setState(() {
-                drawerStatus = FSBStatus.FSB_CLOSE;
-              });
-            },
+        body: SwipeDetector(
+          onSwipeLeft:(){
+            setState(() {
+              drawerStatus=FSBStatus.FSB_CLOSE;
+            });
+
+          },
+           onSwipeRight:(){
+            setState(() {
+              drawerStatus=FSBStatus.FSB_OPEN;
+            });
+
+          },
+                  child: FoldableSidebarBuilder(
+            drawerBackgroundColor: const Color(0xff00b9ff),
+            drawer: CustomDrawer(
+              closeDrawer: () {
+                setState(() {
+                  drawerStatus = FSBStatus.FSB_CLOSE;
+                });
+              },
+            ),
+            screenContents: PatientLayout(), //navigator.dart dear anfel *-*
+            status: drawerStatus,
+
           ),
-          screenContents: PatientLayout(), //navigator.dart dear anfel *-*
-          status: drawerStatus,
         ),
-        floatingActionButton: FloatingActionButton(
+       /* floatingActionButton: FloatingActionButton(
             backgroundColor: const Color(0xff00b9ff),
             child: Icon(
               Icons.menu,
@@ -35,7 +50,7 @@ class _BenevoleLayoutState extends State<BenevoleLayout> {
                     ? FSBStatus.FSB_CLOSE
                     : FSBStatus.FSB_OPEN;
               });
-            }),
+            }),*/
       ),
     );
   }
@@ -103,7 +118,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
               onTap: () {
-                debugPrint("Tapped Payments");
+                debugPrint("Tapped Payments");//Navigator.of(context).push(MaterialPageRoute(builder:(context)=>seconPage(),));
               },
               leading: Image.asset(
                     "assets/images/env.png",

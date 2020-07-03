@@ -16,6 +16,7 @@ export 'package:geoflutterfire/geoflutterfire.dart';
 export 'package:location/location.dart';
 export 'carte.dart';
 export 'package:foldable_sidebar/foldable_sidebar.dart';
+export 'package:swipedetector/swipedetector.dart';
 //export 'package:location_permissions/location_permissions.dart';
 
 
