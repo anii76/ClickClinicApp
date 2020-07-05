@@ -2,7 +2,6 @@ import 'reset_password.dart';
 import 'package:click_clinic/services/auth.dart';
 import 'package:click_clinic/shared/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleview;

@@ -1,13 +1,14 @@
 class Inscription{
-   String _uid;//can't do setters because of final
-   String _nom;
-   String _tel;
-   bool _service1,_service2,_service3;
-   String _description;
-   bool _disponibilite;
-   String _profilepicpath;
+   String _uid;
+   String _nom = '';
+   String _tel = '';
+   bool _service1 = false,_service2= false,_service3 = false;
+   String _description = '';
+   bool _disponibilite = false;
+   String _profilepicpath = '';
    String _password, _email;
-  //location, gender, bloodtype ...
+   Map _location;
+   String _bloodtype ,_adresse = '';
 
  
   String getUid(){
@@ -43,6 +44,15 @@ class Inscription{
   String getProfilepicpath(){
     return this._profilepicpath;
   }
+  Map getLocation(){
+    return this._location;
+  }
+  String getBloodType(){
+    return this._bloodtype;
+  }
+  String getAdresse(){
+    return this._adresse;
+  }
 
   void setUid(String uid){
      this._uid = uid;
@@ -76,6 +86,15 @@ class Inscription{
   }
   void setProfilepicpath(String pic){
     this._profilepicpath = pic;
+  }
+  void setLocation(var location){
+    this._location = location;
+  }
+  void setBloodType(String bloodType){
+    this._bloodtype = bloodType;
+  }
+  void setAdresse(String adresse){
+    this._adresse = adresse;
   }
 
 }

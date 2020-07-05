@@ -39,9 +39,9 @@ final GlobalKey<FireMapState> _key = new GlobalKey<FireMapState>();
           child: Carte(
             key: _key,
             Width: MediaQuery.of(context).size.width,
-            Height: MediaQuery.of(context).size.height / 1.5,
+            Height: MediaQuery.of(context).size.height / 1.6,
           ),
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment(0 , 0.65),
         ),
         Container(
           width: MediaQuery.of(context).size.width,
@@ -185,7 +185,7 @@ final GlobalKey<FireMapState> _key = new GlobalKey<FireMapState>();
 
       ),
     bottomSheet: Container(
-              height: 55.0,
+              height: MediaQuery.of(context).size.height /14,
               width: double.infinity,
               color: Colors.white,
               child: Center(child: Text(

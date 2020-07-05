@@ -115,8 +115,7 @@ class Doctor {
   final String name;
   final String speciality;
   final int tel;
-  final double lat; 
-  final double long;
+  final Map location;
 
-  Doctor({this.adresse,this.name,this.speciality,this.lat,this.long,this.tel}); 
+  Doctor({this.adresse,this.name,this.speciality,this.location,this.tel}); 
 }

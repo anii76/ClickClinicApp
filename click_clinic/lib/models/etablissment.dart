@@ -16,6 +16,8 @@ class Etablissment {
   }
   void setNom(String nom){
     this._nom = nom;
+    print("nom"+ nom);
+    print("_nom"+_nom);
   }
   void setAdresse(String adresse){
     this._adresse = adresse;
@@ -53,29 +55,14 @@ class Etablissment {
 }
 
 //Doctor Model
-class Doctor extends Etablissment{
-  
-  String _specialite;
-  String _horaire; //opt
+class Doctor {
+  final String adresse;
+  final String name;
+  final String speciality;
+  final String tel;
+  final Map location;
 
-  Doctor();
-  
-  //setters
-  void setSpecialite(String specialite){
-    this._specialite = specialite;
-  }
-  void setHoraire(String horaire){
-    this._horaire = horaire;
-  }
-
-  //getters
-  String getSpecialite(){
-    return this._specialite;
-  }
-  String getHoraire(){
-    return this._horaire;
-  }
-
+  Doctor({this.adresse,this.name,this.speciality,this.location,this.tel}); 
 }
 
 //Hopital Model

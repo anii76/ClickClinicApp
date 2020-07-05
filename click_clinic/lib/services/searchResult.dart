@@ -3,15 +3,55 @@ import 'package:click_clinic/models/etablissment.dart';
 
 class TrouverEtablissement{ //rendre abstract
   
-  final String id; //or nom
+  final String id; 
+  final CollectionReference collectionReference;//or nom
+  String etablis;
   
-  TrouverEtablissement({this.id});
+  TrouverEtablissement({this.id, this.collectionReference, this.etablis});
+
+  displayDetails(){
+
+    try{var doc ;
+    this.collectionReference.document(this.id).get().then((value){
+      doc = value.data;
+      print(value.data);
+      print(id);
+      if (doc["Owner"] != null) {
+      etablis = 'Etablis';
+      return FindLaboratoire(this.id, this.collectionReference).laboratoire;
+    }else if (doc["Speciality"] == 'Pharmacien') {
+      etablis = 'Pharmacie';
+      return FindPharmacie(this.id).pharmacie;
+    }else {
+      etablis = 'Doctor';
+      return FindDoctor(this.id, this.collectionReference).doctor;
+    }
+    });
+
+    }catch(e){
+      print(e);
+      etablis = 'Doctor';
+      return FindDoctor(this.id, this.collectionReference).doctor;
+    }
+  }
+  
+  displayEtablis(){
+
+    switch (etablis) {
+      case  'Doctor':
+        return Doctor();
+      case'Pharmacie':
+        return Pharmacie();
+        break;
+      default: return Laboratoire();
+    }
+  }
 
 } 
 
 //getting doctors by sp is in medecins page
 //display when pressing on doctor marker 
-class FindDoctor extends TrouverEtablissement{
+class FindDoctor {
   
   final String id; //or nom
   final CollectionReference doctorCollection ;
@@ -20,13 +60,22 @@ class FindDoctor extends TrouverEtablissement{
 
   //get all doctor data
   Doctor _doctorDataFromSnapshot(DocumentSnapshot snapshot){
-    Doctor doctor;
-    doctor.setNom(snapshot.data["Name"]);
+    Doctor /*doctor;
+    /*print('here');
+     String nom = snapshot.data["Name"];
+    doctor.setNom(nom);*/
+    print('done');
     doctor.setAdresse(snapshot.data["Adress"]);
     doctor.setTel(snapshot.data["Phone number"]);
     doctor.setSpecialite(snapshot.data["Speciality"]);
     doctor.setLocation(snapshot.data["Location"]);
-    return doctor ;
+    return doctor ;*/(
+      adresse: snapshot.data["Adress"],
+      name: snapshot.data["Name"],
+      speciality: snapshot.data["Speciality"],
+      tel: snapshot.data["Phone number"],
+      location: snapshot.data["Location"],
+      );
   }
   //get doctor stream
   Stream<Doctor> get doctor {
@@ -37,7 +86,7 @@ class FindDoctor extends TrouverEtablissement{
 }
 
 //getting etabli by name in etabli page ..
-class FindPharmacie extends TrouverEtablissement{
+class FindPharmacie {
   
   final String id; //or nom
   final CollectionReference doctorCollection = Firestore.instance.collection("pharmacies"); //reupdate
@@ -62,12 +111,12 @@ class FindPharmacie extends TrouverEtablissement{
 }
 
 //getting etabli by name in etabli page ..
-class FindLaboratoire extends TrouverEtablissement{
+class FindLaboratoire {
   
   final String id; //or nom
-  final CollectionReference doctorCollection = Firestore.instance.collection("laboratoires"); //reupdate
+  final CollectionReference doctorCollection ; //reupdate
 
-  FindLaboratoire(this.id);
+  FindLaboratoire(this.id, this.doctorCollection);
 
   //get all data
   Laboratoire _laboratoireDataFromSnapshot(DocumentSnapshot snapshot){

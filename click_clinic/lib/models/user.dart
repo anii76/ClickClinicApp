@@ -16,37 +16,10 @@ class UserData {
   final String description;
   final bool disponibilite;
   final String profilepicpath;
-  //location, gender, bloodtype ...
+  final location;
+  final String adresse;
+  final String bloodtype;
 
-  UserData({this.uid, this.nom, this.tel, this.service1, 
+  UserData({this.uid, this.nom, this.tel, this.service1,this.adresse,this.bloodtype,this.location, 
   this.service2, this.service3, this.description, this.disponibilite, this.profilepicpath});
-
- 
-  String getUid(){
-    return this.uid;
-  }
-  String getNom(){
-    return this.nom;
-  }
-  String getTel(){
-    return this.tel;
-  }
-  bool getService1(){
-    return this.service1;
-  }
-  bool getService2(){
-    return this.service2;
-  }
-  bool getService3(){
-    return this.service3;
-  }
-  bool getDisponibilite(){
-    return this.disponibilite;
-  }
-  String getDescription(){
-    return this.description;
-  }
-  String getProfilepicpath(){
-    return this.profilepicpath;
-  }
 }

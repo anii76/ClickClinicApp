@@ -1,25 +1,32 @@
-import 'package:flutter/material.dart';
 import 'package:click_clinic/services/Carte.dart';
+import 'package:flutter/material.dart';
 
-class Hopitaux extends StatefulWidget {
+class DonDeSang extends StatefulWidget {
   @override
-  _HopitauxState createState() => _HopitauxState();
+  _DonDeSangState createState() => _DonDeSangState();
 }
 
-class _HopitauxState extends State<Hopitaux> {
+class _DonDeSangState extends State<DonDeSang> {
+
   final GlobalKey<FireMapState> _key = new GlobalKey<FireMapState>();
+  
+
+  String dropdownValue = '  Choisissez le groupe sanguin';
+  var sp = <String>[
+    '  Choisissez le groupe sanguin',
+    '  A+','  A-','  B+','  B-','  O+','  O-','  AB+','  AB-'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        Align(
+         Align(
           child: Carte(
             key: _key,
             Width: MediaQuery.of(context).size.width,
             Height: MediaQuery.of(context).size.height / 1.6,
           ),
-          alignment: Alignment(0 , 0.65),
+          alignment: Alignment.bottomCenter,
         ),
         Container(
           width: MediaQuery.of(context).size.width,
@@ -28,7 +35,11 @@ class _HopitauxState extends State<Hopitaux> {
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                stops: [0.3, 0.7, 0.9],
+                stops: [
+                  0.3,
+                  0.7,
+                  0.9
+                ],
                 colors: [
                   Color(0xFF00D0E1),
                   Color(0xFF00B3FA),
@@ -46,7 +57,7 @@ class _HopitauxState extends State<Hopitaux> {
             /*child: Padding(
               padding: const EdgeInsets.only(top: 85, left: 260, right: 3),*/
               child: Text(
-                "Hopitaux",
+                "Bénévoles",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
@@ -95,28 +106,18 @@ class _HopitauxState extends State<Hopitaux> {
               height: MediaQuery.of(context).size.height / 5.6
               ),
             SizedBox(
-              child: Image.asset("assets/images/hopitaux.png", height:MediaQuery.of(context).size.height / 5.8 ),
+              child: Image.asset("assets/images/groupe-medecins.png", height:MediaQuery.of(context).size.height / 5.8 ),
             ),
             SizedBox(
               child: RaisedButton(
                 color: Colors.white,
-                onPressed: () {
-                  _key.currentState.method('Hopitaux');
-                },
+                onPressed: () {},
                 child: Row(
                   children: <Widget>[
                     CircleAvatar(
                       radius: 25,
                       child: Icon(Icons.search, color: Colors.white),
                       backgroundColor: Color(0xFF00B3FA),
-                    ),
-                    Text(
-                      "  Trouvez des Hopitaux",
-                      style: TextStyle(
-                        fontSize: 21,
-                        color: Color(0xB3000000),
-                        fontFamily: 'SegoeUI'
-                      ),
                     ),
                   ],
                 ),
@@ -128,21 +129,46 @@ class _HopitauxState extends State<Hopitaux> {
             ),
           ]),
         ),
-      ]), 
-      bottomSheet: Container(
-              height: MediaQuery.of(context).size.height /14,
-              width: double.infinity,
-              color: Colors.white,
-              child: Center(child: Text(
-                'Besoin d\'un logement pendant votre séjour médical ?',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF00B3FA),
-                  fontFamily: 'SegoeUI',
-                ),
-              ),),
-      )    
+        Align(
+          /*padding: EdgeInsets.only(top: 305, left: 90, right: 30),*/
+          alignment: Alignment(0.34,-0.22),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 1.5,
+          child: DropdownButton<String>(
+              value: dropdownValue,
+              icon: Icon(Icons.arrow_drop_down),
+              iconSize: 20,
+              style: dropdownValue == sp[0]
+                  ? TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey[700],
+                      fontFamily: 'Poppins-Medium')
+                  : TextStyle(
+                      fontSize: 21,
+                      color: Color(0xB3000000),
+                      fontFamily: 'SegoeUI'),
+              items: sp.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String newValue) {
+                setState(() {
+                  dropdownValue = newValue;
+                  print(newValue);
+                });
+                
+                
+                _key.currentState.rechSang(dropdownValue.replaceAll('  ', ''));
+                
+                
+               }),
+        ))
+      ],
+
+      ),
+      
     );
   }
-
 }

@@ -1,3 +1,4 @@
+import 'package:click_clinic/screens/benevole/authenticate/inscription.dart';
 import 'package:click_clinic/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:click_clinic/models/user.dart';
@@ -14,26 +15,20 @@ class DatabaseService {
   //setters
   //update all user data
   Future updateUserData(
-    String nom, 
-    String tel, 
-    bool service1, 
-    bool service2, 
-    bool service3, 
-    String description, 
-    bool disponibilite,
-    String profilepicpath,
+    Inscription user
     ) async {
     return await benevoleCollection.document(uid).setData({
-      'Nom': nom,
-      'Tel': tel, 
-      'Service1': service1, 
-      'Service2': service2,
-      'Service3': service3,//map or array including blood type
-      'Description': description, //autres services
-      //'Location': 
-      //'Adress':
-      'Disponibilite': disponibilite,
-      'ProfilePicPath': profilepicpath
+      'Nom': user.getNom(),
+      'Tel': user.getTel(), 
+      'Service1': user.getService1(), 
+      'Service2': user.getService2(),
+      'Service3': user.getService3(),//map or array including blood type
+      'Description': user.getDescription(), //autres services
+      'Location': user.getLocation(),
+      'Adress': user.getAdresse(),
+      'BloodType': user.getBloodType(),
+      'Disponibilite': user.getDisponibilite(),
+      'ProfilePicPath': user.getProfilepicpath(),
 
     });
   }
@@ -86,7 +81,7 @@ class DatabaseService {
   }
 
   //setDisponibilite
-  void updateDisponibility(String val ) async {
+  void updateDisponibility(bool val ) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"Disponibilite": val}).then((_){
       print("success!");
@@ -96,7 +91,7 @@ class DatabaseService {
   //setProfilePathPic
   void updateProfilePathPic(String val ) async {
     final user = await _auth.getCurrentUserInfo();
-    benevoleCollection.document(user.uid).updateData({"ProfilePathPic": val}).then((_){
+    benevoleCollection.document(user.uid).updateData({"ProfilePicPath": val}).then((_){
       print("success!");
     });
   }
@@ -117,6 +112,9 @@ class DatabaseService {
       description: snapshot.data['Description'],
       disponibilite: snapshot.data['Disponibilite'],
       profilepicpath: snapshot.data['ProfilePicPath'],
+      location: snapshot.data['Location'],
+      bloodtype: snapshot.data['BloodType'],
+      adresse: snapshot.data['Adress']
     );
   }
 
@@ -153,7 +151,7 @@ class DatabaseService {
       print(value.data["ProfilePicPath"]);
       _imagepath = value.data["ProfilePicPath"];
     });
-    print(_imagepath);
+    print('url: $_imagepath');
     return _imagepath;
     }
 

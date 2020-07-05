@@ -1,4 +1,5 @@
 import 'package:click_clinic/models/user.dart';
+import 'package:click_clinic/screens/benevole/authenticate/inscription.dart';
 import 'package:click_clinic/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +8,7 @@ abstract class BaseAuth {
 
 	  Future<dynamic> connexion(String email, String password);
 	
-	  Future<dynamic> inscription(String email, String password, String nom, String tel, String disc, bool service1, bool service2, bool service3);
+	  Future<dynamic> inscription(Inscription benevole);
 	
 	  //Future<FirebaseUser> getCurrentUser();
 	
@@ -55,12 +56,12 @@ class AuthService implements BaseAuth{
   } 
 
   //SignUp
-  Future inscription(String email, String password, String nom, String tel, String disc, bool service1, bool service2, bool service3 ) async {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+  Future inscription(Inscription benevole) async {
+      AuthResult result = await _auth.createUserWithEmailAndPassword(email: benevole.getEmail(), password: benevole.getPassword());
       FirebaseUser user = result.user;  
       //create new document for the user with uid
       await DatabaseService(uid: user.uid).updateUserData(
-        nom, tel, service1 , service2 , service3, disc, false , '');
+        benevole);
       return _userFromFirebaseUser(user)  ;
   } 
 

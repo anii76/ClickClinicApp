@@ -1,5 +1,6 @@
 import 'package:click_clinic/screens/benevole/authenticate/services.dart';
 import 'package:click_clinic/screens/benevole/home/settings.dart';
+import 'package:click_clinic/screens/patient/principal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,7 +27,7 @@ class _TryState extends State<Try> {
   final AuthService _auth = AuthService();
   File _image;
   bool _isVisible = false;
-  String _imageUrl, _imagepath ;
+  String _imageUrl , _imagepath ;
   bool _isSwitched = false;
   String _disp = 'Non Disponible';
 
@@ -50,12 +51,6 @@ class _TryState extends State<Try> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
-            /*if(userData.disponibilite != null) {
-              _isSwitched = userData.disponibilite ;
-              print('assigned');
-              if (_isSwitched) _disp = 'Disponible' ;else _disp = 'Non Disponible';
-            }
-            if(userData.profilepicpath != null) _imagepath = userData.profilepicpath;*/
             return Material(
       child:  Scaffold(
           body: Stack(children: <Widget>[
@@ -89,7 +84,13 @@ class _TryState extends State<Try> {
                   padding: const EdgeInsets.only(top: 105 ,left: 260, right: 5),
                       child:FlatButton(
                         color: Color(0xFF00B9FF),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return Patient();
+                    },
+                  ));
+                        },
                         child: Row(
                           children: <Widget>[
                             Text(
@@ -110,39 +111,41 @@ class _TryState extends State<Try> {
                       ),
                     ),
               ),
-              SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 70 ,left: 30, right: 220),
-                  child: RaisedButton(
-                    color:Color(0xFF00B9FF),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return Acceuil();
-                      },));
+              Align(
+            alignment: Alignment(-0.8, -0.8),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 2.7,
+              child: RaisedButton(
+                color: Color(0xFF00B9FF),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return Acceuil();
                     },
-                    child: Row(
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius:10,
-                          child: Image.asset("assets/icones/menu.png"),
-                          backgroundColor: Color(0xFF00B9FF),
-                        ),
-                        Text(
-                          " Menu",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: 'Poppins-Light'
-                          ),
-                        ),
-                      ],
+                  ));
+                },
+                child: Row(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 10,
+                      child: Image.asset("assets/icones/menu.png"),
+                      backgroundColor: Color(0xFF00B9FF),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
+                    Text(
+                      " Menu",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontFamily: 'Poppins-Light'),
                     ),
-                  ),
+                  ],
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
               ),
+            ),
+          ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 410,
@@ -234,19 +237,11 @@ class _TryState extends State<Try> {
                               uploadPic(context);
                               print(_imagepath);
                               if (_imagepath != null){
-                                await DatabaseService(uid: user.uid).updateUserData(
-                                userData.nom ?? snapshot.data.nom,
-                                userData.tel ?? snapshot.data.tel,
-                                userData.service1 ?? snapshot.data.service1,
-                                userData.service2 ?? snapshot.data.service2,
-                                userData.service3 ?? snapshot.data.service3,
-                                userData.description ?? snapshot.data.description,
-                                userData.disponibilite ?? snapshot.data.disponibilite,
-                                _imagepath ?? snapshot.data.profilepicpath
-                            );
+                                DatabaseService(uid: user.uid).updateProfilePathPic(_imagepath);
                             setState(() {
                               _isVisible = false;
                               print('Image Path Uploaded !');
+                              //_showSuccessMessage();
                             });
                             }
                             },
@@ -280,7 +275,7 @@ class _TryState extends State<Try> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                     Text(
-                      _disp,
+                      'Disponibilité :',
                       style: TextStyle(fontSize: 17.5, color: Colors.black, fontFamily: 'SegoeUI', fontWeight: FontWeight.w400),
                     ),
                     SizedBox(width: 30),
@@ -294,16 +289,7 @@ class _TryState extends State<Try> {
                             else if (_isSwitched) _disp = 'Disponible';
                           });
                           if (_isSwitched != null){
-                                await DatabaseService(uid: user.uid).updateUserData(
-                                userData.nom ?? snapshot.data.nom,
-                                userData.tel ?? snapshot.data.tel,
-                                userData.service1 ?? snapshot.data.service1,
-                                userData.service2 ?? snapshot.data.service2,
-                                userData.service3 ?? snapshot.data.service3,
-                                userData.description ?? snapshot.data.description,
-                                _isSwitched ?? snapshot.data.disponibilite,
-                                userData.profilepicpath ?? snapshot.data.profilepicpath
-                            );
+                              DatabaseService(uid: user.uid).updateDisponibility(_isSwitched);
                             setState(() {
                               print('Switch uploaded ${_isSwitched}');
                             });
@@ -431,19 +417,15 @@ class _TryState extends State<Try> {
         StorageReference firebaseStorageRef =
             FirebaseStorage.instance.ref().child('Bénévoles/${fileName}');
         StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-        StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+        var downurl = await (await uploadTask.onComplete).ref.getDownloadURL();
+        var url = downurl.toString();
+        print('downloadurl: $url');
         setState(() {
           print("Profile Picture uploaded");
           _isVisible = false;
-          /*Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text('Profile Picture Uploaded')));*/
-          _imagepath = fileName;
+          _imagepath = url;
         });
       } catch (ex) {
-        //change it with a dialog 
-        /*Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(ex.message),
-        ));*/
         print(ex.message);
       }
     }
@@ -454,13 +436,10 @@ class _TryState extends State<Try> {
       final firestoreInstance = Firestore.instance;
       firestoreInstance.collection("Benevole").document(userA.uid).get().then((value){
       print(value.data["Disponibilite"]);
-      _isSwitched = value.data["Disponibilite"];
+      setState((){
+        _isSwitched = value.data["Disponibilite"];
+      });
     });
-    
-      setState(() { if (_isSwitched) _disp = 'Disponible' ;else _disp = 'Non Disponible';}) ;
-      /*.updateData({"Profilepathpic": 60}).then((_) {
-      print("success!");
-    });*/
     return _isSwitched;
     }
 
@@ -468,19 +447,20 @@ class _TryState extends State<Try> {
       final userA = await _auth.getCurrentUserInfo();
       final firestoreInstance = Firestore.instance;
       firestoreInstance.collection("Benevole").document(userA.uid).get().then((value){
-      print(value.data["ProfilePicPath"]);
-      _imagepath = value.data["ProfilePicPath"];
+      print('value : ${value.data["ProfilePicPath"]}');
+      _imageUrl = value.data["ProfilePicPath"];
+      print('url in firestore : $_imageUrl');
     });
-    print(_imagepath);
-    return _imagepath;
+    return _imageUrl;
     }
 
     void initState() {
       super.initState();
-      print(getDispo());
-      print(getProfileUrl());
-      var ref = FirebaseStorage.instance.ref().child('Bénévoles/benevole-profile.jpeg');
-      ref.getDownloadURL().then((loc) => setState(() => _imageUrl = loc));
+      getDispo();
+      getProfileUrl();
+      //print(getProfileUrl());
+      /*var ref = FirebaseStorage.instance.ref().child('Bénévoles/benevole-profile.jpeg');
+      ref.getDownloadURL().then((loc) => setState(() { _imageUrl = loc; print(loc);}));*/
       
     }
 }

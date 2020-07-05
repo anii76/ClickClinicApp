@@ -39,7 +39,7 @@ class _NameSetState extends State<NameSet> {
           ],),
           SizedBox(height: 20.0),
           TextFormField(
-            initialValue: db.getNom().toString(),
+            initialValue: db.getNom().toString(), // gonna use a provider anyway
             /*decoration: InputDecoration(
                 hintText: _currentphone,
               ),*/
