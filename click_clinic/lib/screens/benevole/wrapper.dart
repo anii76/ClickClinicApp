@@ -1,5 +1,4 @@
 import 'package:click_clinic/screens/benevole/authenticate/autheticate.dart';
-import 'package:click_clinic/screens/benevole/home/home.dart';
 import 'package:click_clinic/models/user.dart';
 import 'package:click_clinic/screens/benevole/home/navigator.dart';
 import 'package:flutter/material.dart';

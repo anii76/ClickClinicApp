@@ -1,3 +1,4 @@
+import 'package:click_clinic/screens/patient/profiles/benevoleListing.dart';
 import 'package:click_clinic/services/Carte.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class Medecins extends StatefulWidget {
 class _MedecinsState extends State<Medecins> {
 
 final GlobalKey<FireMapState> _key = new GlobalKey<FireMapState>();
+final GlobalKey key = GlobalKey();
   
 
   String dropdownValue = '  Choisissez la spécialité';
@@ -188,12 +190,21 @@ final GlobalKey<FireMapState> _key = new GlobalKey<FireMapState>();
               height: MediaQuery.of(context).size.height /14,
               width: double.infinity,
               color: Colors.white,
-              child: Center(child: Text(
-                'Besoin d\'un logement pendant votre séjour médical ?',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF00B3FA),
-                  fontFamily: 'SegoeUI',
+              child: Center(child: FlatButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return BenevoleListing(service: 'Service3',);
+          },
+        ));
+                },
+                              child: Text(
+                  'Besoin d\'un logement pendant votre séjour médical ?',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF00B3FA),
+                    fontFamily: 'SegoeUI',
+                  ),
                 ),
               ),),
       )

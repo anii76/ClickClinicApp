@@ -1,4 +1,3 @@
-import 'package:click_clinic/screens/benevole/authenticate/services.dart';
 import 'package:click_clinic/screens/benevole/home/settings.dart';
 import 'package:click_clinic/screens/patient/principal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,29 +15,25 @@ import 'package:provider/provider.dart';
 import 'package:click_clinic/models/user.dart';
 import 'package:click_clinic/shared/acceuil.dart';
 
-
 class Try extends StatefulWidget {
   @override
   _TryState createState() => _TryState();
 }
 
 class _TryState extends State<Try> {
-
   final AuthService _auth = AuthService();
   File _image;
   bool _isVisible = false;
-  String _imageUrl , _imagepath ;
+  String _imageUrl, _imagepath;
   bool _isSwitched = false;
   String _disp = 'Non Disponible';
 
   @override
   Widget build(BuildContext context) {
-
     User user = Provider.of<User>(context);
 
     Future getImage() async {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-
       setState(() {
         _image = image;
         print('Image Path $_image');
@@ -52,415 +47,434 @@ class _TryState extends State<Try> {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
             return Material(
-      child:  Scaffold(
-          body: Stack(children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFF4F8F9), //background
-              ),
-            ),
-
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height:MediaQuery.of(context).size.height / 2.6,
-              decoration: BoxDecoration(
-                color: Color(0xFF00B9FF),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(77),
-                    bottomRight: Radius.circular(77)),
-              ),
-            ),
-
-            Padding(
-                padding: const EdgeInsets.only(top: 70,left: 290),
-                child: CircleAvatar(
-                  radius:20,
-                  child: Image.asset("assets/images/patient.png"),
-                  backgroundColor: Colors.white,
-                ),
-              ),
-              SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 105 ,left: 260, right: 5),
-                      child:FlatButton(
+              child: Scaffold(
+                body: Stack(children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF4F8F9), //background
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 2.6,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF00B9FF),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(77),
+                          bottomRight: Radius.circular(77)),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 70, left: 290),
+                    child: CircleAvatar(
+                      radius: 20,
+                      child: Image.asset("assets/images/patient.png"),
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
+                  SizedBox(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 105, left: 260, right: 5),
+                      child: FlatButton(
                         color: Color(0xFF00B9FF),
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return Patient();
-                    },
-                  ));
+                            builder: (context) {
+                              return Patient();
+                            },
+                          ));
                         },
                         child: Row(
                           children: <Widget>[
                             Text(
                               "Bénévole ",
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Poppins-Regular'
-                              ),
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins-Regular'),
                             ),
                             CircleAvatar(
-                              radius:10,
-                              child: Image.asset("assets/icones/selectionner.png", color: Colors.white,),
+                              radius: 10,
+                              child: Image.asset(
+                                "assets/icones/selectionner.png",
+                                color: Colors.white,
+                              ),
                               backgroundColor: Color(0xFF00B9FF),
                             ),
                           ],
                         ),
                       ),
                     ),
-              ),
-              Align(
-            alignment: Alignment(-0.8, -0.8),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width / 2.7,
-              child: RaisedButton(
-                color: Color(0xFF00B9FF),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return Acceuil();
-                    },
-                  ));
-                },
-                child: Row(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 10,
-                      child: Image.asset("assets/icones/menu.png"),
-                      backgroundColor: Color(0xFF00B9FF),
-                    ),
-                    Text(
-                      " Menu",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontFamily: 'Poppins-Light'),
-                    ),
-                  ],
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-            ),
-          ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 410,
-              child: Padding(
-                padding: EdgeInsets.only(top: 200),
-                child: Center(
-                  child: Stack(children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(55)),
+                  ),
+                  Align(
+                    alignment: Alignment(-0.8, -0.8),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.7,
+                      child: RaisedButton(
+                        color: Color(0xFF00B9FF),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return Acceuil();
+                            },
+                          ));
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 10,
+                              child: Image.asset("assets/icones/menu.png"),
+                              backgroundColor: Color(0xFF00B9FF),
+                            ),
+                            Text(
+                              " Menu",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontFamily: 'Poppins-Light'),
+                            ),
+                          ],
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                       ),
-                      child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(55)),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 410,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 200),
+                      child: Center(
+                        child: Stack(children: [
+                          Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(55)),
+                            ),
+                            child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(55)),
+                                ),
+                                child: GFAvatar(
+                                  shape: GFAvatarShape.circle,
+                                  radius: 70,
+                                  backgroundColor: Colors.white,
+                                  child: ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(55)),
+                                    child: SizedBox(
+                                      height: 360,
+                                      child: (_image == null)
+                                          ? _imageUrl == null
+                                              ? Image.asset(
+                                                  //default image
+                                                  "assets/images/clickclinic.png",
+                                                  fit: BoxFit.fill,
+                                                )
+                                              : Image.network(_imageUrl,
+                                                  fit: BoxFit.fill)
+                                          : Image.file(_image,
+                                              fit: BoxFit.fill),
+                                    ),
+                                  ),
+                                )),
                           ),
-                          child: GFAvatar(
-                          shape: GFAvatarShape.circle,
-                            radius: 70,
-                            backgroundColor: Colors.white,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.all(Radius.circular(55)),
-                              child: SizedBox(
-                                height: 360,
-                                child: (_image == null)
-                                     ? _imageUrl == null
-                                     ? Image.asset(
-                                      //default image
-                                       "assets/images/clickclinic.png",
-                                        fit: BoxFit.fill,
-                                      )
-                                     : Image.network(
-                                       _imageUrl,
-                                       fit: BoxFit.fill
-                                     )
-                                     : Image.file(
-                                        _image,
-                                        fit: BoxFit.fill
-                                      ),
-                               ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: 115.0, right: 0.0, left: 115),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add_a_photo,
+                                size: 25.0,
+                                color: Colors.grey[700],
+                              ),
+                              onPressed: () {
+                                getImage();
+                                setState(() {
+                                  _isVisible = true;
+                                });
+                              },
                             ),
                           )
-                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 115.0, right: 0.0, left: 115),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.add_a_photo,
-                          size: 25.0,
-                          color: Colors.grey[700],
-                        ),
-                        onPressed: () {
-                          getImage();
-                          setState(() {
-                            _isVisible = true;
-                          });
-                        },
+                        ]),
                       ),
-                    )
-                  ]),
-                ),
-              ),
-            ),
-
-            Container(
-                width: MediaQuery.of(context).size.width,
-                //height: 360,
-                padding: EdgeInsets.only(top: 360, left: 180),
-                child:  
-                _isVisible
-                    ? Row(
-                        children: <Widget>[
-                          RaisedButton(
-                            color: Color(0xff476cfb),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    //height: 360,
+                    padding: EdgeInsets.only(top: 360, left: 180),
+                    child: _isVisible
+                        ? Row(
+                            children: <Widget>[
+                              RaisedButton(
+                                color: Color(0xff476cfb),
+                                onPressed: () {
+                                  setState(() {
+                                    _isVisible = false;
+                                  });
+                                },
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 11.0),
+                                ),
+                              ),
+                              RaisedButton(
+                                color: Color(0xff476cfb),
+                                onPressed: () async {
+                                  uploadPic(context);
+                                  print(_imagepath);
+                                  if (_imagepath != null) {
+                                    DatabaseService(uid: user.uid)
+                                        .updateProfilePathPic(_imagepath);
+                                    setState(() {
+                                      _isVisible = false;
+                                      print('Image Path Uploaded !');
+                                      //_showSuccessMessage();
+                                    });
+                                  }
+                                },
+                                child: Text(
+                                  'Up',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 11.0),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Text(''),
+                  ),
+                  Center(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.only(top: 180)),
+                        Text(
+                          'Que Voulez-vous faire?',
+                          style: TextStyle(
+                              fontSize: 26,
+                              color: Colors.white,
+                              fontFamily: 'Poppins-Medium'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 200),
+                        ),
+                        Text(
+                          userData.nom,
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                              fontFamily: 'Poppins-Medium',
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 7.5),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Disponibilité :',
+                              style: TextStyle(
+                                  fontSize: 17.5,
+                                  color: Colors.black,
+                                  fontFamily: 'SegoeUI',
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(width: 30),
+                            CupertinoSwitch(
+                              value: _isSwitched,
+                              onChanged: (value) async {
+                                setState(() {
+                                  _isSwitched = value;
+                                  print("Switched");
+                                  if (!_isSwitched)
+                                    _disp = 'Non Disponible'; //
+                                  else if (_isSwitched) _disp = 'Disponible';
+                                });
+                                if (_isSwitched != null) {
+                                  DatabaseService(uid: user.uid)
+                                      .updateDisponibility(_isSwitched);
+                                  setState(() {
+                                    print('Switch uploaded ${_isSwitched}');
+                                  });
+                                }
+                              },
+                              activeColor: Colors.greenAccent[400],
+                            )
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 40),
+                        ),
+                        SizedBox(
+                          child: RaisedButton(
+                            color: Colors.white,
                             onPressed: () {
-                              setState(() {
-                                _isVisible = false;
-                              });
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return Settings();
+                                },
+                              ));
                             },
-                            child: Text(
-                              'Cancel',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 11.0),
+                            child: Row(
+                              children: <Widget>[
+                                CircleAvatar(
+                                  radius: 20,
+                                  //child: Image.asset("assets/icones/medecin.png"),
+                                  backgroundColor: Color(0xFF00B9FF),
+                                ),
+                                Text(
+                                  "   Paramétres du Compte",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: 'Poppins-Regular',
+                                      color: Color(0xFF00B9FF)),
+                                ),
+                              ],
                             ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
                           ),
-                          RaisedButton(
-                            color: Color(0xff476cfb),
+                          width: 300,
+                          height: 55,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 15),
+                        ),
+                        SizedBox(
+                          child: RaisedButton(
+                            color: Colors.white,
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return Settings();
+                                },
+                              ));
+                            },
+                            child: Row(
+                              children: <Widget>[
+                                CircleAvatar(
+                                  radius: 20,
+                                  //child: Image.asset("assets/icones/medecin.png"),
+                                  backgroundColor: Color(0xFF00B9FF),
+                                ),
+                                Text(
+                                  "   Paramétres des Services",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: 'Poppins-Regular',
+                                      color: Color(0xFF00B9FF)),
+                                ),
+                              ],
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                          ),
+                          width: 300,
+                          height: 55,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 40),
+                        ),
+                        SizedBox(
+                          child: RaisedButton(
+                            color: Colors.white,
                             onPressed: () async {
-                              uploadPic(context);
-                              print(_imagepath);
-                              if (_imagepath != null){
-                                DatabaseService(uid: user.uid).updateProfilePathPic(_imagepath);
-                            setState(() {
-                              _isVisible = false;
-                              print('Image Path Uploaded !');
-                              //_showSuccessMessage();
-                            });
-                            }
+                              await _auth.signOut();
                             },
-                            child: Text(
-                              'Up',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 11.0),
+                            child: Row(
+                              children: <Widget>[
+                                CircleAvatar(
+                                  radius: 15,
+                                  //child: Image.asset("assets/icones/medecin.png"),
+                                  backgroundColor: Colors.red,
+                                ),
+                                Text(
+                                  "  Déconnexion",
+                                  style: TextStyle(
+                                      fontSize: 16.5,
+                                      fontFamily: 'Poppins-Regular',
+                                      color: Colors.red),
+                                ),
+                              ],
                             ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
                           ),
-                        ],
-                      )
-                    : Text(''),
-            ),
-
-            Center(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 180)),
-                  Text(
-                    'Que Voulez-vous faire?',
-                     style: TextStyle(fontSize: 26, color: Colors.white, fontFamily: 'Poppins-Medium'),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 200),),
-                  Text(
-                    userData.nom,
-                    style: TextStyle(fontSize: 22, color: Colors.black, fontFamily: 'Poppins-Medium', fontWeight: FontWeight.w500),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 7.5),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                    Text(
-                      'Disponibilité :',
-                      style: TextStyle(fontSize: 17.5, color: Colors.black, fontFamily: 'SegoeUI', fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(width: 30),
-                    CupertinoSwitch(
-                      value: _isSwitched, 
-                      onChanged: (value) async {
-                          setState(() {
-                            _isSwitched = value; 
-                            print("Switched");
-                            if (!_isSwitched )  _disp = 'Non Disponible';//
-                            else if (_isSwitched) _disp = 'Disponible';
-                          });
-                          if (_isSwitched != null){
-                              DatabaseService(uid: user.uid).updateDisponibility(_isSwitched);
-                            setState(() {
-                              print('Switch uploaded ${_isSwitched}');
-                            });
-                          }
-                      },
-                      activeColor: Colors.greenAccent[400],
-                    )
-                  ],),
-                  Padding(
-                    padding: EdgeInsets.only(top:40),
-                  ),
-                  SizedBox(
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return Settings();
-                        },));
-                        },
-                        child: Row(
-                          children: <Widget>[
-                            CircleAvatar(
-                              radius: 20,
-                              //child: Image.asset("assets/icones/medecin.png"),
-                              backgroundColor: Color(0xFF00B9FF),
-                            ),
-                            Text(
-                              "   Paramétres du Compte",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontFamily: 'Poppins-Regular',
-                                color: Color(0xFF00B9FF)
-                              ),
-                            ),
-                          ],
+                          width: 190,
+                          height: 45,
                         ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                      ),
-                      width: 300,
-                      height: 55,
-                    ), 
-                  Padding(
-                      padding: EdgeInsets.only(top: 15),
+                      ],
                     ),
-                  SizedBox(
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return Settings();
-                        },));
-                        },
-                        child: Row(
-                          children: <Widget>[
-                            CircleAvatar(
-                              radius: 20,
-                              //child: Image.asset("assets/icones/medecin.png"),
-                              backgroundColor: Color(0xFF00B9FF),
-                            ),
-                            Text(
-                              "   Paramétres des Services",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontFamily: 'Poppins-Regular',
-                                color: Color(0xFF00B9FF)
-                              ),
-                            ),
-                          ],
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                      ),
-                      width: 300,
-                      height: 55,
-                    ),
-                  Padding(
-                      padding: EdgeInsets.only(top: 40),
-                    ),
-                  SizedBox(
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () async {
-                          await _auth.signOut();
-                         },
-                        child: Row(
-                          children: <Widget>[
-                            CircleAvatar(
-                              radius: 15,
-                              //child: Image.asset("assets/icones/medecin.png"),
-                              backgroundColor: Colors.red,
-                            ),
-                            Text(
-                              "  Déconnexion",
-                              style: TextStyle(
-                                fontSize: 16.5,
-                                fontFamily: 'Poppins-Regular',
-                                color: Colors.red
-                              ),
-                            ),
-                          ],
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                      ),
-                      width: 190,
-                      height: 45,
-                    ),       
-                ],
+                  )
+                ]),
               ),
-            )
-
-          ]),
-        ),
- 
-    );
-  }else
-     return Loading();
-  });}
+            );
+          } else
+            return Loading();
+        });
+  }
 
   // upload pic to firebase storage
-    Future uploadPic(BuildContext context) async {
-      try {
-        String fileName = basename(_image.path);
-        StorageReference firebaseStorageRef =
-            FirebaseStorage.instance.ref().child('Bénévoles/${fileName}');
-        StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-        var downurl = await (await uploadTask.onComplete).ref.getDownloadURL();
-        var url = downurl.toString();
-        print('downloadurl: $url');
-        setState(() {
-          print("Profile Picture uploaded");
-          _isVisible = false;
-          _imagepath = url;
-        });
-      } catch (ex) {
-        print(ex.message);
-      }
+  Future uploadPic(BuildContext context) async {
+    try {
+      String fileName = basename(_image.path);
+      StorageReference firebaseStorageRef =
+          FirebaseStorage.instance.ref().child('Bénévoles/${fileName}');
+      StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+      var downurl = await (await uploadTask.onComplete).ref.getDownloadURL();
+      var url = downurl.toString();
+      print('downloadurl: $url');
+      setState(() {
+        print("Profile Picture uploaded");
+        _isVisible = false;
+        _imagepath = url;
+      });
+    } catch (ex) {
+      //error message
+      print(ex.message);
     }
+  }
 
-    //put this getter in database.dart with its sisters
-    Future<bool> getDispo() async{
-      final userA = await _auth.getCurrentUserInfo();
-      final firestoreInstance = Firestore.instance;
-      firestoreInstance.collection("Benevole").document(userA.uid).get().then((value){
+  Future<bool> getDispo() async {
+    final userA = await _auth.getCurrentUserInfo();
+    final firestoreInstance = Firestore.instance;
+    firestoreInstance
+        .collection("Benevole")
+        .document(userA.uid)
+        .get()
+        .then((value) {
       print(value.data["Disponibilite"]);
-      setState((){
+      setState(() {
         _isSwitched = value.data["Disponibilite"];
       });
     });
     return _isSwitched;
-    }
+  }
 
-    Future<String> getProfileUrl() async{
-      final userA = await _auth.getCurrentUserInfo();
-      final firestoreInstance = Firestore.instance;
-      firestoreInstance.collection("Benevole").document(userA.uid).get().then((value){
+  Future<String> getProfileUrl() async {
+    final userA = await _auth.getCurrentUserInfo();
+    final firestoreInstance = Firestore.instance;
+    firestoreInstance
+        .collection("Benevole")
+        .document(userA.uid)
+        .get()
+        .then((value) {
       print('value : ${value.data["ProfilePicPath"]}');
       _imageUrl = value.data["ProfilePicPath"];
       print('url in firestore : $_imageUrl');
     });
     return _imageUrl;
-    }
+  }
 
-    void initState() {
-      super.initState();
-      getDispo();
-      getProfileUrl();
-      //print(getProfileUrl());
-      /*var ref = FirebaseStorage.instance.ref().child('Bénévoles/benevole-profile.jpeg');
-      ref.getDownloadURL().then((loc) => setState(() { _imageUrl = loc; print(loc);}));*/
-      
-    }
+  void initState() {
+    super.initState();
+    getDispo();
+    getProfileUrl();
+  }
 }
