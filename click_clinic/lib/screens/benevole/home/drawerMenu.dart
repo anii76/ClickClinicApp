@@ -1,7 +1,11 @@
-import 'package:click_clinic/screens/patient/drawerMenu.dart';
+import 'package:click_clinic/screens/benevole/benevole.dart';
+import 'package:click_clinic/screens/benevole/home/navigator.dart';
+import 'package:click_clinic/services/auth.dart';
+import 'package:click_clinic/shared/parametreApp.dart';
 import 'package:flutter/material.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
 import 'package:swipedetector/swipedetector.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class BenevoleLayout extends StatefulWidget {
@@ -37,7 +41,7 @@ class _BenevoleLayoutState extends State<BenevoleLayout> {
                 });
               },
             ),
-            screenContents: Patient(), //navigator.dart dear anfel *-*
+            screenContents: Try(), //navigator.dart dear anfel *-*
             status: drawerStatus,
 
           ),
@@ -64,7 +68,11 @@ class CustomDrawer extends StatelessWidget {
   final Function closeDrawer;
 
   const CustomDrawer({Key key, this.closeDrawer}) : super(key: key);
-
+  
+  void contact(){
+    String mailto ='mailto:a.bourouina@esi-sba.dz?subject=FeedBack&body:write your feed back';
+    launch(mailto);
+  }
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -103,6 +111,12 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
               onTap: () {
                 debugPrint("Tapped settings");
+                Navigator.push(context,
+                                            MaterialPageRoute(
+                                          builder: (context) {
+                                            return ParaDapp();
+                                          },
+                                        ));
               },
               leading: Image.asset(
                     "assets/images/gear.png",
@@ -122,7 +136,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
               onTap: () {
-                debugPrint("Tapped Payments");//Navigator.of(context).push(MaterialPageRoute(builder:(context)=>seconPage(),));
+                debugPrint("Tapped Payments");
+                contact();
               },
               leading: Image.asset(
                     "assets/images/env.png",
@@ -169,6 +184,7 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
               onTap: () {
                 debugPrint("Tapped Log Out");
+                AuthService().signOut();
               },
               leading: Image.asset(
                     "assets/images/out.png",

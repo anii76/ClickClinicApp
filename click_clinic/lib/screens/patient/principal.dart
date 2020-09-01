@@ -1,5 +1,3 @@
-import 'package:click_clinic/screens/benevole/benevole.dart';
-import 'package:click_clinic/screens/patient/database.dart';
 import 'package:click_clinic/screens/patient/hopitaux.dart';
 import 'package:click_clinic/screens/patient/pharmacies.dart';
 import 'package:click_clinic/screens/patient/medecins.dart';
@@ -35,88 +33,40 @@ class _PatientState extends State<Patient> {
                   bottomRight: Radius.circular(77)),
             ),
           ),
+          
           Align(
-            alignment: Alignment(0.8, -0.8),
-            child: SizedBox(
-              child: Wrap(//later reformate with media Query
-                    direction: Axis.vertical,
-                  children: [
-                    Wrap(
-                children: [
-                  SizedBox(width: 20,),
-                  CircleAvatar(
-                  radius: 20,
-                  child: Image.asset("assets/images/patient.png"),
-                  backgroundColor: Colors.white,
-                ),]),
-                FlatButton(
-                  color: Color(0xFF00B9FF),
-                  onPressed: () {
-                     Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return Benevole();
-                    },
-                  ));
-                  },
-                  child: Wrap(
-                    children: <Widget>[
-                      Text(
-                        "Patient ",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize:
-                                MediaQuery.of(context).textScaleFactor * 12,
-                            fontFamily: 'Poppins-Regular'),
-                      ),
-                      CircleAvatar(
-                        radius: 10,
-                        child: Image.asset(
-                          "assets/icones/selectionner.png",
-                          color: Colors.white,
-                        ),
-                        backgroundColor: Color(0xFF00B9FF),
-                      ),
-                    ],
+                    alignment: Alignment(0.45, -0.83),
+                    child: Image.asset("assets/images/l.png"),
                   ),
-                ),
-              ]),
-            ),
-          ),
           Align(
-            alignment: Alignment(-0.8, -0.8),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width / 2.7,
-              child: RaisedButton(
-                color: Color(0xFF00B9FF),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return Acceuil();
-                    },
-                  ));
-                },
-                child: Row(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 10,
-                      child: Image.asset("assets/icones/menu.png"),
-                      backgroundColor: Color(0xFF00B9FF),
+                    alignment: Alignment(-0.8, -0.85),
+                    child: SizedBox(
+                      width: 80,
+                      child: RaisedButton(
+                        color: Color(0xFF00B9FF),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return Acceuil();
+                            },
+                          ));
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 20,
+                              child: Image.asset("assets/icones/menu.png"),
+                              backgroundColor: Color(0xFF00B9FF),
+                            ),
+                          ],
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      ),
                     ),
-                    Text(
-                      " Menu",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontFamily: 'Poppins-Light'),
-                    ),
-                  ],
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-            ),
-          ),
+                  ),
+          //********************************************************** */
           Center(
             child: Column(
               children: <Widget>[
@@ -302,4 +252,3 @@ class _PatientState extends State<Patient> {
 }
 
 //redo the UI to make it responsive
-//'patient' iconImageButton is not responsive

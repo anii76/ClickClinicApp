@@ -1,11 +1,14 @@
+import 'package:click_clinic/shared/parametreApp.dart';
 import 'package:flutter/material.dart';
+import 'package:click_clinic/screens/patient/principal.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class Patient extends StatefulWidget {
+class PatientDrawer extends StatefulWidget {
   @override
-  _PatientState createState() => _PatientState();
+  _PatientDrawerState createState() => _PatientDrawerState();
 }
 
-class _PatientState extends State<Patient> {
+class _PatientDrawerState extends State<PatientDrawer> {
   GlobalKey globalKey = GlobalKey();
   Offset _offset = Offset(0, 0);
   List<double> limits = [];
@@ -37,6 +40,11 @@ class _PatientState extends State<Patient> {
     double size =
         (_offset.dy > limits[x] && _offset.dy < limits[x + 1] ? 25 : 20);
     return size;
+  }
+
+  void contact(){
+    String mailto ='mailto:a.bourouina@esi-sba.dz?subject=FeedBack&body:write your feed back';
+    launch(mailto);
   }
 
   @override
@@ -122,18 +130,28 @@ class _PatientState extends State<Patient> {
                                       textSize: getSize(0),
                                       iconData: "assets/images/gear.png",
                                       height: (menuContainerHeight / 3),
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                          builder: (context) {
+                                            return ParaDapp();
+                                          },
+                                        ));
+                                      },
                                     ),
                                     MyButton(
                                       text: "Contact",
                                       textSize: getSize(1),
                                       iconData: "assets/images/env.png",
                                       height: (menuContainerHeight / 3),
+                                      onPressed: () {contact();},
                                     ),
                                     MyButton(
                                       text: "À propos",
                                       textSize: getSize(2),
                                       iconData: "assets/images/h.png",
                                       height: (menuContainerHeight / 3),
+                                      onPressed: () {},
                                     ),
                                   ],
                                 ),
@@ -224,7 +242,9 @@ class MyButton extends StatelessWidget {
   final double textSize;
   final String iconData;
   final double height;
-  MyButton({this.text, this.textSize, this.iconData, this.height});
+  Function onPressed;
+  MyButton(
+      {this.text, this.textSize, this.iconData, this.height, this.onPressed});
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -247,7 +267,7 @@ class MyButton extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {},
+      onPressed: onPressed,
     );
   }
 }
@@ -263,4 +283,5 @@ class Img extends StatelessWidget {
       child: Image.asset(_assetPath, fit: BoxFit.cover, width: 30.0),
     );
   }
+
 }

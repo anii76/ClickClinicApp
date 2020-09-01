@@ -1,10 +1,5 @@
 import 'package:click_clinic/screens/benevole/authenticate/address.dart';
 import 'package:click_clinic/screens/benevole/authenticate/inscription.dart';
-import 'package:click_clinic/screens/benevole/authenticate/sang.dart';
-import 'package:click_clinic/screens/benevole/home/navigator.dart';
-import 'package:click_clinic/screens/benevole/wrapper.dart';
-import 'package:click_clinic/services/auth.dart';
-import 'package:click_clinic/shared/acceuil.dart';
 import 'package:click_clinic/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:click_clinic/services/database.dart';

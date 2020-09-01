@@ -1,4 +1,5 @@
 import 'package:click_clinic/screens/benevole/benevole.dart';
+import 'package:click_clinic/screens/patient/drawerMenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:click_clinic/screens/patient/principal.dart';
@@ -73,7 +74,7 @@ class _AcceuilState extends State<Acceuil> {
                             });*/
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return Patient();
+                          return PatientDrawer();
                         },
                       ));
                     },

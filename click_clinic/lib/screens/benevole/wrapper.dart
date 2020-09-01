@@ -4,6 +4,8 @@ import 'package:click_clinic/screens/benevole/home/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'home/drawerMenu.dart';
+
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Try();
+      return BenevoleLayout();
     }
   }
 }

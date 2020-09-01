@@ -1,11 +1,10 @@
-import 'package:click_clinic/screens/benevole/home/settings.dart';
-import 'package:click_clinic/screens/patient/principal.dart';
+import 'package:click_clinic/screens/benevole/home/parametreCompte.dart';
+import 'package:click_clinic/screens/benevole/home/parametreService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
-import 'package:getflutter/getflutter.dart';
 import 'package:path/path.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:click_clinic/services/auth.dart';
@@ -23,22 +22,64 @@ class Try extends StatefulWidget {
 class _TryState extends State<Try> {
   final AuthService _auth = AuthService();
   File _image;
-  bool _isVisible = false;
   String _imageUrl, _imagepath;
   bool _isSwitched = false;
-  String _disp = 'Non Disponible';
 
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
+
+    //void _showSuccessMessage()
+
+    void _showConfirmMessage() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text("Modifier votre photo"),
+            content: new Text(
+                "Etes vous sur de vouloir modifier votre photo de profil ? "),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Annuler"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: new Text("Confirmer"),
+                onPressed: () async {
+                  uploadPic(context);
+                  print(_imagepath);
+                  if (_imagepath != null) {
+                    DatabaseService(uid: user.uid)
+                        .updateProfilePathPic(_imagepath);
+                    setState(() {
+                      print('Image Path Uploaded !');
+                      //_showSuccessMessage();
+                    });
+                  }
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     Future getImage() async {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
       setState(() {
         _image = image;
         print('Image Path $_image');
+        _showConfirmMessage();
       });
     }
+
+    //void _getImageFromCamera()
+
+    //void _uploadCamera&Gallery()
 
     return StreamBuilder<UserData>(
         //the provider to bypass user name & photo & disponibility
@@ -64,53 +105,14 @@ class _TryState extends State<Try> {
                           bottomRight: Radius.circular(77)),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 70, left: 290),
-                    child: CircleAvatar(
-                      radius: 20,
-                      child: Image.asset("assets/images/patient.png"),
-                      backgroundColor: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 105, left: 260, right: 5),
-                      child: FlatButton(
-                        color: Color(0xFF00B9FF),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return Patient();
-                            },
-                          ));
-                        },
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "Bénévole ",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontFamily: 'Poppins-Regular'),
-                            ),
-                            CircleAvatar(
-                              radius: 10,
-                              child: Image.asset(
-                                "assets/icones/selectionner.png",
-                                color: Colors.white,
-                              ),
-                              backgroundColor: Color(0xFF00B9FF),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  Align(
+                    alignment: Alignment(0.45, -0.83),
+                    child: Image.asset("assets/images/l.png"),
                   ),
                   Align(
-                    alignment: Alignment(-0.8, -0.8),
+                    alignment: Alignment(-0.8, -0.85),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 2.7,
+                      width: 80,
                       child: RaisedButton(
                         color: Color(0xFF00B9FF),
                         onPressed: () {
@@ -123,16 +125,9 @@ class _TryState extends State<Try> {
                         child: Row(
                           children: <Widget>[
                             CircleAvatar(
-                              radius: 10,
+                              radius: 20,
                               child: Image.asset("assets/icones/menu.png"),
                               backgroundColor: Color(0xFF00B9FF),
-                            ),
-                            Text(
-                              " Menu",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontFamily: 'Poppins-Light'),
                             ),
                           ],
                         ),
@@ -142,276 +137,159 @@ class _TryState extends State<Try> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 410,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 200),
-                      child: Center(
-                        child: Stack(children: [
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(55)),
-                            ),
-                            child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(55)),
-                                ),
-                                child: GFAvatar(
-                                  shape: GFAvatarShape.circle,
-                                  radius: 70,
-                                  backgroundColor: Colors.white,
-                                  child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(55)),
-                                    child: SizedBox(
-                                      height: 360,
-                                      child: (_image == null)
-                                          ? _imageUrl == null
-                                              ? Image.asset(
-                                                  //default image
-                                                  "assets/images/clickclinic.png",
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : Image.network(_imageUrl,
-                                                  fit: BoxFit.fill)
-                                          : Image.file(_image,
-                                              fit: BoxFit.fill),
-                                    ),
-                                  ),
-                                )),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 115.0, right: 0.0, left: 115),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.add_a_photo,
-                                size: 25.0,
-                                color: Colors.grey[700],
-                              ),
-                              onPressed: () {
-                                getImage();
-                                setState(() {
-                                  _isVisible = true;
-                                });
-                              },
-                            ),
-                          )
-                        ]),
+                  Align(
+                    alignment: Alignment(0, -0.6),
+                    child: Text(
+                      'Que Voulez-vous faire?',
+                      style: TextStyle(
+                          fontSize: 26,
+                          color: Colors.white,
+                          fontFamily: 'Poppins-Medium'),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment(0, -0.3),
+                    child: FlatButton(
+                      onPressed: () {
+                        print('tapped');
+                        getImage();
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage("assets/images/man.png"),
+                        radius: 80, //tobemodified
+                        child: ClipOval(
+                          child: (_image == null)
+                              ? _imageUrl == null
+                                  ? Image.asset(
+                                      //default image
+                                      "assets/images/man.png",
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.network(_imageUrl, fit: BoxFit.fill)
+                              : Image.file(_image, fit: BoxFit.fill),
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    //height: 360,
-                    padding: EdgeInsets.only(top: 360, left: 180),
-                    child: _isVisible
-                        ? Row(
-                            children: <Widget>[
-                              RaisedButton(
-                                color: Color(0xff476cfb),
-                                onPressed: () {
-                                  setState(() {
-                                    _isVisible = false;
-                                  });
-                                },
-                                child: Text(
-                                  'Cancel',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 11.0),
-                                ),
-                              ),
-                              RaisedButton(
-                                color: Color(0xff476cfb),
-                                onPressed: () async {
-                                  uploadPic(context);
-                                  print(_imagepath);
-                                  if (_imagepath != null) {
-                                    DatabaseService(uid: user.uid)
-                                        .updateProfilePathPic(_imagepath);
-                                    setState(() {
-                                      _isVisible = false;
-                                      print('Image Path Uploaded !');
-                                      //_showSuccessMessage();
-                                    });
-                                  }
-                                },
-                                child: Text(
-                                  'Up',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 11.0),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Text(''),
+                  Align(
+                    alignment: Alignment(0, 0.1),
+                    child: Text(
+                      userData.nom,
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.black,
+                          fontFamily: 'Poppins-Medium',
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
-                  Center(
-                    child: Column(
+                  Align(
+                    alignment: Alignment(0, 0.25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Padding(padding: EdgeInsets.only(top: 180)),
                         Text(
-                          'Que Voulez-vous faire?',
+                          'Disponibilité :',
                           style: TextStyle(
-                              fontSize: 26,
-                              color: Colors.white,
-                              fontFamily: 'Poppins-Medium'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 200),
-                        ),
-                        Text(
-                          userData.nom,
-                          style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 17.5,
                               color: Colors.black,
-                              fontFamily: 'Poppins-Medium',
-                              fontWeight: FontWeight.w500),
+                              fontFamily: 'SegoeUI',
+                              fontWeight: FontWeight.w400),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 7.5),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Disponibilité :',
-                              style: TextStyle(
-                                  fontSize: 17.5,
-                                  color: Colors.black,
-                                  fontFamily: 'SegoeUI',
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(width: 30),
-                            CupertinoSwitch(
-                              value: _isSwitched,
-                              onChanged: (value) async {
-                                setState(() {
-                                  _isSwitched = value;
-                                  print("Switched");
-                                  if (!_isSwitched)
-                                    _disp = 'Non Disponible'; //
-                                  else if (_isSwitched) _disp = 'Disponible';
-                                });
-                                if (_isSwitched != null) {
-                                  DatabaseService(uid: user.uid)
-                                      .updateDisponibility(_isSwitched);
-                                  setState(() {
-                                    print('Switch uploaded ${_isSwitched}');
-                                  });
-                                }
-                              },
-                              activeColor: Colors.greenAccent[400],
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 40),
-                        ),
-                        SizedBox(
-                          child: RaisedButton(
-                            color: Colors.white,
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return Settings();
-                                },
-                              ));
-                            },
-                            child: Row(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  radius: 20,
-                                  //child: Image.asset("assets/icones/medecin.png"),
-                                  backgroundColor: Color(0xFF00B9FF),
-                                ),
-                                Text(
-                                  "   Paramétres du Compte",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontFamily: 'Poppins-Regular',
-                                      color: Color(0xFF00B9FF)),
-                                ),
-                              ],
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                          ),
-                          width: 300,
-                          height: 55,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
-                        ),
-                        SizedBox(
-                          child: RaisedButton(
-                            color: Colors.white,
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return Settings();
-                                },
-                              ));
-                            },
-                            child: Row(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  radius: 20,
-                                  //child: Image.asset("assets/icones/medecin.png"),
-                                  backgroundColor: Color(0xFF00B9FF),
-                                ),
-                                Text(
-                                  "   Paramétres des Services",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontFamily: 'Poppins-Regular',
-                                      color: Color(0xFF00B9FF)),
-                                ),
-                              ],
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                          ),
-                          width: 300,
-                          height: 55,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 40),
-                        ),
-                        SizedBox(
-                          child: RaisedButton(
-                            color: Colors.white,
-                            onPressed: () async {
-                              await _auth.signOut();
-                            },
-                            child: Row(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  radius: 15,
-                                  //child: Image.asset("assets/icones/medecin.png"),
-                                  backgroundColor: Colors.red,
-                                ),
-                                Text(
-                                  "  Déconnexion",
-                                  style: TextStyle(
-                                      fontSize: 16.5,
-                                      fontFamily: 'Poppins-Regular',
-                                      color: Colors.red),
-                                ),
-                              ],
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                          ),
-                          width: 190,
-                          height: 45,
-                        ),
+                        SizedBox(width: 30),
+                        CupertinoSwitch(
+                          value: _isSwitched,
+                          onChanged: (value) async {
+                            setState(() {
+                              _isSwitched = value;
+                              print("Switched");
+                            });
+                            if (_isSwitched != null) {
+                              DatabaseService(uid: user.uid)
+                                  .updateDisponibility(_isSwitched);
+                              setState(() {
+                                print('Switch uploaded ${_isSwitched}');
+                              });
+                            }
+                          },
+                          activeColor: Colors.greenAccent[400],
+                        )
                       ],
                     ),
-                  )
+                  ),
+                  Align(
+                    alignment: Alignment(0, 0.5),
+                    child: SizedBox(
+                      child: RaisedButton(
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return ParaDuCompte();
+                            },
+                          ));
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 20,
+                              child: ClipOval(
+                                  child:
+                                      Image.asset("assets/icones/medecin.png")),
+                              backgroundColor: Color(0xFF00B9FF),
+                            ),
+                            Text(
+                              "   Paramétres du Compte",
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: 'Poppins-Regular',
+                                  color: Color(0xFF00B9FF)),
+                            ),
+                          ],
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                      ),
+                      width: 300, //tobemodified
+                      height: 55, //tobemodified
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment(0, 0.7),
+                    child: SizedBox(
+                      child: RaisedButton(
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return ParaDesServices();
+                            },
+                          ));
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 20,
+                              child: ClipOval(
+                                  child:
+                                      Image.asset("assets/icones/medecin.png")),
+                              backgroundColor: Color(0xFF00B9FF),
+                            ),
+                            Text(
+                              "   Paramétres des Services",
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: 'Poppins-Regular',
+                                  color: Color(0xFF00B9FF)),
+                            ),
+                          ],
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                      ),
+                      width: 300, //tobemodified
+                      height: 55, //tobemodified
+                    ),
+                  ),
                 ]),
               ),
             );
@@ -432,7 +310,6 @@ class _TryState extends State<Try> {
       print('downloadurl: $url');
       setState(() {
         print("Profile Picture uploaded");
-        _isVisible = false;
         _imagepath = url;
       });
     } catch (ex) {

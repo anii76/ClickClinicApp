@@ -1,4 +1,3 @@
-import 'package:click_clinic/screens/benevole/authenticate/services.dart';
 import 'package:flutter/material.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

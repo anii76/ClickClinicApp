@@ -161,8 +161,9 @@ class _BenevoleListingState extends State<BenevoleListing> {
     var imgUrl = document.data["ProfilePicPath"];
     var nom = document.data["Nom"];
     var tel = document.data["Tel"];
-    return Container(
-      height: 50,
+    return SizedBox(
+      width: 500,
+      height: 60,
       child: RaisedButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
@@ -171,13 +172,15 @@ class _BenevoleListingState extends State<BenevoleListing> {
             },
           ));
         },
-        child: Row(
+        child: Wrap(
           children: <Widget>[
             CircleAvatar(
-              radius: 20,
-              child: imgUrl != null
-                  ? Image.network(imgUrl)
-                  : Image.asset("assets/name.png"),
+              radius: 22,
+              child: ClipOval(
+                              child: imgUrl != null
+                    ? Image.network(imgUrl)
+                    : Image.asset("assets/name.png"),
+              ),
               backgroundColor: Colors.white10,
             ),
             Column(children: [

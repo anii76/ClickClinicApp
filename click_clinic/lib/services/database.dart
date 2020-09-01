@@ -96,9 +96,23 @@ class DatabaseService {
     });
   }
 
-  //setLocation -> in carte.dart
-  //setAdress
+  //setBloodType
+  void updateBloodType(String val) async {
+    final user = await _auth.getCurrentUserInfo();
+    benevoleCollection.document(user.uid).updateData({"BloodType": val}).then((_){
+      print("success!");
+    });
+  }
 
+  //setAdress
+  void updateAdress(String val ) async {
+    final user = await _auth.getCurrentUserInfo();
+    benevoleCollection.document(user.uid).updateData({"Adress": val}).then((_){
+      print("success!");
+    });
+  }
+
+  
   //getters
   //getting all user data 
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {

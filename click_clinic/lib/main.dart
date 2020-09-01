@@ -1,5 +1,4 @@
 import 'package:click_clinic/shared/acceuil.dart';
-import 'package:click_clinic/shared/switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:click_clinic/shared/onboarding.dart';
@@ -20,13 +19,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: initScreen == 0 || initScreen == null ? "first" : "/", //initialRoute is ruining it
+      initialRoute: initScreen == 0 || initScreen == null ? "first" : "/", 
       routes: {
-        '/': (context) => Acceuil(), //qst is can I put this widget in materialApp :/ 
+        '/': (context) => Acceuil(), 
         "first": (context) => OnboardingScreen(),
       },
     );
   }
 }
 
-//implement the error handling before release

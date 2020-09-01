@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ParaDapp extends StatefulWidget {
   @override
@@ -8,7 +9,7 @@ class ParaDapp extends StatefulWidget {
 
 class _ParaDappState extends State<ParaDapp> {
   final List<String> para = <String>[
-   "Langue",
+    "Langue",
     "Signaler un bug",
     "À propos",
     "License",
@@ -25,12 +26,28 @@ class _ParaDappState extends State<ParaDapp> {
     "Détails de l'application\net sa license",
     "Informations sur la license\nde l'application",
   ];
-      final List<String> textu = <String>[
-    "Oops not availeble ",
+  final List<String> textu = <String>[
+    "Cette fonctionnalité n'est pas encore valable",
     "Contactez les développeurs",
     "Lien du projet ",
-    "Contactez les développeurs"
+    "Cette application est dans le domaine public, ce qui veut dire qu'elle n'est protégée par aucun droit d'auteur."
   ];
+
+  void contact() {
+    String mailto =
+        'mailto:a.bourouina@esi-sba.dz?subject=FeedBack&body:write your feed back';
+    launch(mailto);
+  }
+
+  _launchURL() async {
+  const url = 'https://gitHub.com/anii76/ClickClinicApp';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +82,9 @@ class _ParaDappState extends State<ParaDapp> {
                     height: MediaQuery.of(context).size.width * 0.12,
                     child: RaisedButton(
                       color: Color(0xFF00B9FF),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: Row(
                         children: <Widget>[
                           CircleAvatar(
@@ -117,7 +136,7 @@ class _ParaDappState extends State<ParaDapp> {
                 //initiallyExpanded: false,
                 subtitle: Text(sub[index],
                     style: TextStyle(
-                      fontFamily: 'Quicksand',
+                      fontFamily: 'Poppins-Regular',
                       color: Color(0x35000000),
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -126,56 +145,218 @@ class _ParaDappState extends State<ParaDapp> {
                 backgroundColor: Colors.white10,
                 title: Text(para[index],
                     style: TextStyle(
-                      fontFamily: 'CircularStd',
+                      fontFamily: 'Poppins-Medium',
                       color: Color(0xff000000),
                       fontSize: 21,
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
                     )),
                 children: [
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width /1.2,
-                        height: MediaQuery.of(context).size.height / 8,
-                        child: Card(
-                          color: Colors.white,
-                          child: Row(
-                            children: <Widget>[
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 50.0),
-                                  child: TextFormField(
-                                    //initialValue: textu[index],
-                                    decoration: InputDecoration(
-                                      hintText: textu[index],
-                                      hintStyle: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.grey[400],
+                  index == 0
+                      ? Column(
+                          children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              height: MediaQuery.of(context).size.height / 8,
+                              child: Card(
+                                color: Colors.white,
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      textu[index],
+                                      style: TextStyle(
                                         fontFamily: 'Poppins-Light',
+                                        fontSize: 17,
                                       ),
                                     ),
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins-Regular'),
-                                    onChanged: (val) {
-                                      String _password;
-                                      setState(() => _password = val);
-                                    },
                                   ),
                                 ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
                               ),
-                            ],
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                      ),
-                      
-                    ],
+                            ),
+                          ],
+                        )
+                      : index == 1
+                          ? Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  height:
+                                      MediaQuery.of(context).size.height / 7.9,
+                                  child: Card(
+                                    color: Colors.white,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Text(
+                                              textu[index],
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins-Light',
+                                                fontSize: 17,
+                                              ),
+                                            ),
+                                            FlatButton(
+                                              onPressed: () {
+                                                contact();
+                                              },
+                                              child: Text(
+                                                'par e-mail',
+                                                style: TextStyle(
+                                                    fontFamily: 'Poppins-Light',
+                                                    fontSize: 17,
+                                                    color: Color(0xFF00B9FF),
+                                                    decoration: TextDecoration
+                                                        .underline),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : index == 2
+                              ? Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          1.2,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              3,
+                                      child: Card(
+                                        color: Colors.white,
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                    "assets/images/l.png"),
+                                                RichText(
+                                                  text: TextSpan(
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Poppins-Light',
+                                                          fontSize: 17,
+                                                          color: Colors.black),
+                                                      children: <TextSpan>[
+                                                        TextSpan(
+                                                          text:
+                                                              '  Encadrement: ',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins-Light',
+                                                              fontSize: 17,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        TextSpan(
+                                                            text:
+                                                                '  Mme S.BENNABI\n'),
+                                                        TextSpan(
+                                                          text:
+                                                              '  Developeurs: ',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins-Light',
+                                                              fontSize: 17,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        TextSpan(
+                                                            text:
+                                                                '  A.BOUROUINA, A.MOUSSOUNI, S.CHERFAOUI, R.HAMMA, A.AMAZOUZ, O.GHILES'),
+                                                      ]),
+                                                ),
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    _launchURL();
+                                                  },
+                                                  child: Text(
+                                                    'Lien du projet',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                        fontSize: 17,
+                                                        color:
+                                                            Color(0xFF00B9FF),
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          1.2,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              4,
+                                      child: Card(
+                                        color: Colors.white,
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(15),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                    "assets/images/pubdom.png"),
+                                                Text(
+                                                  textu[index],
+                                                  style: TextStyle(
+                                                    fontFamily: 'Poppins-Light',
+                                                    fontSize: 17,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                  SizedBox(
+                    height: 10,
                   ),
-                   SizedBox(height: 10,),
                   //ListTile(),
                 ]),
             separatorBuilder: (BuildContext context, int index) =>
@@ -188,7 +369,6 @@ class _ParaDappState extends State<ParaDapp> {
             cacheExtent: 100,
 
             // itemExtent: 90,
-            
           ),
         ),
       ]),

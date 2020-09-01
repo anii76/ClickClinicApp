@@ -34,7 +34,7 @@ class _AutreState extends State<Autre> {
                     bottomRight: Radius.circular(77)),
               ),
             ),
-
+            //****************************************************************** */
             SizedBox(
               child: Padding(
                 padding: const EdgeInsets.only(top: 85 ,left: 280, right: 10),
