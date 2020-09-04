@@ -82,7 +82,7 @@ class _BenevoleListingState extends State<BenevoleListing> {
             child: Text('Appuyez sur un bénévole \npour afficher son profil '),
           ),
           Align(
-            alignment: Alignment(0, 0),
+            alignment: Alignment(0, 0.22),
             child: StreamBuilder<Object>(
                 stream: firestore
                     .collection('Benevole')
@@ -104,7 +104,10 @@ class _BenevoleListingState extends State<BenevoleListing> {
                         shrinkWrap: true,
                         itemCount: benevoles.length,
                         itemBuilder: (_, index) {
-                          return UI(benevoles[index]);
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50),
+                            child: UI(benevoles[index]),
+                          );
                         });
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
@@ -162,7 +165,7 @@ class _BenevoleListingState extends State<BenevoleListing> {
     var nom = document.data["Nom"];
     var tel = document.data["Tel"];
     return SizedBox(
-      width: 500,
+      width: 500, //not working
       height: 60,
       child: RaisedButton(
         onPressed: () {
@@ -172,18 +175,22 @@ class _BenevoleListingState extends State<BenevoleListing> {
             },
           ));
         },
-        child: Wrap(
+        child: Row(
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             CircleAvatar(
               radius: 22,
               child: ClipOval(
                               child: imgUrl != null
                     ? Image.network(imgUrl)
-                    : Image.asset("assets/name.png"),
+                    : Image.asset("assets/images/man.png"),
               ),
               backgroundColor: Colors.white10,
             ),
-            Column(children: [
+            SizedBox(width:  30,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
               Text(nom),
               Text(tel),
             ]),

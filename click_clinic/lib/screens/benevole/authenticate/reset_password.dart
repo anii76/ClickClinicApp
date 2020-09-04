@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:click_clinic/services/auth.dart';
-import 'package:click_clinic/shared/loading.dart';
 
 class ResetPassword extends StatefulWidget {
   @override
@@ -106,103 +105,144 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: SizedBox(
-        child: Padding(
-          padding: const EdgeInsets.all(80.0),
-          child: Form(
-            key: _formKey,
-            child: Column(children: [
-              TextFormField(
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.mail_outline,
-                        color: Colors.grey[400], size: 40),
-                    hintText: ' Tappez votre e-mail',
-                    hintStyle: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey[400],
-                      fontFamily: 'Poppins-Light',
-                    ),
-                    labelText: ' Adresse e-mail',
-                    labelStyle: TextStyle(
-                        fontFamily: 'SegoeUI', color: Color(0xFF00B9FF))),
-                keyboardType: TextInputType.emailAddress,
-                style: TextStyle(fontFamily: 'Poppins-Regular'),
-                validator: (val) => (val.isEmpty || !val.contains('@'))
-                    ? 'Entrer email valide'
-                    : null,
-                onChanged: (val) {
-                  setState(() => _resetPasswordEmail = val);
-                },
+        body: Stack(
+          children: <Widget>[
+            Container(
+                color: Color(0xFFF4F8F9),
               ),
-              SizedBox(
-                height: 30.0,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 2.6,
+                decoration: BoxDecoration(
+                  color: Color(0xFF00B9FF),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(77),
+                      bottomRight: Radius.circular(77)),
+                ),
               ),
-              SizedBox(
-                child: RaisedButton(
-                    onPressed: () async {
-                      try {
-                        if (_formKey.currentState.validate()) {
-                          setState(() => loading = true);
-                          await _auth
-                              .sendPasswordResetMail(_resetPasswordEmail);
-                          _showVerifyEmailSentDialog();
-                          _checkEmailVerification();
-                          if (_isEmailVerified) {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return Confirmation();
-                              },
-                            ));
-                          } else {
-                            setState(() {
-                              _showVerifyEmailDialog();
-                              loading = false;
-                            });
-                          }
-                        }
-                      } catch (e) {
-                        print('Errror: $e');
-                        setState(() {
-                          _error = e.message;
-                          _showErrorDialog();
-                          loading = false;
-                        });
-                      }
-                    },
-                    shape: RoundedRectangleBorder(
-                        //changed
-                        borderRadius: BorderRadius.circular(50)),
-                    color: Color(0xFF00B9FF),
-                    focusColor: Colors.blue[400],
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '      Verify Email',
-                            style: TextStyle(
-                                fontSize: 17.5,
-                                color: Colors.white,
-                                fontFamily: 'SegoeUI'),
-                          ),
-                          SizedBox(width: 40),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.white,
-                            size: 19,
-                          )
-                        ])),
-                width: 250,
-                height: 45,
+
+              Align(
+                alignment: Alignment(0, -0.15),
+                child: Text("Mot de passe oublié",
+                style: TextStyle(
+                  fontFamily: 'Poppins-Medium',
+                  fontSize: 22,
+    fontWeight: FontWeight.w500,
+                ),
+                ),
               ),
-              Center(child: loading? CircularProgressIndicator(): Text(''),)
-            ]),
-          ),
-        ),
-      ),
-    ));
+              Align(
+                alignment: Alignment(0, -0.03),
+                child: Center(
+                  child: Text("Saisissez votre adresse e-mail\npour recevoir un code de récupération",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+    fontFamily: 'Poppins-Light',
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    
+    
+    )),
+                ),
+              ),
+            Align(
+              alignment: Alignment(0, 0.6),
+                          child: SizedBox(
+                            height: 400,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.mail_outline,
+                                color: Colors.grey[400], size: 40),
+                            hintText: ' Tappez votre e-mail',
+                            hintStyle: TextStyle(
+                              fontSize: 18, //change
+                              color: Colors.grey[400],
+                              fontFamily: 'Poppins-Light',
+                            ),
+                            labelText: ' Adresse e-mail',
+                            labelStyle: TextStyle(
+                                fontFamily: 'SegoeUI', color: Color(0xFF00B9FF))),
+                        keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(fontFamily: 'Poppins-Regular'),
+                        validator: (val) => (val.isEmpty || !val.contains('@'))
+                            ? 'Entrer email valide'
+                            : null,
+                        onChanged: (val) {
+                          setState(() => _resetPasswordEmail = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 30.0, //change
+                      ),
+                      SizedBox(
+                        child: RaisedButton(
+                            onPressed: () async {
+                              try {
+                                if (_formKey.currentState.validate()) {
+                                  setState(() => loading = true);
+                                  await _auth
+                                      .sendPasswordResetMail(_resetPasswordEmail);
+                                  _showVerifyEmailSentDialog();
+                                  _checkEmailVerification();
+                                  if (_isEmailVerified) {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return Confirmation();
+                                      },
+                                    ));
+                                  } else {
+                                    setState(() {
+                                      _showVerifyEmailDialog();
+                                      loading = false;
+                                    });
+                                  }
+                                }
+                              } catch (e) {
+                                print('Errror: $e');
+                                setState(() {
+                                  _error = e.message;
+                                  _showErrorDialog();
+                                  loading = false;
+                                });
+                              }
+                            },
+                            shape: RoundedRectangleBorder(
+       
+                                borderRadius: BorderRadius.circular(50)),
+                            color: Color(0xFF00B9FF),
+                            focusColor: Colors.blue[400],
+                            child: Text(
+                              'Envoyer le code',
+                              style: TextStyle(
+                                  fontSize: 19, //change
+                                  color: Colors.white,
+                                  fontFamily: 'SegoeUI'),
+                            )),
+                        width: 250, //change
+                        height: 60, //change
+                      ),
+                      Center(child: loading? CircularProgressIndicator(): Text(''),)
+                    ]),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
+
+
+
+
 //not working yet
 class Confirmation extends StatefulWidget {
   @override

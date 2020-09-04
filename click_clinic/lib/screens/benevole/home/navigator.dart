@@ -156,7 +156,7 @@ class _TryState extends State<Try> {
                       },
                       child: CircleAvatar(
                         backgroundImage: AssetImage("assets/images/man.png"),
-                        radius: 80, //tobemodified
+                        radius: MediaQuery.of(context).size.height / 10, 
                         child: ClipOval(
                           child: (_image == null)
                               ? _imageUrl == null
@@ -231,7 +231,7 @@ class _TryState extends State<Try> {
                         child: Row(
                           children: <Widget>[
                             CircleAvatar(
-                              radius: 20,
+                              radius: MediaQuery.of(context).size.height / 35,
                               child: ClipOval(
                                   child:
                                       Image.asset("assets/icones/medecin.png")),
@@ -249,8 +249,8 @@ class _TryState extends State<Try> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                       ),
-                      width: 300, //tobemodified
-                      height: 55, //tobemodified
+                      width: MediaQuery.of(context).size.width / 1.3, 
+                      height: MediaQuery.of(context).size.height / 14, 
                     ),
                   ),
                   Align(
@@ -268,7 +268,7 @@ class _TryState extends State<Try> {
                         child: Row(
                           children: <Widget>[
                             CircleAvatar(
-                              radius: 20,
+                              radius: MediaQuery.of(context).size.height / 35,
                               child: ClipOval(
                                   child:
                                       Image.asset("assets/icones/medecin.png")),
@@ -286,8 +286,8 @@ class _TryState extends State<Try> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
                       ),
-                      width: 300, //tobemodified
-                      height: 55, //tobemodified
+                      width: MediaQuery.of(context).size.width / 1.3, 
+                      height: MediaQuery.of(context).size.height / 14,
                     ),
                   ),
                 ]),

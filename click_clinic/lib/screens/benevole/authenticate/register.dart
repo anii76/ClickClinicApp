@@ -1,8 +1,5 @@
 import 'package:click_clinic/screens/benevole/authenticate/inscription.dart';
 import 'package:click_clinic/screens/benevole/authenticate/services.dart';
-import 'sign_in.dart';
-import 'package:click_clinic/services/auth.dart';
-import 'package:click_clinic/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -51,7 +48,7 @@ class _RegisterState extends State<Register> {
 
                   Container( //to remove later
                     width: MediaQuery.of(context).size.width,
-                    height: 310.0,
+                    height: MediaQuery.of(context).size.height / 2.6,
                     decoration: BoxDecoration(
                       color: Color(0xFF00B9FF),
                       borderRadius: BorderRadius.only(

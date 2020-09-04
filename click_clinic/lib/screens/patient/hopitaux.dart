@@ -1,3 +1,4 @@
+import 'package:click_clinic/screens/patient/profiles/benevoleListing.dart';
 import 'package:flutter/material.dart';
 import 'package:click_clinic/services/Carte.dart';
 
@@ -43,8 +44,6 @@ class _HopitauxState extends State<Hopitaux> {
         Align(
               alignment: Alignment(0.75, -0.78),
                   child: SizedBox(
-            /*child: Padding(
-              padding: const EdgeInsets.only(top: 85, left: 260, right: 3),*/
               child: Text(
                 "Hopitaux",
                 style: TextStyle(
@@ -59,8 +58,6 @@ class _HopitauxState extends State<Hopitaux> {
               alignment: Alignment(-0.8, -0.8),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width /2.7,
-            /*child: Padding(
-              padding: const EdgeInsets.only(top: 70, left: 30, right: 210),*/
               child: RaisedButton(
                 color: Color(0xFF00B9FF),
                 onPressed: () {
@@ -133,16 +130,26 @@ class _HopitauxState extends State<Hopitaux> {
               height: MediaQuery.of(context).size.height /14,
               width: double.infinity,
               color: Colors.white,
-              child: Center(child: Text(
-                'Besoin d\'un logement pendant votre séjour médical ?',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF00B3FA),
-                  fontFamily: 'SegoeUI',
+              child: Center(child: FlatButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return BenevoleListing(service: 'Service3',);
+          },
+        ));
+                },
+                              child: Text(
+                  'Besoin d\'un logement pendant votre séjour médical ?',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF00B3FA),
+                    fontFamily: 'SegoeUI',
+                  ),
                 ),
               ),),
-      )    
+      )
     );
   }
 
 }
+

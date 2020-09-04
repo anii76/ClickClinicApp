@@ -137,28 +137,6 @@ class _SetAdresseState extends State<SetAdresse> {
                   ),
                 ),
                 Container(
-                  child: Center(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Finalisez votre inscription',
-                        style: TextStyle(
-                          fontFamily: 'Poppins-Medium',
-                          fontSize: 22,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        'saisir votre adresse',
-                        style: TextStyle(
-                          fontFamily: 'Poppins-Light',
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  )),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height / 2.6,
                   decoration: BoxDecoration(
@@ -168,6 +146,49 @@ class _SetAdresseState extends State<SetAdresse> {
                         bottomRight: Radius.circular(77)),
                   ),
                 ),
+
+                Align(
+            alignment: Alignment(0, -0.6),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Finalisez votre inscription',
+                style: TextStyle(
+                  fontFamily: 'Poppins-Medium',
+                  fontSize: MediaQuery.of(context).size.height / 30,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment(0, -0.5),
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'Saisir votre adresse',
+                  style: TextStyle(
+                    fontFamily: 'Poppins-Light',
+                    fontSize: MediaQuery.of(context).size.height / 46, //change
+                    color: Colors.white,
+                  ),
+                )),
+          ),
+
+                Align(
+            alignment: Alignment(-0.95, -0.85),
+            //return button
+            child: FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: CircleAvatar(
+                radius: MediaQuery.of(context).size.height / 30,
+                child: Image.asset("assets/icones/retour.png"),
+                backgroundColor: Colors.white12,
+              ),
+            ),
+          ),
                 Align(
                   alignment: Alignment(0, -0.28),
                   child: Container(
@@ -230,9 +251,10 @@ class _SetAdresseState extends State<SetAdresse> {
                   ),
                 ),
                 Align(
-                  alignment: Alignment(0, 0.9),
+                  alignment: Alignment(0, 0.8),
                   child: SizedBox(
-                    height: 50,
+                    width: 250,
+                    height: 60,
                     child: RaisedButton(
                       onPressed: () {
                         if (_formKey.currentState.validate()){
@@ -244,7 +266,7 @@ class _SetAdresseState extends State<SetAdresse> {
                         '    Inscription    ',
                         style: TextStyle(
                             fontFamily: 'Poppins-Medium',
-                            fontSize: 16,
+                            fontSize: 19,
                             color: Colors.white),
                       ),
                       shape: RoundedRectangleBorder(

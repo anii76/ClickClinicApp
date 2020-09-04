@@ -1,3 +1,4 @@
+import 'package:click_clinic/screens/patient/profiles/benevoleListing.dart';
 import 'package:flutter/material.dart';
 import 'package:click_clinic/services/Carte.dart';
 
@@ -133,15 +134,25 @@ class _PharmaciesState extends State<Pharmacies> {
               height: MediaQuery.of(context).size.height /14,
               width: double.infinity,
               color: Colors.white,
-              child: Center(child: Text(
-                'Besoin qu\'on vous l\'apporte d\'ailleurs ?',
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Color(0xFF00B3FA),
-                  fontFamily: 'SegoeUI',
+              child: Center(child: FlatButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return BenevoleListing(service: 'Service1',);
+          },
+        ));
+                },
+                              child: Text(
+                  'Besoin qu\'on vous l\'apporte d\'ailleurs ?',
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: Color(0xFF00B3FA),
+                    fontFamily: 'SegoeUI',
+                  ),
                 ),
               ),),
       )
     );
   }
+
 }

@@ -106,6 +106,7 @@ class _PatientDrawerState extends State<PatientDrawer> {
                                     children: <Widget>[
                                       Image.asset(
                                         "assets/images/patient.png",
+                                        height: mediaQuery.height / 6,
                                         width: sidebarSize / 2,
                                       ),
                                       Text(
