@@ -114,7 +114,7 @@ class _SetAdresseState extends State<SetAdresse> {
     }
   }
 
-  void _assign(){
+  void _assign() {
     //user.setLocation(point.data);
     user.setAdresse(_adr);
   }
@@ -146,54 +146,54 @@ class _SetAdresseState extends State<SetAdresse> {
                         bottomRight: Radius.circular(77)),
                   ),
                 ),
-
                 Align(
-            alignment: Alignment(0, -0.6),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Finalisez votre inscription',
-                style: TextStyle(
-                  fontFamily: 'Poppins-Medium',
-                  fontSize: MediaQuery.of(context).size.height / 30,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment(0, -0.5),
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: Text(
-                  'Saisir votre adresse',
-                  style: TextStyle(
-                    fontFamily: 'Poppins-Light',
-                    fontSize: MediaQuery.of(context).size.height / 46, //change
-                    color: Colors.white,
+                  alignment: Alignment(0, -0.6),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width / 15),
+                    child: Text(
+                      'Finalisez votre inscription',
+                      style: TextStyle(
+                        fontFamily: 'Poppins-Medium',
+                        fontSize: MediaQuery.of(context).size.height / 30,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                )),
-          ),
-
+                ),
                 Align(
-            alignment: Alignment(-0.95, -0.85),
-            //return button
-            child: FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: CircleAvatar(
-                radius: MediaQuery.of(context).size.height / 30,
-                child: Image.asset("assets/icones/retour.png"),
-                backgroundColor: Colors.white12,
-              ),
-            ),
-          ),
+                  alignment: Alignment(0, -0.5),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width / 15),
+                      child: Text(
+                        'Saisir votre adresse',
+                        style: TextStyle(
+                          fontFamily: 'Poppins-Light',
+                          fontSize: MediaQuery.of(context).size.height / 46,
+                          color: Colors.white,
+                        ),
+                      )),
+                ),
+                Align(
+                  alignment: Alignment(-0.95, -0.85),
+                  //return button
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: CircleAvatar(
+                      radius: MediaQuery.of(context).size.height / 30,
+                      child: Image.asset("assets/icones/retour.png"),
+                      backgroundColor: Colors.white12,
+                    ),
+                  ),
+                ),
                 Align(
                   alignment: Alignment(0, -0.28),
                   child: Container(
                     width: MediaQuery.of(context).size.width / 1.18,
-                    height: 70,
+                    height: MediaQuery.of(context).size.height / 11,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.horizontal(
@@ -204,33 +204,44 @@ class _SetAdresseState extends State<SetAdresse> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         SizedBox(
-                          width: 8,
+                          width: MediaQuery.of(context).size.width / 30,
                         ),
                         CircleAvatar(
-                          radius: 25,
-                          child: Icon(Icons.search, color: Colors.white),
+                          radius: MediaQuery.of(context).size.height / 30,
+                          child: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: MediaQuery.of(context).size.height / 32,
+                          ),
                           backgroundColor: Color(0xFF00B3FA),
                         ),
                         Flexible(
                           child: Form(
                             key: _formKey,
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width / 28,
+                              ),
                               child: TextFormField(
                                 decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.symmetric(vertical: 0),
-                                    hintText: ' Tappez votre adresse',
-                                    hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey[400],
-                                      fontFamily: 'Poppins-Light',
-                                    ),
-                                    labelText: ' Adresse',
-                                    labelStyle: TextStyle(
-                                        fontFamily: 'SegoeUI',
-                                        color: Color(0xFF00B9FF))),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 0),
+                                  hintText: ' Tappez votre adresse',
+                                  hintStyle: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 45,
+                                    color: Colors.grey[400],
+                                    fontFamily: 'Poppins-Light',
+                                  ),
+                                  labelText: ' Adresse',
+                                  labelStyle: TextStyle(
+                                      fontFamily: 'SegoeUI',
+                                      color: Color(0xFF00B9FF),
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              55),
+                                ),
                                 keyboardType: TextInputType.emailAddress,
                                 style: TextStyle(fontFamily: 'Poppins-Regular'),
                                 validator: (val) => (val.isEmpty)
@@ -244,7 +255,7 @@ class _SetAdresseState extends State<SetAdresse> {
                           ),
                         ),
                         SizedBox(
-                          width: 8,
+                          width: MediaQuery.of(context).size.width / 20,
                         ),
                       ],
                     ),
@@ -253,11 +264,11 @@ class _SetAdresseState extends State<SetAdresse> {
                 Align(
                   alignment: Alignment(0, 0.8),
                   child: SizedBox(
-                    width: 250,
-                    height: 60,
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    height: MediaQuery.of(context).size.height / 13,
                     child: RaisedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()){
+                        if (_formKey.currentState.validate()) {
                           _assign();
                           _register();
                         }
@@ -266,7 +277,7 @@ class _SetAdresseState extends State<SetAdresse> {
                         '    Inscription    ',
                         style: TextStyle(
                             fontFamily: 'Poppins-Medium',
-                            fontSize: 19,
+                            fontSize: MediaQuery.of(context).size.height / 41,
                             color: Colors.white),
                       ),
                       shape: RoundedRectangleBorder(
@@ -293,11 +304,9 @@ class _SetAdresseState extends State<SetAdresse> {
         geo.point(latitude: pos.latitude, longitude: pos.longitude);
     print(_point.data);
 
-    
-      point = _point;
-      //user.setLocation(point.data);
-      print(_point.data);
-    
+    point = _point;
+    //user.setLocation(point.data);
+    print(_point.data);
 
     _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(pos.latitude, pos.longitude),

@@ -53,7 +53,8 @@ class _SetServicesState extends State<SetServices> {
               Align(
                 alignment: Alignment(0, -0.6),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width / 15),
                   child: Text(
                     'Finalisez votre inscription',
                     style: TextStyle(
@@ -67,7 +68,8 @@ class _SetServicesState extends State<SetServices> {
               Align(
                 alignment: Alignment(0, -0.5),
                 child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width / 15),
                     child: Text(
                       'Sélectionnez vos services',
                       style: TextStyle(
@@ -94,8 +96,8 @@ class _SetServicesState extends State<SetServices> {
               Align(
                 alignment: Alignment(0, -0.3),
                 child: SizedBox(
-                  width: 150, // change
-                  height: 150, // change
+                  width: MediaQuery.of(context).size.width / 2.6, //150
+                  height: MediaQuery.of(context).size.height / 5.3, //150
                   child: Card(
                     color: Colors.white,
                     child: Image.asset("assets/images/add.png"),
@@ -108,7 +110,7 @@ class _SetServicesState extends State<SetServices> {
                 alignment: Alignment(0, 0.3),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 50.0), //change
+                      EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 10), 
                   child: Wrap(alignment: WrapAlignment.center, children: [
                     Row(
                       children: <Widget>[
@@ -125,7 +127,7 @@ class _SetServicesState extends State<SetServices> {
                           'Apporter des médicaments',
                           style: TextStyle(
                             fontFamily: 'Poppins-Regular',
-                            fontSize: 17, //change
+                            fontSize: MediaQuery.of(context).size.height / 46 ,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -146,7 +148,7 @@ class _SetServicesState extends State<SetServices> {
                           'Donner du sang',
                           style: TextStyle(
                             fontFamily: 'Poppins-Regular',
-                            fontSize: 17,
+                            fontSize: MediaQuery.of(context).size.height / 46 ,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -167,7 +169,7 @@ class _SetServicesState extends State<SetServices> {
                           'Loger des patients',
                           style: TextStyle(
                             fontFamily: 'Poppins-Regular',
-                            fontSize: 17,
+                            fontSize: MediaQuery.of(context).size.height / 46 ,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -177,7 +179,7 @@ class _SetServicesState extends State<SetServices> {
                       decoration: InputDecoration(
                         hintText: ' Autres services',
                         hintStyle: TextStyle(
-                          fontSize: 18, //change
+                          fontSize: MediaQuery.of(context).size.height / 43 ,
                           color: Colors.grey[400],
                           fontFamily: 'Poppins-Light',
                         ),
@@ -188,7 +190,7 @@ class _SetServicesState extends State<SetServices> {
                       },
                     ),
                     SizedBox(
-                      height: 10,
+                      height: MediaQuery.of(context).size.height / 28,
                     ),
                   ]),
                 ),
@@ -196,8 +198,8 @@ class _SetServicesState extends State<SetServices> {
               Align(
                 alignment: Alignment(0, 0.8),
                 child: SizedBox(
-                  width: 250, //change
-                  height: 60, //change
+                  width: MediaQuery.of(context).size.width / 1.5,
+                  height: MediaQuery.of(context).size.height / 13,
                   child: RaisedButton(
                     onPressed: () {
                       _assign();
@@ -227,7 +229,7 @@ class _SetServicesState extends State<SetServices> {
                       "Suivant",
                       style: TextStyle(
                           fontFamily: 'Poppins-Medium',
-                          fontSize: 19, //change
+                          fontSize: MediaQuery.of(context).size.height / 41 ,
                           color: Colors.white),
                     ),
                     shape: RoundedRectangleBorder(

@@ -25,6 +25,8 @@ class _TryState extends State<Try> {
   String _imageUrl, _imagepath;
   bool _isSwitched = false;
 
+  //show error msg
+
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
@@ -58,6 +60,7 @@ class _TryState extends State<Try> {
                     setState(() {
                       print('Image Path Uploaded !');
                       //_showSuccessMessage();
+                      //Navigator.of(context).pop();
                     });
                   }
                 },
@@ -234,7 +237,7 @@ class _TryState extends State<Try> {
                               radius: MediaQuery.of(context).size.height / 35,
                               child: ClipOval(
                                   child:
-                                      Image.asset("assets/icones/medecin.png")),
+                                      Image.asset("assets/icones/user.png")),
                               backgroundColor: Color(0xFF00B9FF),
                             ),
                             Text(
@@ -271,7 +274,7 @@ class _TryState extends State<Try> {
                               radius: MediaQuery.of(context).size.height / 35,
                               child: ClipOval(
                                   child:
-                                      Image.asset("assets/icones/medecin.png")),
+                                      Image.asset("assets/icones/customer.png")),
                               backgroundColor: Color(0xFF00B9FF),
                             ),
                             Text(
@@ -305,12 +308,14 @@ class _TryState extends State<Try> {
       StorageReference firebaseStorageRef =
           FirebaseStorage.instance.ref().child('Bénévoles/${fileName}');
       StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+      //loading variable
       var downurl = await (await uploadTask.onComplete).ref.getDownloadURL();
       var url = downurl.toString();
       print('downloadurl: $url');
       setState(() {
         print("Profile Picture uploaded");
         _imagepath = url;
+        //stop loading
       });
     } catch (ex) {
       //error message

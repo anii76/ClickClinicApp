@@ -106,70 +106,74 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-          children: <Widget>[
-            Container(
-                color: Color(0xFFF4F8F9),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 2.6,
-                decoration: BoxDecoration(
-                  color: Color(0xFF00B9FF),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(77),
-                      bottomRight: Radius.circular(77)),
-                ),
-              ),
-
-              Align(
-                alignment: Alignment(0, -0.15),
-                child: Text("Mot de passe oublié",
+      children: <Widget>[
+        Container(
+          color: Color(0xFFF4F8F9),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 2.6,
+          decoration: BoxDecoration(
+            color: Color(0xFF00B9FF),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(77),
+                bottomRight: Radius.circular(77)),
+          ),
+        ),
+        Align(
+          alignment: Alignment(0, -0.15),
+          child: Text(
+            "Mot de passe oublié",
+            style: TextStyle(
+              fontFamily: 'Poppins-Medium',
+              fontSize: 22, //change
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment(0, -0.03),
+          child: Center(
+            child: Text(
+                "Saisissez votre adresse e-mail\npour recevoir un code de récupération",
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: 'Poppins-Medium',
-                  fontSize: 22,
-    fontWeight: FontWeight.w500,
-                ),
-                ),
-              ),
-              Align(
-                alignment: Alignment(0, -0.03),
-                child: Center(
-                  child: Text("Saisissez votre adresse e-mail\npour recevoir un code de récupération",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-    fontFamily: 'Poppins-Light',
-    fontSize: 15,
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal,
-    
-    
-    )),
-                ),
-              ),
-            Align(
-              alignment: Alignment(0, 0.6),
-                          child: SizedBox(
-                            height: 400,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                  fontFamily: 'Poppins-Light',
+                  fontSize: 15, //change
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                )),
+          ),
+        ),
+        Align(
+          alignment: Alignment(0, 0.6),
+          child: SizedBox(
+            height: 400,//change
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50), //change
+              child: Form(
+                key: _formKey,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       TextFormField(
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.mail_outline,
-                                color: Colors.grey[400], size: 40),
+                                color: Colors.grey[400], size: MediaQuery.of(context).size.height / 25,
+                          ),
                             hintText: ' Tappez votre e-mail',
                             hintStyle: TextStyle(
-                              fontSize: 18, //change
-                              color: Colors.grey[400],
+                              fontSize: MediaQuery.of(context).size.height / 45,
+                            color: Colors.grey[400],
                               fontFamily: 'Poppins-Light',
                             ),
                             labelText: ' Adresse e-mail',
                             labelStyle: TextStyle(
-                                fontFamily: 'SegoeUI', color: Color(0xFF00B9FF))),
+                                fontFamily: 'SegoeUI',
+                                color: Color(0xFF00B9FF),
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 55),
+                        ),
                         keyboardType: TextInputType.emailAddress,
                         style: TextStyle(fontFamily: 'Poppins-Regular'),
                         validator: (val) => (val.isEmpty || !val.contains('@'))
@@ -180,7 +184,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         },
                       ),
                       SizedBox(
-                        height: 30.0, //change
+                        height: MediaQuery.of(context).size.height / 28,
                       ),
                       SizedBox(
                         child: RaisedButton(
@@ -188,8 +192,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                               try {
                                 if (_formKey.currentState.validate()) {
                                   setState(() => loading = true);
-                                  await _auth
-                                      .sendPasswordResetMail(_resetPasswordEmail);
+                                  await _auth.sendPasswordResetMail(
+                                      _resetPasswordEmail);
                                   _showVerifyEmailSentDialog();
                                   _checkEmailVerification();
                                   if (_isEmailVerified) {
@@ -215,7 +219,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                               }
                             },
                             shape: RoundedRectangleBorder(
-       
                                 borderRadius: BorderRadius.circular(50)),
                             color: Color(0xFF00B9FF),
                             focusColor: Colors.blue[400],
@@ -226,22 +229,24 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   color: Colors.white,
                                   fontFamily: 'SegoeUI'),
                             )),
-                        width: 250, //change
+                        width: MediaQuery.of(context).size.width / 1.6,
                         height: 60, //change
                       ),
-                      Center(child: loading? CircularProgressIndicator(): Text(''),)
+                      Center(
+                        child: loading ? CircularProgressIndicator() : Text(''),
+                      )
                     ]),
-                  ),
-                ),
               ),
             ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }
 
-
-
+//rebuild page with singlechildscrollview
+//add return button
 
 //not working yet
 class Confirmation extends StatefulWidget {

@@ -29,8 +29,8 @@ class _SangServiceState extends State<SangService> {
       body: Stack(
         children: <Widget>[
           Container(
-                color: Color(0xFFF4F8F9),
-              ),
+            color: Color(0xFFF4F8F9),
+          ),
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 2.4,
@@ -58,7 +58,8 @@ class _SangServiceState extends State<SangService> {
           Align(
             alignment: Alignment(0, -0.6),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 15),
               child: Text(
                 'Finalisez votre inscription',
                 style: TextStyle(
@@ -72,7 +73,8 @@ class _SangServiceState extends State<SangService> {
           Align(
             alignment: Alignment(0, -0.5),
             child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 15),
                 child: Text(
                   'Sélectionnez votre groupe sanguin et votre rhésus',
                   style: TextStyle(
@@ -86,8 +88,8 @@ class _SangServiceState extends State<SangService> {
             alignment: Alignment(0, -0.2),
             //card for first DropDownMenu
             child: SizedBox(
-              width: 300, //change
-              height: 80, //change
+              width: MediaQuery.of(context).size.width / 1.3,
+              height: MediaQuery.of(context).size.height / 10,
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(33)),
@@ -96,21 +98,27 @@ class _SangServiceState extends State<SangService> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       CircleAvatar(
-                        radius: 25,//change
-                        child: Icon(Icons.search, color: Colors.white),
+                        radius: MediaQuery.of(context).size.height / 30,
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: MediaQuery.of(context).size.height / 32,
+                        ),
                         backgroundColor: Color(0xFF00B3FA),
                       ),
                       DropdownButton<String>(
                         value: dropdownValue,
                         icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 20, 
+                        iconSize: MediaQuery.of(context).size.height / 35,
                         style: dropdownValue == sp[0]
                             ? TextStyle(
-                                fontSize: 19,//change
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 41,
                                 color: Colors.grey[400],
                                 fontFamily: 'Poppins-Regular')
                             : TextStyle(
-                                fontSize: 21,//change
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 39,
                                 color: Color(0xB3000000),
                                 fontFamily: 'SegoeUI'),
                         items: sp.map<DropdownMenuItem<String>>((String value) {
@@ -137,8 +145,8 @@ class _SangServiceState extends State<SangService> {
             alignment: Alignment(0, 0.05),
             //card for second DropDownMenu
             child: SizedBox(
-              width: 300,
-              height: 80,
+              width: MediaQuery.of(context).size.width / 1.3,
+              height: MediaQuery.of(context).size.height / 10,
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(33)),
@@ -147,21 +155,27 @@ class _SangServiceState extends State<SangService> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       CircleAvatar(
-                        radius: 25,
-                        child: Icon(Icons.search, color: Colors.white),
+                        radius: MediaQuery.of(context).size.height / 30,
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: MediaQuery.of(context).size.height / 32,
+                        ),
                         backgroundColor: Color(0xFF00B3FA),
                       ),
                       DropdownButton<String>(
                         value: dropdownValue1,
                         icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 20,
+                        iconSize: MediaQuery.of(context).size.height / 35,
                         style: dropdownValue1 == sp1[0]
                             ? TextStyle(
-                                fontSize: 19,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 41,
                                 color: Colors.grey[400],
                                 fontFamily: 'Poppins-Regular')
                             : TextStyle(
-                                fontSize: 21,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 39,
                                 color: Color(0xB3000000),
                                 fontFamily: 'SegoeUI'),
                         items:
@@ -188,8 +202,8 @@ class _SangServiceState extends State<SangService> {
           Align(
             alignment: Alignment(0, 0.8),
             child: SizedBox(
-              width: 250,
-              height: 60,
+              width: MediaQuery.of(context).size.width / 1.5,
+              height: MediaQuery.of(context).size.height / 13,
               child: RaisedButton(
                 onPressed: () {
                   user.setBloodType(_bloodType.replaceAll(' ', ''));
@@ -201,15 +215,16 @@ class _SangServiceState extends State<SangService> {
                     },
                   ));
                 },
-                child: Text("Suivant",
-                style: TextStyle(
-                            fontFamily: 'Poppins-Medium',
-                            fontSize: 19,
-                            color: Colors.white),
+                child: Text(
+                  "Suivant",
+                  style: TextStyle(
+                      fontFamily: 'Poppins-Medium',
+                      fontSize: MediaQuery.of(context).size.height / 41,
+                      color: Colors.white),
                 ),
                 shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      color: Color(0xFF00B9FF),
+                    borderRadius: BorderRadius.circular(50)),
+                color: Color(0xFF00B9FF),
               ),
             ),
           ),
