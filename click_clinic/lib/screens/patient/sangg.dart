@@ -106,7 +106,7 @@ class _DonDeSangState extends State<DonDeSang> {
               height: MediaQuery.of(context).size.height / 5.6
               ),
             SizedBox(
-              child: Image.asset("assets/images/groupe-medecins.png", height:MediaQuery.of(context).size.height / 5.8 ),
+              child: Image.asset("assets/images/bene.png", height:MediaQuery.of(context).size.height / 5.7 ),
             ),
             SizedBox(
               child: RaisedButton(

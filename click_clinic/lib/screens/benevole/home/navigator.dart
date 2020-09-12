@@ -60,7 +60,7 @@ class _TryState extends State<Try> {
                     setState(() {
                       print('Image Path Uploaded !');
                       //_showSuccessMessage();
-                      //Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                     });
                   }
                 },
@@ -115,7 +115,7 @@ class _TryState extends State<Try> {
                   Align(
                     alignment: Alignment(-0.8, -0.85),
                     child: SizedBox(
-                      width: 80,
+                      width: 80, //change
                       child: RaisedButton(
                         color: Color(0xFF00B9FF),
                         onPressed: () {
@@ -128,7 +128,7 @@ class _TryState extends State<Try> {
                         child: Row(
                           children: <Widget>[
                             CircleAvatar(
-                              radius: 20,
+                              radius: 20, //change
                               child: Image.asset("assets/icones/menu.png"),
                               backgroundColor: Color(0xFF00B9FF),
                             ),
@@ -145,7 +145,7 @@ class _TryState extends State<Try> {
                     child: Text(
                       'Que Voulez-vous faire?',
                       style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 26, //change
                           color: Colors.white,
                           fontFamily: 'Poppins-Medium'),
                     ),
@@ -158,19 +158,16 @@ class _TryState extends State<Try> {
                         getImage();
                       },
                       child: CircleAvatar(
-                        backgroundImage: AssetImage("assets/images/man.png"),
+                        //backgroundImage: AssetImage("assets/images/man.png"),
                         radius: MediaQuery.of(context).size.height / 10, 
-                        child: ClipOval(
-                          child: (_image == null)
+                        backgroundImage:  (_image == null)
                               ? _imageUrl == null
-                                  ? Image.asset(
+                                  ? AssetImage(
                                       //default image
                                       "assets/images/man.png",
-                                      fit: BoxFit.fill,
                                     )
-                                  : Image.network(_imageUrl, fit: BoxFit.fill)
-                              : Image.file(_image, fit: BoxFit.fill),
-                        ),
+                                  : NetworkImage(_imageUrl)
+                              : FileImage(_image),
                       ),
                     ),
                   ),
@@ -179,7 +176,7 @@ class _TryState extends State<Try> {
                     child: Text(
                       userData.nom,
                       style: TextStyle(
-                          fontSize: 22,
+                          fontSize: MediaQuery.of(context).size.height / 36,
                           color: Colors.black,
                           fontFamily: 'Poppins-Medium',
                           fontWeight: FontWeight.w500),
@@ -193,12 +190,14 @@ class _TryState extends State<Try> {
                         Text(
                           'Disponibilité :',
                           style: TextStyle(
-                              fontSize: 17.5,
+                              fontSize: 17.5, //change
                               color: Colors.black,
                               fontFamily: 'SegoeUI',
                               fontWeight: FontWeight.w400),
                         ),
-                        SizedBox(width: 30),
+                        SizedBox(
+                          width: 30,//change
+                          ),
                         CupertinoSwitch(
                           value: _isSwitched,
                           onChanged: (value) async {
@@ -243,7 +242,7 @@ class _TryState extends State<Try> {
                             Text(
                               "   Paramétres du Compte",
                               style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: 17, //change
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0xFF00B9FF)),
                             ),

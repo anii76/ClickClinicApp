@@ -105,52 +105,90 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        Container(
-          color: Color(0xFFF4F8F9),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2.6,
-          decoration: BoxDecoration(
-            color: Color(0xFF00B9FF),
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(77),
-                bottomRight: Radius.circular(77)),
+        body: SingleChildScrollView(
+      child: Stack(
+        children: <Widget>[
+          Container(
+            color: Color(0xFFF4F8F9),
           ),
-        ),
-        Align(
-          alignment: Alignment(0, -0.15),
-          child: Text(
-            "Mot de passe oublié",
-            style: TextStyle(
-              fontFamily: 'Poppins-Medium',
-              fontSize: 22, //change
-              fontWeight: FontWeight.w500,
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 2.6,
+            decoration: BoxDecoration(
+              color: Color(0xFF00B9FF),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(77),
+                  bottomRight: Radius.circular(77)),
             ),
           ),
-        ),
-        Align(
-          alignment: Alignment(0, -0.03),
-          child: Center(
-            child: Text(
-                "Saisissez votre adresse e-mail\npour recevoir un code de récupération",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Poppins-Light',
-                  fontSize: 15, //change
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
-                )),
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height / 20,
+              left: MediaQuery.of(context).size.width / 20,
+            ),
+            child: FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: CircleAvatar(
+                radius: MediaQuery.of(context).size.height / 30,
+                child: Image.asset("assets/icones/retour.png"),
+                backgroundColor: Colors.white12,
+              ),
+            ),
           ),
-        ),
-        Align(
-          alignment: Alignment(0, 0.6),
-          child: SizedBox(
-            height: 400,//change
+          Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50), //change
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 7.5,
+              ),
+              child: Image.asset(
+                "assets/images/pass_reset.PNG", 
+                height: MediaQuery.of(context).size.height / 4,
+              ),
+            ),
+          ),
+          SizedBox(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 2.45),
+              child: Center(
+                child: Text(
+                  "Mot de passe oublié",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Poppins-Medium',
+                    fontSize: MediaQuery.of(context).size.height / 36,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 2.1),
+              child: Center(
+                child: Text(
+                    "Saisissez votre adresse e-mail\npour recevoir un code de récupération",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Poppins-Light',
+                      fontSize: MediaQuery.of(context).size.height / 55,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                    )),
+              ),
+            ),
+          ),
+          SizedBox(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 1.8,
+                left: MediaQuery.of(context).size.width / 10,
+                right: MediaQuery.of(context).size.width / 10,
+              ),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -158,19 +196,21 @@ class _ResetPasswordState extends State<ResetPassword> {
                     children: [
                       TextFormField(
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.mail_outline,
-                                color: Colors.grey[400], size: MediaQuery.of(context).size.height / 25,
-                          ),
-                            hintText: ' Tappez votre e-mail',
-                            hintStyle: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 45,
+                          prefixIcon: Icon(
+                            Icons.mail_outline,
                             color: Colors.grey[400],
-                              fontFamily: 'Poppins-Light',
-                            ),
-                            labelText: ' Adresse e-mail',
-                            labelStyle: TextStyle(
-                                fontFamily: 'SegoeUI',
-                                color: Color(0xFF00B9FF),
+                            size: MediaQuery.of(context).size.height / 25,
+                          ),
+                          hintText: ' Tappez votre e-mail',
+                          hintStyle: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 45,
+                            color: Colors.grey[400],
+                            fontFamily: 'Poppins-Light',
+                          ),
+                          labelText: ' Adresse e-mail',
+                          labelStyle: TextStyle(
+                              fontFamily: 'SegoeUI',
+                              color: Color(0xFF00B9FF),
                               fontSize:
                                   MediaQuery.of(context).size.height / 55),
                         ),
@@ -184,7 +224,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         },
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 28,
+                        height: MediaQuery.of(context).size.height / 6,
                       ),
                       SizedBox(
                         child: RaisedButton(
@@ -225,12 +265,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                             child: Text(
                               'Envoyer le code',
                               style: TextStyle(
-                                  fontSize: 19, //change
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 45,
                                   color: Colors.white,
                                   fontFamily: 'SegoeUI'),
                             )),
                         width: MediaQuery.of(context).size.width / 1.6,
-                        height: 60, //change
+                        height: MediaQuery.of(context).size.height / 15,
                       ),
                       Center(
                         child: loading ? CircularProgressIndicator() : Text(''),
@@ -239,8 +280,8 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ));
   }
 }

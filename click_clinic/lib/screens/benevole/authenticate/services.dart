@@ -250,3 +250,4 @@ class _SetServicesState extends State<SetServices> {
     user.setLocation(_point.data);
   }
 }
+//redo UI like sign_in

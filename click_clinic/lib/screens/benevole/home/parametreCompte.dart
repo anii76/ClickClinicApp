@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:click_clinic/models/user.dart';
 import 'package:click_clinic/services/auth.dart';
 import 'package:click_clinic/services/database.dart';
@@ -43,6 +45,8 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
   String _password;
   String _email;
   String _tel;
+  var _state = 0;
+  bool finished = false;
 
   String _error =
       'Etes-vous sur de bien vouloir supprimer votre compte de bénévole ?\nCette opération est irréversible.';
@@ -58,7 +62,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
             style: TextStyle(
               fontFamily: 'SegoeUI',
               fontWeight: FontWeight.w500,
-              fontSize: 20
+              fontSize: 20, //change
             ),
           ),
           content: new Text(
@@ -98,10 +102,9 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
               child: new Text(
                 "Annuler",
                 style: TextStyle(
-                  fontFamily: 'SegoeUI',
-                  fontWeight: FontWeight.w200,
-                  color: Colors.black
-                ),
+                    fontFamily: 'SegoeUI',
+                    fontWeight: FontWeight.w200,
+                    color: Colors.black),
               ),
               onPressed: () {
                 //SignIn();
@@ -137,7 +140,9 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
   }
 
   void _deleteAccount() async {
-    await AuthService().connexion(_email, _password);
+    await AuthService().connexion(_email, _password).then((_) {
+      finished = true;
+    });
     _showConfirmDialog();
   }
 
@@ -146,7 +151,9 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
       if (_formKey.currentState.validate()) {
         //setState(() =>loading = true );
         //await AuthService().connexion(_email, _password);
-        await AuthService().changePassword(_confirmPassword);
+        await AuthService().changePassword(_confirmPassword).then((_) {
+          finished = true;
+        });
       }
     } catch (e) {
       print("Error: $e");
@@ -162,7 +169,9 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
       if (_formKey.currentState.validate()) {
         //setState(() =>loading = true );
         await AuthService().connexion(_email, _confirmPassword);
-        await AuthService().changeEmail(_password);
+        await AuthService().changeEmail(_password).then((_) {
+          finished = true;
+        });
       }
     } catch (e) {
       print("Error: $e");
@@ -170,6 +179,46 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
         _error = e.message;
         _showErrorDialog();
       });
+    }
+  }
+
+  void animateButton() {
+    setState(() {
+      _state = 1;
+    });
+
+    Timer(Duration(milliseconds: 3300), () {
+      setState(() {
+        if (finished) {
+          _state = 2;
+        } else {
+          _state = 3;
+        }
+      });
+    });
+
+    Timer(Duration(milliseconds: 4300), () {
+      setState(() {
+        _state = 0;
+      });
+    });
+  }
+
+  Widget loading() {
+    if (_state == 3) {
+      return Icon(Icons.close, color: Colors.white);
+    } else if (_state == 1) {
+      return Center(
+        child: SizedBox(
+          height: 15, //change
+          width: 15, //change
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
+        ),
+      );
+    } else {
+      return Icon(Icons.check, color: Colors.white);
     }
   }
 
@@ -185,7 +234,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
             return Scaffold(
               body: Column(children: <Widget>[
                 SizedBox(
-                  height: 29, //it should be the size of the bar of each device
+                  height: 29, ////change
                 ),
                 Flexible(
                   flex: 1,
@@ -220,7 +269,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                               child: Row(
                                 children: <Widget>[
                                   CircleAvatar(
-                                    radius: 10,
+                                    radius: 10, //change
                                     child:
                                         Image.asset("assets/images/Retour.png"),
                                     backgroundColor: Color(0xFF00B9FF),
@@ -229,7 +278,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                     "      Paramètres du compte",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 19,
+                                        fontSize: 19, //change
                                         fontFamily: 'Poppins-Light'),
                                   ),
                                 ],
@@ -264,16 +313,16 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                     itemBuilder: (BuildContext context, int index) =>
                         ExpansionTile(
                             leading: CircleAvatar(
-                              radius: 20,
-                              child: Image.asset("assets/images/${img[index]}"),
+                              radius: 20, //change
+                              child: Image.asset(
+                                  "assets/images/${img[index]}"), //changz size
                               backgroundColor: Colors.white10,
                             ),
-                            //initiallyExpanded: false,
                             subtitle: Text(sub[index],
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0x35000000),
-                                  fontSize: 16,
+                                  fontSize: 16, //change
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -282,7 +331,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Medium',
                                   color: Color(0xff000000),
-                                  fontSize: 21,
+                                  fontSize: 21, //change
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -302,15 +351,14 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                           children: <Widget>[
                                             Flexible(
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 50.0),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 50.0), //change
                                                 child: TextFormField(
                                                   initialValue: userData.tel,
                                                   decoration: InputDecoration(
                                                     hintText: textu[index],
                                                     hintStyle: TextStyle(
-                                                      fontSize: 18,
+                                                      fontSize: 18, //change
                                                       color: Colors.grey[400],
                                                       fontFamily:
                                                           'Poppins-Light',
@@ -334,16 +382,33 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                       ),
                                     ),
                                     RaisedButton(
-                                        onPressed: () {
-                                          DatabaseService(uid: user.uid)
-                                              .updateTel(_password);
+                                        onPressed: () async {
+                                          setState(() {
+                                            if (_state == 0) {
+                                              animateButton();
+                                            }
+                                          });
+
+                                          if (_tel != null) {
+                                            await DatabaseService(uid: user.uid)
+                                                .updateTel(_tel)
+                                                .then((_) {
+                                              print(userData.tel);
+                                              if (userData.tel == _tel)
+                                                finished = true;
+                                              print('is finished');
+                                            });
+                                          }
                                         },
-                                        child: Text(
-                                          'Confirmer',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Poppins-Light'),
-                                        ),
+                                        child: _state == 0
+                                            ? Text(
+                                                'Confirmer',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily:
+                                                        'Poppins-Light'),
+                                              )
+                                            : loading(),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(30),
@@ -368,9 +433,9 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                             children: <Widget>[
                                               Flexible(
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 50.0),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          50.0), //change
                                                   child: TextFormField(
                                                     initialValue:
                                                         para[index] == para[0]
@@ -379,7 +444,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                                     decoration: InputDecoration(
                                                       hintText: textu[index],
                                                       hintStyle: TextStyle(
-                                                        fontSize: 18,
+                                                        fontSize: 18, //change
                                                         color: Colors.grey[400],
                                                         fontFamily:
                                                             'Poppins-Light',
@@ -433,13 +498,14 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                                 child: Padding(
                                                   padding: const EdgeInsets
                                                           .symmetric(
-                                                      horizontal: 50.0),
+                                                      horizontal:
+                                                          50.0), //change
                                                   child: TextFormField(
                                                     decoration: InputDecoration(
                                                       hintText:
                                                           'Re-entrez votre mot de passe',
                                                       hintStyle: TextStyle(
-                                                        fontSize: 18,
+                                                        fontSize: 18, //change
                                                         color: Colors.grey[400],
                                                         fontFamily:
                                                             'Poppins-Light',
@@ -474,6 +540,11 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                       ),
                                       RaisedButton(
                                           onPressed: () {
+                                            setState(() {
+                                              if (_state == 0) {
+                                                animateButton();
+                                              }
+                                            });
                                             switch (index) {
                                               case 0:
                                                 {
@@ -491,12 +562,15 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                                 }
                                             }
                                           },
-                                          child: Text(
-                                            'Confirmer',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'Poppins-Light'),
-                                          ),
+                                          child: _state == 0
+                                              ? Text(
+                                                  'Confirmer',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily:
+                                                          'Poppins-Light'),
+                                                )
+                                              : loading(),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30),
@@ -506,18 +580,16 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                   ),
                                 ),
                           SizedBox(
-                            height: 10,
+                            height: 10, //change
                           ),
-                          //ListTile(),
                         ]),
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(color: Colors.grey),
                     itemCount: 4,
-                    padding: const EdgeInsets.all(18),
+                    padding: EdgeInsets.all(18), //change
                     scrollDirection: Axis.vertical,
-                    //reverse: true,
                     addAutomaticKeepAlives: true,
-                    cacheExtent: 100,
+                    cacheExtent: 100, //idk
                   ),
                 ),
               ]),

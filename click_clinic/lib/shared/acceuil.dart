@@ -33,7 +33,7 @@ class _AcceuilState extends State<Acceuil> {
             child: Text(
               "ClickClinic",
               style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 25, //change
                   color: Color(0xFF00B9FF),
                   fontFamily: 'CenturyGothic-Bold'),
             ),
@@ -50,7 +50,7 @@ class _AcceuilState extends State<Acceuil> {
             child: Text(
               "Sélectionnez votre profil",
               style: TextStyle(
-                  fontSize: 19,
+                  fontSize: MediaQuery.of(context).size.height / 45,
                   color: Colors.black,
                   fontFamily: 'Poppins-Regular'),
             ),

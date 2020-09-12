@@ -19,12 +19,6 @@ class _BenevoleListingState extends State<BenevoleListing> {
   Firestore firestore = Firestore.instance;
   List benevoles;
 
-  /*@override
-  void initState() {
-    rechBenevole(service);
-    super.initState();
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +40,17 @@ class _BenevoleListingState extends State<BenevoleListing> {
             ),
           ),
           Align(
-            alignment: Alignment(0, -0.8),
+            alignment: Alignment(0, -0.585),
+            child: Image.asset(
+              "assets/images/old.png",
+              height: MediaQuery.of(context).size.height / 4.5,
+            ),
+          ),
+          Align(
+            alignment: Alignment(0, -0.87),
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.width * 0.12,
+              height: MediaQuery.of(context).size.height / 15,
               child: RaisedButton(
                 color: Color(0xFF00B9FF),
                 onPressed: () {
@@ -58,16 +59,18 @@ class _BenevoleListingState extends State<BenevoleListing> {
                 child: Row(
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 10,
+                      radius: 10, //change
                       child: Image.asset("assets/icones/retour.png"),
                       backgroundColor: Color(0xFF00B9FF),
                     ),
                     Text(
-                      "      Bénévoles",
+                      "Bénévoles                                        ",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 19,
-                          fontFamily: 'Poppins-Light'),
+                          fontSize: MediaQuery.of(context).size.height / 45,
+                          fontFamily: 'Poppins-Light',
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
@@ -78,44 +81,70 @@ class _BenevoleListingState extends State<BenevoleListing> {
             ),
           ),
           Align(
-            alignment: Alignment(0, -0.19),
-            child: Text('Appuyez sur un bénévole \npour afficher son profil '),
+            alignment: Alignment(0, -0.10),
+            child: Text(
+              'Appuyez sur un bénévole \npour afficher son profil ',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'SegoeUI',
+                fontSize: MediaQuery.of(context).size.height / 50,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           Align(
-            alignment: Alignment(0, 0.22),
-            child: StreamBuilder<Object>(
-                stream: firestore
-                    .collection('Benevole')
-                    .where("$service", isEqualTo: true)
-                    .where("Disponibilite", isEqualTo: true)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    benevoles = [''];
-                    benevoles.clear();
-                    QuerySnapshot values = snapshot.data;
-                    var documentList = values.documents;
-                    documentList.forEach((DocumentSnapshot document) {
-                      print(document.data);
-                      benevoles.add(document);
-                    });
-                    print(benevoles);
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: benevoles.length,
-                        itemBuilder: (_, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50),
-                            child: UI(benevoles[index]),
-                          );
-                        });
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else
-                    return Text('No results');
-                }),
+            alignment: Alignment(0, 0.1),
+            child: Padding(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
+              child: StreamBuilder<Object>(
+                  stream: firestore
+                      .collection('Benevole')
+                      .where("$service", isEqualTo: true)
+                      .where("Disponibilite", isEqualTo: true)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      benevoles = [''];
+                      benevoles.clear();
+                      QuerySnapshot values = snapshot.data;
+                      var documentList = values.documents;
+                      documentList.forEach((DocumentSnapshot document) {
+                        print(document.data);
+                        benevoles.add(document);
+                      });
+                      print(benevoles);
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: benevoles.length,
+                          itemBuilder: (_, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical:
+                                    MediaQuery.of(context).size.height / 70,
+                                horizontal:
+                                    MediaQuery.of(context).size.width / 8.5,
+                              ),
+                              child: UI(benevoles[index]),
+                            );
+                          });
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+                  }),
+            ),
           ),
+          /*Align(
+            alignment: Alignment(0, 0.1),
+            child: benevoles == null
+                ? Text(
+                    'pas de resultas :(', 
+                  )
+                : Text(
+                    '',
+                  ),
+          )*/
         ],
       ),
     );
@@ -163,11 +192,11 @@ class _BenevoleListingState extends State<BenevoleListing> {
   Widget UI(DocumentSnapshot document) {
     var imgUrl = document.data["ProfilePicPath"];
     var nom = document.data["Nom"];
-    var tel = document.data["Tel"];
+    var adr = document.data["Adress"];
     return SizedBox(
-      width: 500, //not working
-      height: 60,
+      height: MediaQuery.of(context).size.height / 11,
       child: RaisedButton(
+        color: Colors.white,
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
@@ -176,23 +205,35 @@ class _BenevoleListingState extends State<BenevoleListing> {
           ));
         },
         child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             CircleAvatar(
-              radius: 22,
+              radius: MediaQuery.of(context).size.height / 30,
               child: ClipOval(
-                              child: imgUrl != null
+                child: imgUrl != null && imgUrl != ''
                     ? Image.network(imgUrl)
                     : Image.asset("assets/images/man.png"),
               ),
               backgroundColor: Colors.white10,
             ),
-            SizedBox(width:  30,),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-              Text(nom),
-              Text(tel),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 12,
+            ),
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                nom,
+                style: TextStyle(
+                  fontFamily: 'Poppins-Medium',
+                  fontSize: MediaQuery.of(context).size.height / 50,
+                ),
+              ),
+              Text(
+                adr,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontFamily: 'Poppins-Regular',
+                  fontSize: MediaQuery.of(context).size.height / 60,
+                ),
+              ),
             ]),
           ],
         ),

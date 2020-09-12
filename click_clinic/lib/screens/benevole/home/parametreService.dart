@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:click_clinic/models/user.dart';
 import 'package:click_clinic/services/database.dart';
 import 'package:click_clinic/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-enum BloodType {A, B, O, AB}
-enum Rhesus {plus , minus}
+enum BloodType { A, B, O, AB }
+enum Rhesus { plus, minus }
 
 class ParaDesServices extends StatefulWidget {
   @override
@@ -37,9 +39,51 @@ class _ParaDesServicesState extends State<ParaDesServices> {
   String _description;
   String _adresse;
   bool val1 = false, val2 = false, val3 = false;
-  BloodType _bloodType1 ;
+  BloodType _bloodType1;
   Rhesus _rhesus;
   String _bloodType;
+  var _state = 0;
+  bool finished = false;
+
+  void animateButton() {
+    setState(() {
+      _state = 1;
+    });
+
+    Timer(Duration(milliseconds: 3300), () {
+      setState(() {
+        if (finished) {
+          _state = 2;
+        } else {
+          _state = 3;
+        }
+      });
+    });
+
+    Timer(Duration(milliseconds: 4300), () {
+      setState(() {
+        _state = 0;
+      });
+    });
+  }
+
+  Widget loading() {
+    if (_state == 3) {
+      return Icon(Icons.close, color: Colors.white);
+    } else if (_state == 1) {
+      return Center(
+        child: SizedBox(
+          height: 15, //change
+          width: 15, //change
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
+        ),
+      );
+    } else {
+      return Icon(Icons.check, color: Colors.white);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +132,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                               child: Row(
                                 children: <Widget>[
                                   CircleAvatar(
-                                    radius: 10,
+                                    radius: 10,//change
                                     child:
                                         Image.asset("assets/images/Retour.png"),
                                     backgroundColor: Color(0xFF00B9FF),
@@ -97,7 +141,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                     "      Paramètres des services",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 19,
+                                        fontSize: 19,//change
                                         fontFamily: 'Poppins-Light'),
                                   ),
                                 ],
@@ -132,7 +176,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                     itemBuilder: (BuildContext context, int index) =>
                         ExpansionTile(
                             leading: CircleAvatar(
-                              radius: 20,
+                              radius: 20,//change
                               child: Image.asset("assets/images/${img[index]}"),
                               backgroundColor: Colors.white10,
                             ),
@@ -141,7 +185,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0x35000000),
-                                  fontSize: 16,
+                                  fontSize: 16,//change
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -150,7 +194,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Medium',
                                   color: Color(0xff000000),
-                                  fontSize: 21,
+                                  fontSize: 21,//change
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -168,7 +212,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                       child: Card(
                                         color: Colors.white,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
+                                          padding: EdgeInsets.all(10.0),
                                           child: Wrap(
                                               alignment: WrapAlignment.center,
                                               children: [
@@ -182,11 +226,13 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                         });
                                                       },
                                                     ),
-                                                    Text('Apporter des médicaments',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins-Light',
-                                                      fontSize: 16
-                                                    ),),
+                                                    Text(
+                                                      'Apporter des médicaments',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Poppins-Light',
+                                                          fontSize: 16),//change
+                                                    ),
                                                   ],
                                                 ),
                                                 Row(
@@ -199,11 +245,13 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                         });
                                                       },
                                                     ),
-                                                    Text('Donner du sang',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins-Light',
-                                                      fontSize: 16
-                                                    ),),
+                                                    Text(
+                                                      'Donner du sang',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Poppins-Light',
+                                                          fontSize: 16),//change
+                                                    ),
                                                   ],
                                                 ),
                                                 Row(
@@ -216,27 +264,31 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                         });
                                                       },
                                                     ),
-                                                    Text('Loger des patients',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins-Light',
-                                                      fontSize: 16
-                                                    ),),
+                                                    Text(
+                                                      'Loger des patients',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Poppins-Light',
+                                                          fontSize: 16),//change
+                                                    ),
                                                   ],
                                                 ),
                                                 Flexible(
                                                   child: Padding(
-                                                    padding: const EdgeInsets
+                                                    padding: EdgeInsets
                                                             .symmetric(
-                                                        horizontal: 30.0),
+                                                        horizontal: 30.0),//change
                                                     child: TextFormField(
                                                       initialValue:
                                                           userData.description,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         hintText:
                                                             ' Autres services',
                                                         hintStyle: TextStyle(
-                                                          fontSize: 18,
-                                                          color: Colors.grey[400],
+                                                          fontSize: 18,//change
+                                                          color:
+                                                              Colors.grey[400],
                                                           fontFamily:
                                                               'Poppins-Light',
                                                         ),
@@ -263,22 +315,46 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                       ),
                                     ),
                                     RaisedButton(
-                                        onPressed: () {
-                                          DatabaseService(uid: user.uid)
-                                              .updateService1(val1);
-                                          DatabaseService(uid: user.uid)
-                                              .updateService1(val2);
-                                          DatabaseService(uid: user.uid)
-                                              .updateService1(val3);
-                                          DatabaseService(uid: user.uid)
-                                              .updateDescription(_description);
+                                        onPressed: () async {
+                                          setState(() {
+                                            if (_state == 0) {
+                                              animateButton();
+                                            }
+                                          });
+                                          await DatabaseService(uid: user.uid)
+                                              .updateService1(val1)
+                                              .then((_) {
+                                            if (userData.service1 == val1)
+                                              finished = true;
+                                          });
+                                          await DatabaseService(uid: user.uid)
+                                              .updateService2(val2)
+                                              .then((_) {
+                                            if (userData.service2 == val1)
+                                              finished = true;
+                                          });
+                                          await DatabaseService(uid: user.uid)
+                                              .updateService3(val3)
+                                              .then((_) {
+                                            if (userData.service3 == val1)
+                                              finished = true;
+                                          });
+                                          await DatabaseService(uid: user.uid)
+                                              .updateDescription(_description)
+                                              .then((_) {
+                                            if (userData.description ==
+                                                _description) finished = true;
+                                          });
                                         },
-                                        child: Text(
-                                          'Confirmer',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Poppins-Light'),
-                                        ),
+                                        child: _state == 0
+                                            ? Text(
+                                                'Confirmer',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily:
+                                                        'Poppins-Light'),
+                                              )
+                                            : loading(),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(30),
@@ -306,7 +382,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                   child: Padding(
                                                     padding: const EdgeInsets
                                                             .symmetric(
-                                                        horizontal: 50.0),
+                                                        horizontal: 50.0),//change
                                                     child: TextFormField(
                                                       initialValue:
                                                           userData.adresse,
@@ -314,7 +390,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                           InputDecoration(
                                                         hintText: textu[index],
                                                         hintStyle: TextStyle(
-                                                          fontSize: 18,
+                                                          fontSize: 18,//change
                                                           color:
                                                               Colors.grey[400],
                                                           fontFamily:
@@ -340,16 +416,29 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                           ),
                                         ),
                                         RaisedButton(
-                                            onPressed: () {
-                                              DatabaseService(uid: user.uid)
-                                                  .updateAdress(_adresse);
+                                            onPressed: () async {
+                                              setState(() {
+                                            if (_state == 0) {
+                                              animateButton();
+                                            }
+                                          });
+                                              await DatabaseService(
+                                                      uid: user.uid)
+                                                  .updateAdress(_adresse)
+                                                  .then((_) {
+                                                if (userData.adresse ==
+                                                    _adresse) finished = true;
+                                              });
                                             },
-                                            child: Text(
-                                              'Confirmer',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: 'Poppins-Light'),
-                                            ),
+                                            child: _state == 0
+                                                ? Text(
+                                                    'Confirmer',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily:
+                                                            'Poppins-Light'),
+                                                  )
+                                                : loading(),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -368,130 +457,180 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                         child: Card(
                                           color: Colors.white,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
+                                            padding: EdgeInsets.all(10.0),//change
                                             child: Column(
                                               children: <Widget>[
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: <Widget>[
                                                     Radio(
                                                       value: BloodType.A,
                                                       groupValue: _bloodType1,
-                                                      onChanged: (BloodType value) {
+                                                      onChanged:
+                                                          (BloodType value) {
                                                         setState(() {
                                                           _bloodType1 = value;
                                                           _bloodType = 'A';
                                                         });
                                                       },
-                                                      activeColor: Color(0xFF00B9FF),
+                                                      activeColor:
+                                                          Color(0xFF00B9FF),
                                                     ),
                                                     new Text(
                                                       'A ',
                                                       style: new TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Poppins-Light',),
+                                                        fontSize: 16.0,//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                      ),
                                                     ),
-                                                    SizedBox(width: MediaQuery.of(context).size.width / 4,),
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              4,
+                                                    ),
                                                     Radio(
                                                       value: BloodType.B,
                                                       groupValue: _bloodType1,
-                                                      onChanged: (BloodType value) {
+                                                      onChanged:
+                                                          (BloodType value) {
                                                         setState(() {
                                                           _bloodType1 = value;
                                                           _bloodType = 'B';
                                                         });
                                                       },
-                                                      activeColor: Color(0xFF00B9FF),
+                                                      activeColor:
+                                                          Color(0xFF00B9FF),
                                                     ),
                                                     new Text(
                                                       'B ',
                                                       style: new TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Poppins-Light',),
+                                                        fontSize: 16.0,//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: <Widget>[
                                                     Radio(
                                                       value: BloodType.AB,
                                                       groupValue: _bloodType1,
-                                                      onChanged: (BloodType value) {
+                                                      onChanged:
+                                                          (BloodType value) {
                                                         setState(() {
                                                           _bloodType1 = value;
                                                           _bloodType = 'AB';
                                                         });
                                                       },
-                                                      activeColor: Color(0xFF00B9FF),
+                                                      activeColor:
+                                                          Color(0xFF00B9FF),
                                                     ),
                                                     new Text(
                                                       'AB',
                                                       style: new TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Poppins-Light',),
+                                                        fontSize: 16.0,//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                      ),
                                                     ),
-                                                    SizedBox(width: MediaQuery.of(context).size.width / 4,),
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              4,
+                                                    ),
                                                     Radio(
                                                       value: BloodType.O,
                                                       groupValue: _bloodType1,
-                                                      onChanged: (BloodType value) {
+                                                      onChanged:
+                                                          (BloodType value) {
                                                         setState(() {
                                                           _bloodType1 = value;
                                                           _bloodType = 'O';
                                                         });
                                                       },
-                                                      activeColor: Color(0xFF00B9FF),
+                                                      activeColor:
+                                                          Color(0xFF00B9FF),
                                                     ),
                                                     new Text(
                                                       'O ',
                                                       style: new TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Poppins-Light',),
+                                                        fontSize: 16.0,//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                                  child: const Divider(color: Colors.grey, thickness: 01,),
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 10.0),
+                                                  child: const Divider(
+                                                    color: Colors.grey,
+                                                    thickness: 01,
+                                                  ),
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: <Widget>[
                                                     Radio(
                                                       value: Rhesus.plus,
                                                       groupValue: _rhesus,
-                                                      onChanged: (Rhesus value) {
+                                                      onChanged:
+                                                          (Rhesus value) {
                                                         setState(() {
                                                           _rhesus = value;
-                                                          _bloodType += '+' ;
+                                                          _bloodType += '+';
                                                         });
                                                       },
-                                                      activeColor: Color(0xFF00B9FF),
+                                                      activeColor:
+                                                          Color(0xFF00B9FF),
                                                     ),
                                                     new Text(
                                                       '+ ',
                                                       style: new TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Poppins-Light',),
+                                                        fontSize: 16.0,//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                      ),
                                                     ),
-                                                    SizedBox(width: MediaQuery.of(context).size.width / 4,),
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              4,
+                                                    ),
                                                     Radio(
                                                       value: Rhesus.minus,
                                                       groupValue: _rhesus,
-                                                      onChanged: (Rhesus value) {
+                                                      onChanged:
+                                                          (Rhesus value) {
                                                         setState(() {
                                                           _rhesus = value;
-                                                          _bloodType += '-' ;
+                                                          _bloodType += '-';
                                                         });
                                                       },
-                                                      activeColor: Color(0xFF00B9FF),
+                                                      activeColor:
+                                                          Color(0xFF00B9FF),
                                                     ),
                                                     new Text(
                                                       '- ',
                                                       style: new TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontFamily: 'Poppins-Light',),
+                                                        fontSize: 16.0,//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -499,41 +638,54 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                             ),
                                           ),
                                           shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
                                         ),
                                       ),
                                       RaisedButton(
-                                            onPressed: () {
-                                              if (_bloodType.isNotEmpty) {
-                                                DatabaseService(uid: user.uid)
-                                                  .updateBloodType(_bloodType);
-                                                  setState(() {
-                                                    _bloodType = '';
-                                                  });
-                                                  }
-                                            },
-                                            child: Text(
-                                              'Confirmer',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: 'Poppins-Light'),
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                            ),
-                                            color: Color(0xFF00B9FF)),
+                                          onPressed: () async {
+                                            setState(() {
+                                            if (_state == 0) {
+                                              animateButton();
+                                            }
+                                          });
+                                            if (_bloodType.isNotEmpty) {
+                                              await DatabaseService(
+                                                      uid: user.uid)
+                                                  .updateBloodType(_bloodType)
+                                                  .then((_) {
+                                                if (_bloodType ==
+                                                    userData.bloodtype) {
+                                                  finished = true;
+                                                  _bloodType = '';
+                                                }
+                                              });
+                                            }
+                                          },
+                                          child: _state == 0
+                                              ? Text(
+                                                  'Confirmer',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily:
+                                                          'Poppins-Light'),
+                                                )
+                                              : loading(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          color: Color(0xFF00B9FF)),
                                     ]),
                           SizedBox(
-                            height: 10,
+                            height: 10,//change
                           ),
                         ]),
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(color: Colors.grey),
                     itemCount: 3,
-                    padding: const EdgeInsets.all(18),
+                    padding: EdgeInsets.all(18),//change
                     scrollDirection: Axis.vertical,
                     //reverse: true,
                     addAutomaticKeepAlives: true,
@@ -546,7 +698,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
             return Loading();
         });
   }
-  
+
   //void initialize()
 
   @override

@@ -41,7 +41,7 @@ class DatabaseService {
     });
   }
   //setTel
-  void updateTel(String tel ) async {
+  Future updateTel(String tel ) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"Tel": tel}).then((_){
       print("success!");
@@ -49,7 +49,7 @@ class DatabaseService {
   }
 
   //setService1
-  void updateService1(bool val ) async {
+  Future updateService1(bool val ) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"Service1": val}).then((_){
       print("success!");
@@ -57,7 +57,7 @@ class DatabaseService {
   }
 
   //setService2
-  void updateService2(bool val ) async {
+  Future updateService2(bool val ) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"Service2": val}).then((_){
       print("success!");
@@ -65,7 +65,7 @@ class DatabaseService {
   }
 
   //setService3
-  void updateService3(bool val ) async {
+  Future updateService3(bool val ) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"Service3": val}).then((_){
       print("success!");
@@ -73,7 +73,7 @@ class DatabaseService {
   }
 
   //setDescription
-  void updateDescription(String val ) async {
+  Future updateDescription(String val ) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"Description": val}).then((_){
       print("success!");
@@ -97,7 +97,7 @@ class DatabaseService {
   }
 
   //setBloodType
-  void updateBloodType(String val) async {
+  Future updateBloodType(String val) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"BloodType": val}).then((_){
       print("success!");
@@ -105,7 +105,7 @@ class DatabaseService {
   }
 
   //setAdress
-  void updateAdress(String val ) async {
+  Future updateAdress(String val ) async {
     final user = await _auth.getCurrentUserInfo();
     benevoleCollection.document(user.uid).updateData({"Adress": val}).then((_){
       print("success!");
