@@ -35,12 +35,15 @@ class _PatientState extends State<Patient> {
           ),
           Align(
             alignment: Alignment(0.45, -0.83),
-            child: Image.asset("assets/images/l.png"),
+            child: Image.asset(
+              "assets/images/l.png",
+              height: MediaQuery.of(context).size.height / 25,
+            ),
           ),
           Align(
             alignment: Alignment(-0.8, -0.85),
             child: SizedBox(
-              width: 80,
+              width: 80, //change
               child: RaisedButton(
                 color: Color(0xFF00B9FF),
                 onPressed: () {
@@ -70,7 +73,7 @@ class _PatientState extends State<Patient> {
             child: Text(
               'Que cherchez-vous ?',
               style: TextStyle(
-                  fontSize: 28,
+                  fontSize: MediaQuery.of(context).size.height / 28,
                   color: Colors.white,
                   fontFamily: 'Poppins-Medium'),
             ),
@@ -97,7 +100,9 @@ class _PatientState extends State<Patient> {
                     Text(
                       "     Un médecin",
                       style: TextStyle(
-                          fontSize: 22, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),
@@ -130,7 +135,9 @@ class _PatientState extends State<Patient> {
                     Text(
                       "     Un hôpital",
                       style: TextStyle(
-                          fontSize: 22, fontFamily: 'Poppins-Regular'),
+                          fontSize:MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                        ),
                     ),
                   ],
                 ),
@@ -163,7 +170,9 @@ class _PatientState extends State<Patient> {
                     Text(
                       "    Une pharmacie",
                       style: TextStyle(
-                          fontSize: 22, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),
@@ -194,7 +203,9 @@ class _PatientState extends State<Patient> {
                     Text(
                       "     Du sang",
                       style: TextStyle(
-                          fontSize: 22, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),
@@ -227,7 +238,9 @@ class _PatientState extends State<Patient> {
                     Text(
                       "     Autre",
                       style: TextStyle(
-                          fontSize: 22, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),

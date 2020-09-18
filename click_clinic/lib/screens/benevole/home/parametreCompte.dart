@@ -62,7 +62,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
             style: TextStyle(
               fontFamily: 'SegoeUI',
               fontWeight: FontWeight.w500,
-              fontSize: 20, //change
+              fontSize: MediaQuery.of(context).size.height / 37,
             ),
           ),
           content: new Text(
@@ -210,8 +210,8 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
     } else if (_state == 1) {
       return Center(
         child: SizedBox(
-          height: 15, //change
-          width: 15, //change
+          height: MediaQuery.of(context).size.height / 55,
+          width: MediaQuery.of(context).size.height / 55,
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
           ),
@@ -234,7 +234,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
             return Scaffold(
               body: Column(children: <Widget>[
                 SizedBox(
-                  height: 29, ////change
+                  height: MediaQuery.of(context).size.height / 28,
                 ),
                 Flexible(
                   flex: 1,
@@ -260,7 +260,7 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                           alignment: Alignment(-0.45, -0.45),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.9,
-                            height: MediaQuery.of(context).size.width * 0.12,
+                            height: MediaQuery.of(context).size.height / 15,
                             child: RaisedButton(
                               color: Color(0xFF00B9FF),
                               onPressed: () {
@@ -278,7 +278,9 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                     "      Paramètres du compte",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 19, //change
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                40,
                                         fontFamily: 'Poppins-Light'),
                                   ),
                                 ],
@@ -313,16 +315,19 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                     itemBuilder: (BuildContext context, int index) =>
                         ExpansionTile(
                             leading: CircleAvatar(
-                              radius: 20, //change
+                              radius: MediaQuery.of(context).size.height / 37,
                               child: Image.asset(
-                                  "assets/images/${img[index]}"), //changz size
+                                "assets/images/${img[index]}",
+                                height: MediaQuery.of(context).size.height / 20,
+                              ),
                               backgroundColor: Colors.white10,
                             ),
                             subtitle: Text(sub[index],
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0x35000000),
-                                  fontSize: 16, //change
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 50,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -331,7 +336,8 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Medium',
                                   color: Color(0xff000000),
-                                  fontSize: 21, //change
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 40,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -352,13 +358,22 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                             Flexible(
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
-                                                    horizontal: 50.0), //change
+                                                  horizontal:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          10,
+                                                ),
                                                 child: TextFormField(
                                                   initialValue: userData.tel,
                                                   decoration: InputDecoration(
                                                     hintText: textu[index],
                                                     hintStyle: TextStyle(
-                                                      fontSize: 18, //change
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              45,
                                                       color: Colors.grey[400],
                                                       fontFamily:
                                                           'Poppins-Light',
@@ -404,9 +419,14 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                             ? Text(
                                                 'Confirmer',
                                                 style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily:
-                                                        'Poppins-Light'),
+                                                  color: Colors.white,
+                                                  fontFamily: 'Poppins-Light',
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          55,
+                                                ),
                                               )
                                             : loading(),
                                         shape: RoundedRectangleBorder(
@@ -434,8 +454,12 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                               Flexible(
                                                 child: Padding(
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal:
-                                                          50.0), //change
+                                                    horizontal:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            10,
+                                                  ),
                                                   child: TextFormField(
                                                     initialValue:
                                                         para[index] == para[0]
@@ -444,7 +468,11 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                                     decoration: InputDecoration(
                                                       hintText: textu[index],
                                                       hintStyle: TextStyle(
-                                                        fontSize: 18, //change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            45,
                                                         color: Colors.grey[400],
                                                         fontFamily:
                                                             'Poppins-Light',
@@ -496,16 +524,23 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                             children: <Widget>[
                                               Flexible(
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal:
-                                                          50.0), //change
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            10,
+                                                  ),
                                                   child: TextFormField(
                                                     decoration: InputDecoration(
                                                       hintText:
                                                           'Re-entrez votre mot de passe',
                                                       hintStyle: TextStyle(
-                                                        fontSize: 18, //change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            45,
                                                         color: Colors.grey[400],
                                                         fontFamily:
                                                             'Poppins-Light',
@@ -566,9 +601,14 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                               ? Text(
                                                   'Confirmer',
                                                   style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily:
-                                                          'Poppins-Light'),
+                                                    color: Colors.white,
+                                                    fontFamily: 'Poppins-Light',
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height /
+                                                            55,
+                                                  ),
                                                 )
                                               : loading(),
                                           shape: RoundedRectangleBorder(
@@ -580,13 +620,14 @@ class _ParaDuCompteState extends State<ParaDuCompte> {
                                   ),
                                 ),
                           SizedBox(
-                            height: 10, //change
+                            height: MediaQuery.of(context).size.height / 70,
                           ),
                         ]),
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(color: Colors.grey),
                     itemCount: 4,
-                    padding: EdgeInsets.all(18), //change
+                    padding:
+                        EdgeInsets.all(MediaQuery.of(context).size.height / 45),
                     scrollDirection: Axis.vertical,
                     addAutomaticKeepAlives: true,
                     cacheExtent: 100, //idk

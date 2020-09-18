@@ -9,7 +9,6 @@ class Opticiens extends StatefulWidget {
 class _OpticiensState extends State<Opticiens> {
   final GlobalKey<FireMapState> _key = new GlobalKey<FireMapState>();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +28,11 @@ class _OpticiensState extends State<Opticiens> {
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                stops: [0.3, 0.7, 0.9],
+                stops: [
+                  0.3,
+                  0.7,
+                  0.9
+                ],
                 colors: [
                   Color(0xFF00D0E1),
                   Color(0xFF00B3FA),
@@ -42,61 +45,62 @@ class _OpticiensState extends State<Opticiens> {
           ),
         ),
         Align(
-              alignment: Alignment(0.75, -0.78),
-                  child: SizedBox(
+          alignment: Alignment(0.75, -0.78),
+          child: SizedBox(
             /*child: Padding(
               padding: const EdgeInsets.only(top: 85, left: 260, right: 3),*/
-              child: Text(
-                "Opticiens",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontFamily: 'Poppins-Regular'),
-              ),
+            child: Text(
+              "Opticiens",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.height / 47,
+                  fontFamily: 'Poppins-Regular'),
+            ),
             //),
           ),
         ),
         Align(
-              alignment: Alignment(-0.8, -0.8),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width /2.7,
+          alignment: Alignment(-0.8, -0.8),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 2.7,
             /*child: Padding(
               padding: const EdgeInsets.only(top: 70, left: 30, right: 210),*/
-              child: RaisedButton(
-                color: Color(0xFF00B9FF),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Row(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 10,
-                      child: Image.asset("assets/icones/retour.png"),
-                      backgroundColor: Color(0xFF00B9FF),
-                    ),
-                    Text(
-                      " Accueil",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontFamily: 'Poppins-Light'),
-                    ),
-                  ],
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
+            child: RaisedButton(
+              color: Color(0xFF00B9FF),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Row(
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 10,
+                    child: Image.asset("assets/icones/retour.png"),
+                    backgroundColor: Color(0xFF00B9FF),
+                  ),
+                  Text(
+                    " Accueil",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.height / 47,
+                        fontFamily: 'Poppins-Light'),
+                  ),
+                ],
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
               //),
             ),
           ),
         ),
         Center(
           child: Column(children: <Widget>[
+            SizedBox(height: MediaQuery.of(context).size.height / 5.6),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 5.6
+              child: Image.asset(
+                "assets/images/opticien-ils.png",
+                height: MediaQuery.of(context).size.height / 5.8,
               ),
-            SizedBox(
-              child: Image.asset("assets/images/opticien-ils.png", height:MediaQuery.of(context).size.height / 5.8 ),
             ),
             SizedBox(
               child: RaisedButton(
@@ -107,25 +111,28 @@ class _OpticiensState extends State<Opticiens> {
                 child: Row(
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 25,
-                      child: Icon(Icons.search, color: Colors.white),
+                      radius: MediaQuery.of(context).size.height / 35,
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: MediaQuery.of(context).size.height / 35,
+                      ),
                       backgroundColor: Color(0xFF00B3FA),
                     ),
                     Text(
                       "  Trouvez des Opticiens",
                       style: TextStyle(
-                        fontSize: 21,
-                        color: Color(0xB3000000),
-                        fontFamily: 'SegoeUI'
-                      ),
+                          fontSize: MediaQuery.of(context).size.height / 37,
+                          color: Color(0xB3000000),
+                          fontFamily: 'SegoeUI'),
                     ),
                   ],
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
               ),
-              width: MediaQuery.of(context).size.width / 1.18, 
-              height: 70,
+              width: MediaQuery.of(context).size.width / 1.18,
+              height: MediaQuery.of(context).size.height / 12,
             ),
           ]),
         ),

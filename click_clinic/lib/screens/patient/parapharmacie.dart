@@ -49,7 +49,7 @@ class _ParapharmaciesState extends State<Parapharmacies> {
                 "Parapharmacies",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 17,
+                    fontSize: MediaQuery.of(context).size.height / 47,
                     fontFamily: 'Poppins-Regular'),
               ),
             //),
@@ -77,7 +77,7 @@ class _ParapharmaciesState extends State<Parapharmacies> {
                       " Accueil",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 17,
+                          fontSize: MediaQuery.of(context).size.height / 47,
                           fontFamily: 'Poppins-Light'),
                     ),
                   ],
@@ -106,14 +106,18 @@ class _ParapharmaciesState extends State<Parapharmacies> {
                 child: Row(
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 25,
-                      child: Icon(Icons.search, color: Colors.white),
+                      radius: MediaQuery.of(context).size.height / 35,
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: MediaQuery.of(context).size.height / 35,
+                        ),
                       backgroundColor: Color(0xFF00B3FA),
                     ),
                     Text(
                       "  Trouvez des Parapharmacies",
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: MediaQuery.of(context).size.height / 43,
                         color: Color(0xB3000000),
                         fontFamily: 'SegoeUI'
                       ),
@@ -124,7 +128,7 @@ class _ParapharmaciesState extends State<Parapharmacies> {
                     borderRadius: BorderRadius.circular(50)),
               ),
               width: MediaQuery.of(context).size.width / 1.18, 
-              height: 70,
+              height: MediaQuery.of(context).size.height / 12,
             ),
           ]),
         ),

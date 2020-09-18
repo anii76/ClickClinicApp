@@ -33,7 +33,7 @@ class _AcceuilState extends State<Acceuil> {
             child: Text(
               "ClickClinic",
               style: TextStyle(
-                  fontSize: 25, //change
+                  fontSize: MediaQuery.of(context).size.height / 30,
                   color: Color(0xFF00B9FF),
                   fontFamily: 'CenturyGothic-Bold'),
             ),
@@ -70,7 +70,7 @@ class _AcceuilState extends State<Acceuil> {
                 child: Text(
                   "je suis un patient",
                   style: TextStyle(
-                      fontSize: 19,
+                      fontSize: MediaQuery.of(context).size.height / 40,
                       color: Colors.white,
                       fontFamily: 'Poppins-Regular'),
                 ),
@@ -96,7 +96,7 @@ class _AcceuilState extends State<Acceuil> {
                 child: Text(
                   "je suis un bénevole",
                   style: TextStyle(
-                      fontSize: 19,
+                      fontSize: MediaQuery.of(context).size.height / 40,
                       color: Colors.white,
                       fontFamily: 'Poppins-Regular'),
                 ),

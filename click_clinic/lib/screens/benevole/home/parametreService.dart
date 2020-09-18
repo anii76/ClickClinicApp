@@ -73,8 +73,8 @@ class _ParaDesServicesState extends State<ParaDesServices> {
     } else if (_state == 1) {
       return Center(
         child: SizedBox(
-          height: 15, //change
-          width: 15, //change
+          height: MediaQuery.of(context).size.height / 55,
+          width: MediaQuery.of(context).size.height / 55,
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
           ),
@@ -97,7 +97,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
             return Scaffold(
               body: Column(children: <Widget>[
                 SizedBox(
-                  height: 29, //it should be the size of the bar of each device
+                  height: MediaQuery.of(context).size.height / 28,
                 ),
                 Flexible(
                   flex: 1,
@@ -123,7 +123,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                           alignment: Alignment(-0.45, -0.45),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.9,
-                            height: MediaQuery.of(context).size.width * 0.12,
+                            height: MediaQuery.of(context).size.height / 15,
                             child: RaisedButton(
                               color: Color(0xFF00B9FF),
                               onPressed: () {
@@ -132,7 +132,7 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                               child: Row(
                                 children: <Widget>[
                                   CircleAvatar(
-                                    radius: 10,//change
+                                    radius: 10, //change
                                     child:
                                         Image.asset("assets/images/Retour.png"),
                                     backgroundColor: Color(0xFF00B9FF),
@@ -141,7 +141,9 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                     "      Paramètres des services",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 19,//change
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                40,
                                         fontFamily: 'Poppins-Light'),
                                   ),
                                 ],
@@ -176,8 +178,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                     itemBuilder: (BuildContext context, int index) =>
                         ExpansionTile(
                             leading: CircleAvatar(
-                              radius: 20,//change
-                              child: Image.asset("assets/images/${img[index]}"),
+                              radius: MediaQuery.of(context).size.height / 37,
+                              child: Image.asset(
+                                "assets/images/${img[index]}",
+                                height: MediaQuery.of(context).size.height / 20,
+                              ),
                               backgroundColor: Colors.white10,
                             ),
                             //initiallyExpanded: false,
@@ -185,7 +190,8 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0x35000000),
-                                  fontSize: 16,//change
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 50,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -194,12 +200,12 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins-Medium',
                                   color: Color(0xff000000),
-                                  fontSize: 21,//change
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 40,
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FontStyle.normal,
                                 )),
                             children: [
-                          ///********************************insert changes here */
                           para[index] == para[0]
                               ? Column(
                                   children: <Widget>[
@@ -229,9 +235,14 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     Text(
                                                       'Apporter des médicaments',
                                                       style: TextStyle(
-                                                          fontFamily:
-                                                              'Poppins-Light',
-                                                          fontSize: 16),//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -248,9 +259,14 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     Text(
                                                       'Donner du sang',
                                                       style: TextStyle(
-                                                          fontFamily:
-                                                              'Poppins-Light',
-                                                          fontSize: 16),//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -267,17 +283,27 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     Text(
                                                       'Loger des patients',
                                                       style: TextStyle(
-                                                          fontFamily:
-                                                              'Poppins-Light',
-                                                          fontSize: 16),//change
+                                                        fontFamily:
+                                                            'Poppins-Light',
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
                                                 Flexible(
                                                   child: Padding(
-                                                    padding: EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 30.0),//change
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              20,
+                                                    ),
                                                     child: TextFormField(
                                                       initialValue:
                                                           userData.description,
@@ -286,7 +312,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                         hintText:
                                                             ' Autres services',
                                                         hintStyle: TextStyle(
-                                                          fontSize: 18,//change
+                                                          fontSize: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height /
+                                                              45,
                                                           color:
                                                               Colors.grey[400],
                                                           fontFamily:
@@ -304,7 +334,10 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  height: 10,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      70,
                                                 ),
                                               ]),
                                         ),
@@ -350,9 +383,14 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                             ? Text(
                                                 'Confirmer',
                                                 style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily:
-                                                        'Poppins-Light'),
+                                                  color: Colors.white,
+                                                  fontFamily: 'Poppins-Light',
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          55,
+                                                ),
                                               )
                                             : loading(),
                                         shape: RoundedRectangleBorder(
@@ -380,9 +418,14 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                               children: <Widget>[
                                                 Flexible(
                                                   child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 50.0),//change
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              10,
+                                                    ),
                                                     child: TextFormField(
                                                       initialValue:
                                                           userData.adresse,
@@ -390,7 +433,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                           InputDecoration(
                                                         hintText: textu[index],
                                                         hintStyle: TextStyle(
-                                                          fontSize: 18,//change
+                                                          fontSize: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height /
+                                                              45,
                                                           color:
                                                               Colors.grey[400],
                                                           fontFamily:
@@ -418,10 +465,10 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                         RaisedButton(
                                             onPressed: () async {
                                               setState(() {
-                                            if (_state == 0) {
-                                              animateButton();
-                                            }
-                                          });
+                                                if (_state == 0) {
+                                                  animateButton();
+                                                }
+                                              });
                                               await DatabaseService(
                                                       uid: user.uid)
                                                   .updateAdress(_adresse)
@@ -434,9 +481,15 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                 ? Text(
                                                     'Confirmer',
                                                     style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily:
-                                                            'Poppins-Light'),
+                                                      color: Colors.white,
+                                                      fontFamily:
+                                                          'Poppins-Light',
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              55,
+                                                    ),
                                                   )
                                                 : loading(),
                                             shape: RoundedRectangleBorder(
@@ -457,7 +510,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                         child: Card(
                                           color: Colors.white,
                                           child: Padding(
-                                            padding: EdgeInsets.all(10.0),//change
+                                            padding: EdgeInsets.all(
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    70),
                                             child: Column(
                                               children: <Widget>[
                                                 Row(
@@ -480,7 +537,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     new Text(
                                                       'A ',
                                                       style: new TextStyle(
-                                                        fontSize: 16.0,//change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
                                                         fontFamily:
                                                             'Poppins-Light',
                                                       ),
@@ -508,7 +569,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     new Text(
                                                       'B ',
                                                       style: new TextStyle(
-                                                        fontSize: 16.0,//change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
                                                         fontFamily:
                                                             'Poppins-Light',
                                                       ),
@@ -535,7 +600,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     new Text(
                                                       'AB',
                                                       style: new TextStyle(
-                                                        fontSize: 16.0,//change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
                                                         fontFamily:
                                                             'Poppins-Light',
                                                       ),
@@ -563,7 +632,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     new Text(
                                                       'O ',
                                                       style: new TextStyle(
-                                                        fontSize: 16.0,//change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
                                                         fontFamily:
                                                             'Poppins-Light',
                                                       ),
@@ -571,9 +644,13 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                   ],
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 10.0),
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            50,
+                                                  ),
                                                   child: const Divider(
                                                     color: Colors.grey,
                                                     thickness: 01,
@@ -599,7 +676,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     new Text(
                                                       '+ ',
                                                       style: new TextStyle(
-                                                        fontSize: 16.0,//change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
                                                         fontFamily:
                                                             'Poppins-Light',
                                                       ),
@@ -627,7 +708,11 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                                     new Text(
                                                       '- ',
                                                       style: new TextStyle(
-                                                        fontSize: 16.0,//change
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height /
+                                                            50,
                                                         fontFamily:
                                                             'Poppins-Light',
                                                       ),
@@ -646,10 +731,10 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                       RaisedButton(
                                           onPressed: () async {
                                             setState(() {
-                                            if (_state == 0) {
-                                              animateButton();
-                                            }
-                                          });
+                                              if (_state == 0) {
+                                                animateButton();
+                                              }
+                                            });
                                             if (_bloodType.isNotEmpty) {
                                               await DatabaseService(
                                                       uid: user.uid)
@@ -667,9 +752,14 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                               ? Text(
                                                   'Confirmer',
                                                   style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily:
-                                                          'Poppins-Light'),
+                                                    color: Colors.white,
+                                                    fontFamily: 'Poppins-Light',
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height /
+                                                            55,
+                                                  ),
                                                 )
                                               : loading(),
                                           shape: RoundedRectangleBorder(
@@ -679,13 +769,14 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                           color: Color(0xFF00B9FF)),
                                     ]),
                           SizedBox(
-                            height: 10,//change
+                            height: MediaQuery.of(context).size.height / 70,
                           ),
                         ]),
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(color: Colors.grey),
                     itemCount: 3,
-                    padding: EdgeInsets.all(18),//change
+                    padding:
+                        EdgeInsets.all(MediaQuery.of(context).size.height / 45),
                     scrollDirection: Axis.vertical,
                     //reverse: true,
                     addAutomaticKeepAlives: true,

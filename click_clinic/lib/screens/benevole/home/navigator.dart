@@ -38,34 +38,37 @@ class _TryState extends State<Try> {
         context: context,
         builder: (BuildContext context) {
           // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Modifier votre photo"),
-            content: new Text(
-                "Etes vous sur de vouloir modifier votre photo de profil ? "),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Annuler"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(
-                child: new Text("Confirmer"),
-                onPressed: () async {
-                  uploadPic(context);
-                  print(_imagepath);
-                  if (_imagepath != null) {
-                    DatabaseService(uid: user.uid)
-                        .updateProfilePathPic(_imagepath);
-                    setState(() {
-                      print('Image Path Uploaded !');
-                      //_showSuccessMessage();
-                      Navigator.of(context).pop();
-                    });
-                  }
-                },
-              ),
-            ],
+          return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState){
+              return AlertDialog(
+              title: new Text("Modifier votre photo"),
+              content: new Text(
+                  "Etes vous sur de vouloir modifier votre photo de profil ? "),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text("Annuler"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                FlatButton(
+                  child: new Text("Confirmer"),
+                  onPressed: () async {
+                    uploadPic(context);
+                    print(_imagepath);
+                    if (_imagepath != null) {
+                      DatabaseService(uid: user.uid)
+                          .updateProfilePathPic(_imagepath);
+                      setState(() {
+                        print('Image Path Uploaded !');
+                        //_showSuccessMessage();
+                        Navigator.of(context).pop();
+                      });
+                    }
+                  },
+                ),
+              ],
+            );}
           );
         },
       );
@@ -76,7 +79,7 @@ class _TryState extends State<Try> {
       setState(() {
         _image = image;
         print('Image Path $_image');
-        _showConfirmMessage();
+        _showConfirmMessage(); //showother thing than dialogue
       });
     }
 
@@ -110,7 +113,10 @@ class _TryState extends State<Try> {
                   ),
                   Align(
                     alignment: Alignment(0.45, -0.83),
-                    child: Image.asset("assets/images/l.png"),
+                    child: Image.asset(
+                      "assets/images/l.png",
+                      height: MediaQuery.of(context).size.height / 25,
+                    ),
                   ),
                   Align(
                     alignment: Alignment(-0.8, -0.85),
@@ -145,7 +151,7 @@ class _TryState extends State<Try> {
                     child: Text(
                       'Que Voulez-vous faire?',
                       style: TextStyle(
-                          fontSize: 26, //change
+                          fontSize: MediaQuery.of(context).size.height / 30, 
                           color: Colors.white,
                           fontFamily: 'Poppins-Medium'),
                     ),
@@ -158,10 +164,11 @@ class _TryState extends State<Try> {
                         getImage();
                       },
                       child: CircleAvatar(
+                        backgroundColor: Colors.transparent,
                         //backgroundImage: AssetImage("assets/images/man.png"),
                         radius: MediaQuery.of(context).size.height / 10, 
                         backgroundImage:  (_image == null)
-                              ? _imageUrl == null
+                              ? _imageUrl == null || _imageUrl == ''
                                   ? AssetImage(
                                       //default image
                                       "assets/images/man.png",
@@ -190,13 +197,13 @@ class _TryState extends State<Try> {
                         Text(
                           'Disponibilité :',
                           style: TextStyle(
-                              fontSize: 17.5, //change
+                              fontSize: MediaQuery.of(context).size.height / 46,
                               color: Colors.black,
                               fontFamily: 'SegoeUI',
                               fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
-                          width: 30,//change
+                          width: MediaQuery.of(context).size.width / 15,
                           ),
                         CupertinoSwitch(
                           value: _isSwitched,
@@ -236,13 +243,16 @@ class _TryState extends State<Try> {
                               radius: MediaQuery.of(context).size.height / 35,
                               child: ClipOval(
                                   child:
-                                      Image.asset("assets/icones/user.png")),
+                                      Image.asset(
+                                        "assets/icones/user.png",
+                                        height: MediaQuery.of(context).size.height / 30,
+                                      )),
                               backgroundColor: Color(0xFF00B9FF),
                             ),
                             Text(
                               "   Paramétres du Compte",
                               style: TextStyle(
-                                  fontSize: 17, //change
+                                  fontSize: MediaQuery.of(context).size.height / 47,
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0xFF00B9FF)),
                             ),
@@ -273,13 +283,16 @@ class _TryState extends State<Try> {
                               radius: MediaQuery.of(context).size.height / 35,
                               child: ClipOval(
                                   child:
-                                      Image.asset("assets/icones/customer.png")),
+                                      Image.asset(
+                                        "assets/icones/customer.png",
+                                        height: MediaQuery.of(context).size.height / 30,
+                                      )),
                               backgroundColor: Color(0xFF00B9FF),
                             ),
                             Text(
                               "   Paramétres des Services",
                               style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: MediaQuery.of(context).size.height / 47,
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0xFF00B9FF)),
                             ),
@@ -318,7 +331,7 @@ class _TryState extends State<Try> {
       });
     } catch (ex) {
       //error message
-      print(ex.message);
+      print('error on upload : '+ex.message);
     }
   }
 

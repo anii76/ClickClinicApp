@@ -39,7 +39,7 @@ class _AutreState extends State<Autre> {
                 "Autres",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: MediaQuery.of(context).size.height / 45,
                     fontFamily: 'Poppins-Medium'),
               ),
             ),
@@ -67,7 +67,7 @@ class _AutreState extends State<Autre> {
                       " Accueil",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 17,
+                          fontSize: MediaQuery.of(context).size.height / 47,
                           fontFamily: 'Poppins-Light'),
                     ),
                   ],
@@ -84,7 +84,7 @@ class _AutreState extends State<Autre> {
             child: Text(
               'Cherchez-vous alors...',
               style: TextStyle(
-                  fontSize: 28,
+                  fontSize: MediaQuery.of(context).size.height / 28,
                   color: Colors.white,
                   fontFamily: 'Poppins-Medium'),
             ),
@@ -111,7 +111,9 @@ class _AutreState extends State<Autre> {
                     Text(
                       "     Un laboratoire",
                       style: TextStyle(
-                          fontSize: 22, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),
@@ -144,7 +146,9 @@ class _AutreState extends State<Autre> {
                     Text(
                       " Un centre d'imagerie",
                       style: TextStyle(
-                          fontSize: 21, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),
@@ -177,7 +181,9 @@ class _AutreState extends State<Autre> {
                     Text(
                       " Une parapharmacie",
                       style: TextStyle(
-                          fontSize: 21, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),
@@ -210,7 +216,9 @@ class _AutreState extends State<Autre> {
                     Text(
                       "      Un opticien",
                       style: TextStyle(
-                          fontSize: 22, fontFamily: 'Poppins-Regular'),
+                          fontSize: MediaQuery.of(context).size.height / 37, 
+                          fontFamily: 'Poppins-Regular',
+                          ),
                     ),
                   ],
                 ),

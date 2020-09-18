@@ -40,20 +40,20 @@ class _ParaDappState extends State<ParaDapp> {
   }
 
   _launchURL() async {
-  const url = 'https://gitHub.com/anii76/ClickClinicApp';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+    const url = 'https://gitHub.com/anii76/ClickClinicApp';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: <Widget>[
         SizedBox(
-          height: 29, //it should be the size of the bar of each device
+          height: MediaQuery.of(context).size.height / 28,
         ),
         Flexible(
           flex: 1,
@@ -93,10 +93,11 @@ class _ParaDappState extends State<ParaDapp> {
                             backgroundColor: Color(0xFF00B9FF),
                           ),
                           Text(
-                            "      Paramètres de l'application",
+                            "  Paramètres de l'application",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 19,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 40,
                                 fontFamily: 'Poppins-Light'),
                           ),
                         ],
@@ -130,7 +131,10 @@ class _ParaDappState extends State<ParaDapp> {
             itemBuilder: (BuildContext context, int index) => ExpansionTile(
                 leading: CircleAvatar(
                   radius: 20,
-                  child: Image.asset("assets/images/${img[index]}"),
+                  child: Image.asset(
+                    "assets/images/${img[index]}",
+                    height: MediaQuery.of(context).size.height / 20,
+                  ),
                   backgroundColor: Colors.white10,
                 ),
                 //initiallyExpanded: false,
@@ -138,7 +142,7 @@ class _ParaDappState extends State<ParaDapp> {
                     style: TextStyle(
                       fontFamily: 'Poppins-Regular',
                       color: Color(0x35000000),
-                      fontSize: 16,
+                      fontSize: MediaQuery.of(context).size.height / 50,
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
                     )),
@@ -147,7 +151,7 @@ class _ParaDappState extends State<ParaDapp> {
                     style: TextStyle(
                       fontFamily: 'Poppins-Medium',
                       color: Color(0xff000000),
-                      fontSize: 21,
+                      fontSize: MediaQuery.of(context).size.height / 40,
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
                     )),
@@ -165,9 +169,10 @@ class _ParaDappState extends State<ParaDapp> {
                                     padding: EdgeInsets.all(10),
                                     child: Text(
                                       textu[index],
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: 'Poppins-Light',
-                                        fontSize: 17,
+                                        fontSize: MediaQuery.of(context).size.height / 47,
                                       ),
                                     ),
                                   ),
@@ -186,19 +191,21 @@ class _ParaDappState extends State<ParaDapp> {
                                   width:
                                       MediaQuery.of(context).size.width / 1.2,
                                   height:
-                                      MediaQuery.of(context).size.height / 7.9,
+                                      MediaQuery.of(context).size.height / 6,
                                   child: Card(
                                     color: Colors.white,
                                     child: Center(
                                       child: Padding(
-                                        padding: EdgeInsets.all(10),
+                                        padding: EdgeInsets.all(MediaQuery.of(context).size.height / 70,),
                                         child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: <Widget>[
                                             Text(
                                               textu[index],
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontFamily: 'Poppins-Light',
-                                                fontSize: 17,
+                                                fontSize: MediaQuery.of(context).size.height / 47,
                                               ),
                                             ),
                                             FlatButton(
@@ -209,7 +216,7 @@ class _ParaDappState extends State<ParaDapp> {
                                                 'par e-mail',
                                                 style: TextStyle(
                                                     fontFamily: 'Poppins-Light',
-                                                    fontSize: 17,
+                                                    fontSize: MediaQuery.of(context).size.height / 47,
                                                     color: Color(0xFF00B9FF),
                                                     decoration: TextDecoration
                                                         .underline),
@@ -239,28 +246,30 @@ class _ParaDappState extends State<ParaDapp> {
                                         color: Colors.white,
                                         child: Center(
                                           child: Padding(
-                                            padding: EdgeInsets.all(15),
+                                            padding: EdgeInsets.all(MediaQuery.of(context).size.height / 65),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: <Widget>[
                                                 Image.asset(
-                                                    "assets/images/l.png"),
+                                                    "assets/images/l.png",
+                                                    height: MediaQuery.of(context).size.height / 25,
+                                                    ),
                                                 RichText(
                                                   text: TextSpan(
                                                       style: TextStyle(
                                                           fontFamily:
                                                               'Poppins-Light',
-                                                          fontSize: 17,
+                                                          fontSize: MediaQuery.of(context).size.height / 47,
                                                           color: Colors.black),
                                                       children: <TextSpan>[
                                                         TextSpan(
                                                           text:
-                                                              '  Encadrement: ',
+                                                              'Encadrement: ',
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   'Poppins-Light',
-                                                              fontSize: 17,
+                                                              fontSize: MediaQuery.of(context).size.height / 47,
                                                               color:
                                                                   Colors.black,
                                                               fontWeight:
@@ -272,11 +281,11 @@ class _ParaDappState extends State<ParaDapp> {
                                                                 '  Mme S.BENNABI\n'),
                                                         TextSpan(
                                                           text:
-                                                              '  Developeurs: ',
+                                                              'Developeurs: ',
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   'Poppins-Light',
-                                                              fontSize: 17,
+                                                              fontSize: MediaQuery.of(context).size.height / 47,
                                                               color:
                                                                   Colors.black,
                                                               fontWeight:
@@ -285,7 +294,7 @@ class _ParaDappState extends State<ParaDapp> {
                                                         ),
                                                         TextSpan(
                                                             text:
-                                                                '  A.BOUROUINA, A.MOUSSOUNI, S.CHERFAOUI, R.HAMMA, A.AMAZOUZ, O.GHILES'),
+                                                                '  A.BOUROUINA,  A.MOUSSOUNI,  S.CHERFAOUI,  R.HAMMA,  A.AMAZOUZ,  O.GHILES'),
                                                       ]),
                                                 ),
                                                 FlatButton(
@@ -297,7 +306,7 @@ class _ParaDappState extends State<ParaDapp> {
                                                     style: TextStyle(
                                                         fontFamily:
                                                             'Poppins-Light',
-                                                        fontSize: 17,
+                                                        fontSize: MediaQuery.of(context).size.height / 47,
                                                         color:
                                                             Color(0xFF00B9FF),
                                                         decoration:
@@ -329,17 +338,21 @@ class _ParaDappState extends State<ParaDapp> {
                                         color: Colors.white,
                                         child: Center(
                                           child: Padding(
-                                            padding: EdgeInsets.all(15),
+                                            padding: EdgeInsets.all(MediaQuery.of(context).size.height / 65,),
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: <Widget>[
                                                 Image.asset(
-                                                    "assets/images/pubdom.png"),
+                                                    "assets/images/pubdom.png",
+                                                    height: MediaQuery.of(context).size.height / 20,
+                                                    ),
                                                 Text(
                                                   textu[index],
+                                                  textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     fontFamily: 'Poppins-Light',
-                                                    fontSize: 17,
+                                                    fontSize: MediaQuery.of(context).size.height / 47,
                                                   ),
                                                 ),
                                               ],
@@ -355,14 +368,14 @@ class _ParaDappState extends State<ParaDapp> {
                                   ],
                                 ),
                   SizedBox(
-                    height: 10,
+                    height: MediaQuery.of(context).size.height / 70,
                   ),
                   //ListTile(),
                 ]),
             separatorBuilder: (BuildContext context, int index) =>
                 const Divider(color: Colors.grey),
             itemCount: 4,
-            padding: const EdgeInsets.all(18),
+            padding: EdgeInsets.all(MediaQuery.of(context).size.height / 45,),
             scrollDirection: Axis.vertical,
             //reverse: true,
             addAutomaticKeepAlives: true,
