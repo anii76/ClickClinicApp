@@ -34,8 +34,7 @@ class _DetailsState extends State<Details> {
       }
     }
 
-    return etablisData != null
-        ? Scaffold(
+    return etablisData != null ? Scaffold(
             body: Stack(
             children: <Widget>[
               Container(

@@ -218,9 +218,9 @@ class _ParaDesServicesState extends State<ParaDesServices> {
                                       child: Card(
                                         color: Colors.white,
                                         child: Padding(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Wrap(
-                                              alignment: WrapAlignment.center,
+                                          padding: EdgeInsets.all(10.0),  //change this
+                                          child: Column(
+                                              //mainAxisAlignemnt: WrapAlignment.center,
                                               children: [
                                                 Row(
                                                   children: <Widget>[

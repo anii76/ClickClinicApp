@@ -150,7 +150,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                             color: Color(0xFF95989A)),
                                       ),
                                       Text(
-                                        'à choisir votre profil ou cliquer sur Passer',
+                                        'à choisir votre profil ou cliquez sur',
                                         style: TextStyle(
                                             fontFamily: 'Poppins-Light',
                                             fontSize: MediaQuery.of(context)
@@ -160,7 +160,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                             color: Color(0xFF95989A)),
                                       ),
                                       Text(
-                                        'pour l\'ignorer',
+                                        'commencer pour l\'ignorer',
                                         style: TextStyle(
                                             fontFamily: 'Poppins-Light',
                                             fontSize: MediaQuery.of(context)
