@@ -161,7 +161,7 @@ The UI went through a full design process. We started with a low-fidelity mockup
 
 Group N°09, ESI Sidi Bel Abbès, 2nd-year preparatory classes (2020):
 
-- **Anfal Bourouina**, *team lead*: project management (planning, task breakdown, progress reviews), Firebase backend (auth, volunteer CRUD, security rules), data pipeline (scraping and geocoding ~9,800 facilities), Google Maps and permissions integration, and wiring the UI screens to the backend.
+- Anfal Bourouina, *team lead*
 - Anis Amazouz
 - Syphax Cherfaoui
 - Rahma Hamma
