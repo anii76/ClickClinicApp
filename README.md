@@ -43,7 +43,7 @@ The app has two actors, and users can switch between them at any time.
 
 We couldn't find a usable public API for Algerian health facilities, and copying thousands of entries by hand wasn't realistic. So we built a small data pipeline:
 
-1. **Scraping**: Python + BeautifulSoup scripts crawled public Algerian health directories and extracted the relevant fields into spreadsheets.
+1. **Scraping**: Python + BeautifulSoup scripts crawled public Algerian health directories (lespagesmaghreb.com, sahti-dz.com, dzdoc.com, guide-alger.com) and extracted the relevant fields into CSV files. The original scripts are in [`data-scraping/`](data-scraping/).
 2. **Geocoding**: each address was converted to coordinates with a geocoder (*Geocode by Awesome Table*).
 3. **Import**: the cleaned data was loaded into Cloud Firestore, one collection per facility type, and queried by distance with GeoFlutterFire.
 
