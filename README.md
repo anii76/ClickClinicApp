@@ -7,7 +7,7 @@
 ClickClinic is a Flutter mobile app that helps patients find nearby doctors, hospitals, pharmacies, laboratories, opticians, imaging centres and parapharmacies on a map. It is built on a dataset of **~9,800 real Algerian health facilities**. The app also connects patients with **volunteers** ("Bénévoles") who offer free help: blood donation, bringing medicines from abroad, or hosting patients who travel for treatment.
 
 > 📚 **Context:** 2nd-year student group project (2020), *Projet Pluridisciplinaire N°12*, Classes Préparatoires, École Supérieure en Informatique (ESI) de Sidi Bel Abbès.
-> Supervised by Mme Sakina Rim Bennabi. Built by a team of 6, fully remote during the COVID-19 lockdown.
+> Supervised by Mme Sakina Rim Bennabi. Built by a team of 6 between March and June 2020, fully remote during the COVID-19 lockdown.
 
 ---
 
@@ -116,6 +116,12 @@ The UI went through a full design process. We started with a low-fidelity mockup
 
 - **Colour:** primary blue `#00B9FF`. Blue is the dominant colour in medical branding and is associated with trust and professionalism.
 - **Typography:** sans-serif families (Poppins, Circular Std) for a clean, modern look.
+
+## Demo
+
+<p align="center"><img src="screenshots/demo.gif" alt="ClickClinic demo" width="300"></p>
+
+*Promo clip from our final presentation (captions in French).*
 
 ## Screenshots
 
