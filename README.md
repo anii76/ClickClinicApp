@@ -183,14 +183,6 @@ To try it on a matching toolchain:
 
 Minimum Android version: 6.0 (Marshmallow). The app needs internet access and GPS.
 
-## Looking back
-
-This was my first team project, and I'm proud of what six second-year students shipped remotely in the middle of a pandemic: real data, a real use case, and a complete design-to-delivery process. With what I know now, I'd do a few things differently:
-
-- **Less duplication:** the facility screens are nearly identical and should be one parameterised screen.
-- **Responsive layout** instead of hand-tuned alignments.
-- **Async correctness** in the data layer (some getters return before their Firestore read completes).
-- **Tests** and a CI pipeline.
-- **Ship the scraper** and the data-cleaning scripts in the repo.
+## Future ideas
 
 Ideas we planned but didn't build: doctor and facility ratings, pharmacy accounts with live medicine availability, a patient–volunteer chat, and publishing to the Play Store and App Store.
